@@ -10,9 +10,10 @@ There are two parts to the workflow:
 
 Do not fork this repository, you have read/write access. Clone it into your working directory. After you've done your editing, be sure to merge any changes added by others since you've last updated. As long as you keep your edits to your section in the file, there shouldn't be merge conflicts. 
 
-__Do not use the github editor, edit from onyx or your own machine__
 
 Sooner than later, add a line to the `LANGUAGES.md` file in your section, pull, merge if needed, commit and push back to _this_ repository. I may not be able to help you troubleshoot this process at the last minute.
+
+_Do not use the github editor, edit from your own working copy of this repo_
 
 ### <tt><small><small>part.1</small></small></tt> Language Demonstration
 
