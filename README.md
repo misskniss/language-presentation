@@ -1,7 +1,7 @@
 
 
 ### <tt><small><small>part.0</small></small></tt> Collaboration
-The assignment is hosted at https://github.com/jmazzare/language-presentation. In the previous assignment, you created your own fork of the repo. For this assignment, you have been added as a collaborator to this repo. You will pull, edit, merge, and push this to this repo.
+In the previous assignment, you created your own fork of the repo. For this assignment, you have been added as a collaborator to this repo. You will pull, edit, merge, and push this to this repo.
 
 There are two parts to the workflow:
 
