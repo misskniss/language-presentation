@@ -107,6 +107,24 @@ adebaca
 #### MicroPython: `controlling hardware`
 jkniss
 
+Basic Motor Control
+===================
+
+Basic Accelerometer Control
+===========================
+
+Basic Sensor Use
+================
+
+Light Sensor
+--------------
+
+IR Sensor
+---------
+
+
+Basic 
+
 ---
 
 #### R: `graphical features`
