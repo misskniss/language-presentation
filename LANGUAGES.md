@@ -2,8 +2,8 @@
 
 #### Ruby: `mixins`
 acole
-
----
+TEST
+--
 
 #### Ruby: `classes` `inheritance`
 kgrosh
