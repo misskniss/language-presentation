@@ -22,6 +22,7 @@ mthurmon
 
 #### Ruby: `data types` &amp; `symbols`
 zlambert
+herp derp
 
 ---
 
