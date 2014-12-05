@@ -18,6 +18,7 @@ arthurfc
 #### Ruby: `blocks` &amp; `collections`
 mthurmon
 
+part 0.
 ---
 
 #### Ruby: `data types` &amp; `symbols`
