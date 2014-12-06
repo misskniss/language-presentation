@@ -48,17 +48,16 @@ Syntax and Semantics
 
 The syntax of modules looks like:
 
-----------------------
 module Identifier
    statement1
    statement2
    ...........
-End
-----------------------
+end
+
 
 And here is a simple example of module:
 
----------------------------------------------------
+
 #!/usr/bin/ruby
 #Module defined in Area.rb file
 module Area
@@ -70,7 +69,7 @@ module Area
    # ..
    end
 end
-----------------------------------------------------
+
 
 The constants of Module are named similar to the class constants with an uppercase letter. The methods of module are defined in the same way 
 as class methods. Below is an example of modules, which has a constant PI and two module methods. We call the module method by preceding the 
