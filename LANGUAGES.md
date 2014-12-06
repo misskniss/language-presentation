@@ -30,7 +30,121 @@ herp derp
 
 #### Ruby: `modules`
 yyang
+Introduction 
+Ruby was invented in 1993 by Yukihiro Matsumoto. It is open source with subject to a license. Ruby is object-oriented 
+and interpreted language which has a clean and easy syntax. The programming is popular because it is scalable and easy to maintain. 
 
+Module is an important feature of the Ruby programming language. It supports multiple inheritances indirectly, and is a major 
+object-oriented feature of the language. Modules group together methods, classes and constants. Modules are defined much like classes, 
+but the module keyword is used in place of the class keyword. There are two main advantages of modules:
+
+1. Modules provide a namespace which prevents name clashes;
+2. Modules implement the mixin feature.
+
+Namespace is a way of grouping logically related objects together. This allows classes or modules with same names to co-exist without clashes. 
+Think of this as storing different files with the same names under separate directories in the file system.
+
+Syntax and Semantics
+
+The syntax of modules looks like:
+
+----------------------
+module Identifier
+   statement1
+   statement2
+   ...........
+End
+----------------------
+
+And here is a simple example of module:
+
+---------------------------------------------------
+#!/usr/bin/ruby
+#Module defined in Area.rb file
+module Area
+   PI = 3.141592654               #module constant
+   def Area.round(r)              #module method
+   # ..
+   end
+   def Area.sphere(r)             #module method
+   # ..
+   end
+end
+----------------------------------------------------
+
+The constants of Module are named similar to the class constants with an uppercase letter. The methods of module are defined in the same way 
+as class methods. Below is an example of modules, which has a constant PI and two module methods. We call the module method by preceding the 
+method’s name with the module’s name and a period, e.g. Area.round(r) . To access constants, we call the module constant using the module name, 
+two colons, and the constant name. e.g. Area::PI.
+
+When & How Modules are Used?
+
+1. Namespaces
+When we work on big Ruby program, we usually write more than one class with logically related functions grouped in a file rather than put everything 
+in one class.  And then we import/include the relevant classes into a file if we need to use the classes in the file. However, there is a risk when the 
+classes contain functions with the same name. Say Molly writes a file called area.rb, and defines functions to calculate the area of square, round, 
+sphere and etc. Mick worked on shape.rb class to determine the shape. You want to write a ruby program to determine the shape and then calculate the area. 
+So I include both area.rb and shape.rb to my program, and both of the classes defined a round method. The program will be confused to choose the 
+appropriate method.
+
+The way to solve the namespace conflicts problem is using module mechanism.  Below is an example of how to use modules in Ruby. The first block defines 
+a module named Area, and has two methods Area.round(r) and Area.sphere(r) which is in Area.rb file. The second block defines a module named Shape with two methods,
+Shape.round(yesorno) and Shape.sphere(yesorno).  The modules on the first and second file have the round and sphere functions.
+
+--------------------------------------------------------
+#!/usr/bin/ruby
+#Module defined in Area.rb file
+module Area
+   PI = 3.141592654               #module constant
+   def Area.round(r)              #module method
+   # ..
+   end
+   def Area.sphere(r)             #module method
+   # ..
+   end
+end
+--------------------------------------------------------
+
+--------------------------------------------------------
+#!/usr/bin/ruby
+#Module defined in Shape.rb file
+module Shape
+   YES =1
+   NO = 0
+   def Shape.round(yesorno)
+   # ...
+   end
+   def Shape.sphere(yesorno)
+   # ...
+   end
+end
+-------------------------------------------------------
+
+If a third program wants to use these modules, it can simply load the two files using the Ruby require statement, and reference the qualified names. 
+The Ruby require statement is similar to the import statement of Java and the include statement of C and C++. It does not matter using require “area.rb” or require “area.”
+
+require “area.rb”
+require “shape”
+
+x = Area.round(1)
+fact = Shape.round(Shape::YES)
+
+Using modules, the program will know which function to use which will avoid names conflicting problem.
+
+2. Mixin
+(Another student did this part, so I won't talk thorougly on mixin.)
+Like Java, Ruby does not support multiple inheritances directly. However, Ruby Modules can solve the problem by adding functionality to classes. 
+In the namespace section, we defined module methods whose names are prefixed by the module name. There is another way to define methods in modules 
+without prefixing of module name. 
+In the previous section's examples, we defined module methods, methods whose names were prefixed by the module name. If this made you think of class methods, 
+your next thought might well be “what happens if I define instance methods within a module?” Good question. A module can't have instances, because a module isn't a class. 
+However, you can include a module within a class definition. When this happens, all the module's instance methods are suddenly available as methods in the class as well. 
+They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
+
+
+Problem
+Modules are part of what makes Ruby’s design beautiful. However, since they do not have a direct analogy in any mainstream programming language, it is easy to get a bit 
+confused about what they should be used for.
 ---
 
 #### Ruby: `scope`
