@@ -215,17 +215,23 @@ jkniss
 
 ##### Light Sensor
 
+```
 from pyb import ADC
 light = ADC(Pin('X7'))
 light.read()
 >>> 456
+```
+
 
 ##### IR Sensor
 
+```
 from pyb import ADC
 eyes = ADC(Pin('Y11'))
 eyes.read()
 >>> 2533
+```
+
 
 ##### Bluetooth Control
 
