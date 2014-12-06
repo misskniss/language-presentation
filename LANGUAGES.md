@@ -234,6 +234,7 @@ eyes.read()
 
 
 ##### Bluetooth Control
+[Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
 
 ```
 # main.py -- on pyboard
