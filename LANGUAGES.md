@@ -203,14 +203,58 @@ adebaca
 jkniss
 
 - Basic Motor Control
+ (See Bluetooth Control below)
 
 - Basic Accelerometer Control
 
-- Basic Sensor Use
+* Basic Sensor Use
 
 - Light Sensor
+from pyb import ADC
+light = ADC(Pin('X7'))
+light.read()
+>>>
 
 - IR Sensor
+from pyb import ADC
+eyes = ADC(Pin('Y11'))
+eyes.read()
+>>>
+
+- Bluetooth Control
+
+```
+# main.py -- on pyboard
+import pyb
+from pyb import Pin
+from pyb import UART
+ 
+left_motor = Pin('X1', Pin.OUT_PP)
+right_motor = Pin('X2', Pin.OUT_PP)
+uart = UART(3,9600)
+uart.init(9600, bits=8, stop=1, parity=None)
+pyb.repl_uart(uart) //push repl to uart for control via bluetooth/phone
+  
+def lt():
+    right_motor.low()
+    left_motor.high()
+    pyb.delay(200)
+
+def rt():
+    right_motor.high()
+    left_motor.low()
+    pyb.delay(200)
+
+def stop():
+    right_motor.low()
+    left_motor.low()
+    pyb.delay(200)
+
+def go():
+    right_motor.high()
+    left_motor.high()
+    pyb.delay(200)
+```
 
 
 Basic 
