@@ -91,7 +91,7 @@ The way to solve the namespace conflicts problem is using module mechanism.  Bel
 a module named Area, and has two methods Area.round(r) and Area.sphere(r) which is in Area.rb file. The second block defines a module named Shape with two methods,
 Shape.round(yesorno) and Shape.sphere(yesorno).  The modules on the first and second file have the round and sphere functions.
 
---------------------------------------------------------
+
 #!/usr/bin/ruby
 #Module defined in Area.rb file
 module Area
@@ -103,9 +103,9 @@ module Area
    # ..
    end
 end
---------------------------------------------------------
 
---------------------------------------------------------
+
+
 #!/usr/bin/ruby
 #Module defined in Shape.rb file
 module Shape
@@ -118,7 +118,7 @@ module Shape
    # ...
    end
 end
--------------------------------------------------------
+
 
 If a third program wants to use these modules, it can simply load the two files using the Ruby require statement, and reference the qualified names. 
 The Ruby require statement is similar to the import statement of Java and the include statement of C and C++. It does not matter using require “area.rb” or require “area.”
@@ -141,10 +141,11 @@ your next thought might well be “what happens if I define instance methods wit
 However, you can include a module within a class definition. When this happens, all the module's instance methods are suddenly available as methods in the class as well. 
 They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
 
-
 Problem
-Modules are part of what makes Ruby’s design beautiful. However, since they do not have a direct analogy in any mainstream programming language, it is easy to get a bit 
-confused about what they should be used for.
+Modules are part of what makes Ruby’s design beautiful. However, since they do not have a direct analogy in any mainstream programming language, it is easy to get a bit confused about what they should be used for.
+
+Conclusion
+
 ---
 
 #### Ruby: `scope`
