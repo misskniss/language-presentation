@@ -47,17 +47,17 @@ Think of this as storing different files with the same names under separate dire
 Syntax and Semantics
 
 The syntax of modules looks like:
-
+```
 module Identifier
    statement1
    statement2
    ...........
 end
-
+```
 
 And here is a simple example of module:
 
-
+```
 #!/usr/bin/ruby
 #Module defined in Area.rb file
 module Area
@@ -69,7 +69,7 @@ module Area
    # ..
    end
 end
-
+```
 
 The constants of Module are named similar to the class constants with an uppercase letter. The methods of module are defined in the same way 
 as class methods. Below is an example of modules, which has a constant PI and two module methods. We call the module method by preceding the 
@@ -90,7 +90,7 @@ The way to solve the namespace conflicts problem is using module mechanism.  Bel
 a module named Area, and has two methods Area.round(r) and Area.sphere(r) which is in Area.rb file. The second block defines a module named Shape with two methods,
 Shape.round(yesorno) and Shape.sphere(yesorno).  The modules on the first and second file have the round and sphere functions.
 
-
+```
 #!/usr/bin/ruby
 #Module defined in Area.rb file
 module Area
@@ -102,9 +102,9 @@ module Area
    # ..
    end
 end
+```
 
-
-
+```
 #!/usr/bin/ruby
 #Module defined in Shape.rb file
 module Shape
@@ -117,17 +117,17 @@ module Shape
    # ...
    end
 end
-
+```
 
 If a third program wants to use these modules, it can simply load the two files using the Ruby require statement, and reference the qualified names. 
 The Ruby require statement is similar to the import statement of Java and the include statement of C and C++. It does not matter using require “area.rb” or require “area.”
-
+```
 require “area.rb”
 require “shape”
 
 x = Area.round(1)
 fact = Shape.round(Shape::YES)
-
+```
 Using modules, the program will know which function to use which will avoid names conflicting problem.
 
 2. Mixin
