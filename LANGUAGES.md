@@ -742,7 +742,6 @@ mhandysi
 ---
 
 ####Object Oriented Python
----
 Python has been an 'Object Oriented' language since day one, making it extremely easy to use classes and objects in your programs.
 
 #####Class Syntax
