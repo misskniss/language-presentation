@@ -852,8 +852,6 @@ class Cutlery(object):
 Note: the object keyword in the class definition will be discuessed when we get into inheritance. 
 
 Note: the __init__ definition will be discussed as we get to private and public declarations.
-=======
->>>>>>> origin/master
 
 #####Creating Objects
 Creating object in python is simple enough; by using the class as a method. There is no 'new' keyword in python, we simply call our class and pass in our parameters.
