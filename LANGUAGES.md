@@ -84,8 +84,10 @@ kgrosh
 #Classes
 
 #Inheritance
-In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but not this guy.
-'''
+In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but Ruby doesn't.
+Below is an example of a basic example of Inheritance.
+
+```ruby
 class Mammal  
   def breathe  
     puts "inhale and exhale"  
@@ -101,7 +103,9 @@ end
 rani = Cat.new  
 rani.breathe  
 rani.speak
-'''
+```
+
+Note the line where the class definition for cat is 'class Cat < Mammal'  the < operator is used to show the inheritance.
 
 ---
 
