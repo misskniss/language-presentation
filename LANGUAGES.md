@@ -107,7 +107,7 @@ theMan = Mammal.new("Konrad","Human")
 The initialize method is a special type of method, which will be executed when the new method of the class is called with parameters.
 Using the class variable @@numMammals, you can determine the population of mammals that are created.
 
-I learned about classes in Ruby at Source: <a href="http://www.tutorialspoint.com/ruby/ruby_classes.htm"target="_blank">tutorialspoint.com/ruby</a>
+I learned about classes in Ruby at <a href="http://www.tutorialspoint.com/ruby/ruby_classes.htm"target="_blank">tutorialspoint.com/ruby</a>
 
 #Inheritance in Ruby
 In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but Ruby doesn't.
