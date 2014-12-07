@@ -741,22 +741,22 @@ mhandysi
 
 ---
 
-###Object Oriented Python
+####Object Oriented Python
 ---
 Python has been an 'Object Oriented' language since day one, making it extremely easy to use classes and objects in your programs.
 
-##Class Syntax
+#####Class Syntax
 
-##Creating Objects
+#####Creating Objects
 
-##Accessing Objects
+#####Accessing Objects
 
-##Class Iheritance
+#####Class Iheritance
 
-##Private & Public Data
+#####Private & Public Data
 
 
-#### Python: `modules`
+### Python: `modules`
 cbarton
 
 ---
