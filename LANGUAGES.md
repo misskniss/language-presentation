@@ -80,7 +80,29 @@ song1  >  song2
 
 #### Ruby: `classes` `inheritance`
 kgrosh
-I'm Adding Stuff Here!
+
+#Classes
+
+#Inheritance
+In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but not this guy.
+'''
+class Mammal  
+  def breathe  
+    puts "inhale and exhale"  
+  end  
+end  
+  
+class Cat < Mammal  
+  def speak  
+    puts "Meow"  
+  end  
+end  
+  
+rani = Cat.new  
+rani.breathe  
+rani.speak
+'''
+
 ---
 
 #### Ruby: `numbers` `arithmetic`
