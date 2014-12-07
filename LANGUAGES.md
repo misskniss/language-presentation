@@ -2,7 +2,80 @@
 
 #### Ruby: `mixins`
 acole
-TEST
+
+Modules => Mixins
+
+Modules are a way of grouping together methods, classes, and constants. Modules give you two major benefits:
+
+1. Modules provide a namespace and prevent name clashes.
+2. Modules implement the mixin facility.
+
+Namspaces
+
+Often your code will be organized into classes, so you'll probably stick a class (or a set of interrelated classes) into a file.
+However, there are times when you want to group things together that don't naturally form a class.
+
+The answer is the module mechanism. Modules define a namespace, a sandbox in which your methods and constants can play without having to worry about being stepped on by other methods and constants. The trig functions can go into one module:
+
+```
+module Trig
+  PI = 3.141592654
+  def Trig.sin(x)
+   # ..
+  end
+  def Trig.cos(x)
+   # ..
+  end
+end
+```
+
+Module constants are named just like class constants, with an initial uppercase letter. The method definitions look similar, too: these module methods are defined just like class methods.
+
+As with class methods, you call a module method by preceding its name with the module's name and a period, and you reference a constant using the module name and two colons.
+
+Modules have another, wonderful use. At a stroke, they pretty much eliminate the need for multiple inheritance, providing a facility called a mixin.
+
+A module can't have instances, because a module isn't a class. However, you can include a module within a class definition. When this happens, all the module's instance methods are suddenly available as methods in the class as well. They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
+
+```
+module Debug
+  def whoAmI?
+    "#{self.type.name} (\##{self.id}): #{self.to_s}"
+  end
+end
+class Phonograph
+  include Debug
+  # ...
+end
+class EightTrack
+  include Debug
+  # ...
+end
+ph = Phonograph.new("West End Blues")
+et = EightTrack.new("Surrealistic Pillow")
+ph.whoAmI?	»	"Phonograph (#537766170): West End Blues"
+et.whoAmI?	»	"EightTrack (#537765860): Surrealistic Pillow"
+```
+
+Mixins give you a wonderfully controlled way of adding functionality to classes. However, their true power comes out when the code in the mixin starts to interact with code in the class that uses it. Let's take the standard Ruby mixin Comparable as an example. The Comparable mixin can be used to add the comparison operators (<, <=, ==, >=, and >), as well as the method between?, to a class. For this to work, Comparable assumes that any class that uses it defines the operator <=>. So, as a class writer, you define the one method, <=>, include Comparable, and get six comparison functions for free. Let's try this with our Song class, by making the songs comparable based on their duration. All we have to do is include the Comparable module and implement the comparison operator <=>.
+
+```
+class Song
+  include Comparable
+  def <=>(other)
+    self.duration <=> other.duration
+  end
+end
+```
+
+```
+song1 = Song.new("My Way",  "Sinatra", 225)
+song2 = Song.new("Bicylops", "Fleck",  260)
+song1 <=> song2	»	-1
+song1  <  song2	»	true
+song1 ==  song1	»	true
+song1  >  song2
+```
 --
 
 #### Ruby: `classes` `inheritance`
