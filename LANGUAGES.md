@@ -81,9 +81,35 @@ song1  >  song2
 #### Ruby: `classes` `inheritance`
 kgrosh
 
-#Classes
+#Classes in Ruby
+Creating classes in Ruby is very easy to do, you must start with the keyword 'class' and follow it with the name of the class and then the class definition is completed with an 'end' keyword.
+```ruby
+class Mammal
+end
 
-#Inheritance
+theMan = Mammal.new
+```
+This code would define a Mammal class and we make an object called theMan which is an instance of the Mammal class we just defined.
+
+Let's add some properties to the Class so that it looks more like something that we would actually use..
+
+```ruby
+class Mammal
+	@@numMammals = 0
+	def initialize(name, type)
+		@mammalName = name
+		@mammalType = type
+	end
+end
+
+theMan = Mammal.new("Konrad","Human")
+```
+The initialize method is a special type of method, which will be executed when the new method of the class is called with parameters.
+Using the class variable @@numMammals, you can determine the population of mammals that are created.
+
+I learned about classes in Ruby at Source: <a href="http://www.tutorialspoint.com/ruby/ruby_classes.htm"target="_blank">tutorialspoint.com/ruby</a>
+
+#Inheritance in Ruby
 In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but Ruby doesn't.
 Below is an example of a basic example of Inheritance.
 
@@ -792,10 +818,13 @@ dhampiki
 #### Python: `OO` &amp; `classes`
 mhandysi
 
+---
+
 ####Object Oriented Python
 Python has been an 'Object Oriented' language since day one, making it extremely easy to use classes and objects in your programs.
 
 #####Class Syntax
+<<<<<<< HEAD
 
 The syntax of a class in python is much like a method definition. You have the keyword 'class' followed by the class name followed by a colon. By convention th first letter of the class name is usually capitallized.
 
@@ -823,6 +852,8 @@ class Cutlery(object):
 Note: the object keyword in the class definition will be discuessed when we get into inheritance. 
 
 Note: the __init__ definition will be discussed as we get to private and public declarations.
+=======
+>>>>>>> origin/master
 
 #####Creating Objects
 Creating object in python is simple enough; by using the class as a method. There is no 'new' keyword in python, we simply call our class and pass in our parameters.
@@ -839,7 +870,7 @@ Note: the parameters in the object instantiation are one short according to our 
 #####Class Iheritance
 
 #####Private & Public Data
----
+
 
 ### Python: `modules`
 cbarton
