@@ -818,14 +818,12 @@ dhampiki
 #### Python: `OO` &amp; `classes`
 mhandysi
 
----
-
 ####Object Oriented Python
-Python has been an 'Object Oriented' language since day one, making it extremely easy to use classes and objects in your programs.
+Python has been an __Object Oriented__ language since day one, making it extremely easy to use classes and objects in your programs.
 
 #####Class Syntax
 
-The syntax of a class in python is much like a method definition. You have the keyword 'class' followed by the class name followed by a colon. By convention th first letter of the class name is usually capitallized.
+The syntax of a class in python is much like a method definition. You have the keyword __class__ followed by the class name followed by a colon. By convention th first letter of the class name is usually capitallized.
 
 After the class declaration usually follows class variables, variable that are visible to every instance of the class object. Then the constructor and class methods.
 
@@ -853,19 +851,19 @@ class Cutlery(object):
 		print "This is a %s %s" % (self.type, self.utensil)
 ```
 
-Note: the object keyword in the class definition will be discuessed when we get into inheritance. 
+Note: the __object__ keyword in the class definition will be discuessed when we get into inheritance. 
 
 Note: the __init__ definition will be discussed as we get to private and public declarations.
 
 #####Creating Objects
-Creating object in python is simple enough; by using the class as a method. There is no 'new' keyword in python, we simply call our class and pass in our parameters.
+Creating object in python is simple enough; by using the class as a method. There is no __new__ keyword in python, we simply call our class and pass in our parameters.
 
 Example Object:
 ```python
 fork = Cutlery("Fork", "Salad")
 spoon = Cutlery("Spoon", "Soup")
 ```
-Note: the parameters in the object instantiation are one short according to our definition. But in python, the parameter self is much like 'this' in Java or C/C++ but it is not a definate keyword and acts as a scoping mechanism.
+Note: the parameters in the object instantiation are one short according to our definition. But in python, the parameter self is much like __this__ in Java or C/C++ but it is not a definate keyword and acts as a scoping mechanism.
 
 #####Accessing Objects
 Accessing object properties in python is much like any other language. The methods are called from the object instantiation with the '.' operater.
@@ -893,7 +891,62 @@ Soup Spoon
 ```
 Note: When we called the methods defined in our class, we did not need to pass in the self parameter. Python does this automatically to access the local scope of our objects.
 
-#####Class Iheritance/Method Overriding
+#####Class Inheritance
+Now that we have the basic class figured out, what if we want to define specific utensils for the cutlery class and define what they are being used for. We can easily accomplish this via subclasses and inheritance.
+
+In a note above I mentioned the __object__ parameter in the class definition. This is because most everything in python is based off of this __object__ class. In other words to make a subclass, we pass in the parent as a parameter to the definition.
+
+Say we want to make classes the inherit from Cutlery and have a specified use. We do this by making a __Fork__, __Spoon__ and __Knife__ class and passing in the parent (__Cutlery__) as a parameter of sorts to the definition.
+
+Example Subclasses:
+```python
+class Fork(Cutlery):
+	#class variables for Fork objects
+	
+	def toss():
+		print "Tossing Salad"
+
+class Spoon(Cutlery):
+	#class variables for Spoon objects
+
+	def stir():
+		print "Stirng Coffee"
+	
+class Knife(Cutlery):
+	#class variables for Knife objects
+
+	def cut():
+		print "Cutting Steak"
+	
+```
+Example SubObjects:
+```python
+saladFork = Fork("Fork", "Salad")
+soupSpoon = Spoon("Spoon", "Soup")
+steakKnife = Knife("Knife", "Steak")
+
+saladFork.cutleryUse()
+saladFork.toss()
+soupSpoon.cutleryUse()
+soupSpoon.stir()
+steakKnife.cutleryUse()
+steakKnife.cut()
+```
+
+Output:
+```
+Using Salad Fork
+Tossing Salad
+Using Soup Spoon
+Stiring Coffee
+Using Steak Knife
+Cutting Steak
+```
+Note: there is no construtor in these subclasses. This is because they are inheriting everything from their parent class __Cutlery__. They are abl to call parent methods as well as their own.
+
+When creating objects from subclasses, if no constructor is defined, the parent constructor will take over. Which leads to Method Overriding in the next section.
+
+#####Method Overriding:
 
 #####Private & Public Data
 
