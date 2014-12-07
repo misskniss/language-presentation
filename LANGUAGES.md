@@ -824,7 +824,6 @@ mhandysi
 Python has been an 'Object Oriented' language since day one, making it extremely easy to use classes and objects in your programs.
 
 #####Class Syntax
-<<<<<<< HEAD
 
 The syntax of a class in python is much like a method definition. You have the keyword 'class' followed by the class name followed by a colon. By convention th first letter of the class name is usually capitallized.
 
@@ -835,16 +834,21 @@ Example Class:
 class Cutlery(object):
 	#class variables
 	cutlery = 0
-		
+	#...
 	#class constructor
 	def __init__(self, utensil, type):
 		self.utensil = utensil
 		self.type = type
+		#...
 	#class methods
 	def cutleryUse(self):
 		#method body...
+		print "Using %s %s" % (self.type, self.utensil)
+		#...
 	def cutleryWash(self):
 		#method body...
+		print "Washing %s %s" % (self.type, self.utensil)
+		#...
 	def cutleryDisplay(self):
 		print "This is a %s %s" % (self.type, self.utensil)
 ```
@@ -861,11 +865,35 @@ Example Object:
 fork = Cutlery("Fork", "Salad")
 spoon = Cutlery("Spoon", "Soup")
 ```
-Note: the parameters in the object instantiation are one short according to our definition. But in python, the parameter self is much like 'this' in Java or C/C++ but it is not a definate keyword; it acts as a scoping mechanism.
+Note: the parameters in the object instantiation are one short according to our definition. But in python, the parameter self is much like 'this' in Java or C/C++ but it is not a definate keyword and acts as a scoping mechanism.
 
 #####Accessing Objects
+Accessing object properties in python is much like any other language. The methods are called from the object instantiation with the '.' operater.
 
-#####Class Iheritance
+Example Object Access:
+```python
+fork.cutleryUse()
+fork.cutleryWash()
+fork.cutleryDisplay()
+
+spoon.cutleryUse()
+spoon.cutleryWash()
+spoon.cutleryDisplay()
+```
+
+Output:
+```
+Using Salad Fork
+Washing Salad Fork
+Salad Fork
+
+Using Soup Spoon
+Washing Soup Spoon
+Soup Spoon
+```
+Note: When we called the methods defined in our class, we did not need to pass in the self parameter. Python does this automatically to access the local scope of our objects.
+
+#####Class Iheritance/Method Overriding
 
 #####Private & Public Data
 
