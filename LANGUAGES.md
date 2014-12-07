@@ -81,9 +81,34 @@ song1  >  song2
 #### Ruby: `classes` `inheritance`
 kgrosh
 
-#Classes
+#Classes in Ruby
+Creating classes in Ruby is very easy to do, you must start with the keyword 'class' and follow it with the name of the class and then the class definition is completed with an 'end' keyword.
+```ruby
+class Mammal
+end
 
-#Inheritance
+theMan = Mammal.new
+```
+This code would define a Mammal class and we make an object called theMan which is an instance of the Mammal class we just defined.
+
+Let's add some properties to the Class so that it looks more like something that we would actually use..
+
+```ruby
+class Mammal
+	@@numMammals = 0
+	def initialize(name, type)
+		@mammalName = name
+		@mammalType = type
+	end
+end
+
+theMan = Mammal.new("Konrad","Human")
+```
+The initialize method is a special type of method, which will be executed when the new method of the class is called with parameters.
+Using the class variable @@numMammals, you can determine the population of mammals that are created.
+
+
+#Inheritance in Ruby
 In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but Ruby doesn't.
 Below is an example of a basic example of Inheritance.
 
