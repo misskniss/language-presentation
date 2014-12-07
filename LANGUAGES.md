@@ -105,7 +105,10 @@ rani.breathe
 rani.speak
 ```
 
-Note the line where the class definition for cat is 'class Cat < Mammal'  the < operator is used to show the inheritance.
+Note the line where the class definition for cat is 'class Cat < Mammal'  the < operator is used to show the inheritance. The cat inherited the ability to breath.
+
+There are certain times when a subclass doesn't want to inherit all of the properties of the class it's inheriting from. I found a good example at 
+<a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">rubylearning.com</a>
 
 ---
 
