@@ -80,7 +80,60 @@ song1  >  song2
 
 #### Ruby: `classes` `inheritance`
 kgrosh
-I'm Adding Stuff Here!
+
+#Classes
+
+#Inheritance
+In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but Ruby doesn't.
+Below is an example of a basic example of Inheritance.
+
+```ruby
+class Mammal  
+  def breathe  
+    puts "inhale and exhale"  
+  end  
+end  
+  
+class Cat < Mammal  
+  def speak  
+    puts "Meow"  
+  end  
+end  
+  
+rani = Cat.new  
+rani.breathe  
+rani.speak
+```
+Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">rubylearning.com</a>
+
+
+Note the line where the class definition for cat is 'class Cat < Mammal'  the < operator is used to show the inheritance. The cat inherited the ability to breathe, which can be fairly useful.
+
+There are certain times when a subclass doesn't want to inherit all of the properties of the class it's inheriting from. 
+
+```ruby
+class Bird  
+  def preen  
+    puts "I am cleaning my feathers."  
+  end  
+  def fly  
+    puts "I am flying."  
+  end  
+end  
+  
+class Penguin < Bird  
+  def fly  
+    puts "Sorry. I'd rather swim."  
+  end  
+end  
+  
+p = Penguin.new  
+p.preen  
+p.fly
+```
+Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">http://rubylearning.com/satishtalim/ruby_inheritance.html</a>
+
+
 ---
 
 #### Ruby: `numbers` `arithmetic`
