@@ -319,6 +319,146 @@ pop up if the the declarations are not handled carefully.
 
 #### Dart: `classes` &amp; `operator overloading`
 cjohnson
+# Google Dart
+
+##### Dart is a cohesive, scalable platform for building apps that run on the web (where you can use Polymer) or on servers (such as with Google Cloud Platform). Use the Dart language, libraries, and tools to write anything from simple scripts to full-featured apps.
+[Dart Homepage]
+
+##Classes
+
+Similar to Java everything every thing in the Dart language is an object.  Therefore classes are objects and everything is an instance of a class.  Classes provide a modular design to the structure of your program by classifying everything as an instance of the class.  Classes support instance variables, constructors and methods for manipulating and obtaining the instance variables, also known as getters and setters.
+
+**The class shown below will be the class referenced in the following examples.**
+```javascript
+class Person {
+String firstName;
+String lastName;
+
+Person(String firstName, {String lastName}) {
+this.firstName = firstName;
+this.lastName = lastName;
+}
+
+@override
+String toString() => print('First: $firstName, Last: $lastName');
+}
+```
+###Getters & Setters
+
+Dart provides many shortcuts or "syntactic sugar" for writing less code which also makes the code easier to read.  An example of this is the fat arrow used for writing getters of a class.  In the example shown below the fat arrow '=>' is the same as writing out the code block within brackets "{ return expr; }".
+```javascript
+String get firstName => firstName;
+```
+The structure of this get method is first the return type, the method, the name of the method and followed by the body of the getter method.  The method 'get' is special to the Dart class because getters and setters are implicitly implemented in the language.  This is useful for writing far less code in getter methods not needing to do any further computation and only return the instance variable of the class.  With this in mind, when we create a new instance of this class, lets say it is a Person class and we want to obtain the Persons' first name the snippet shown below will actually be the same as the code shown above but is instead done under the hood of the language.
+```javascript
+Person person = new Person('Chad');
+String myName = person.firstName;
+```
+This same functionality is also available for setter methods used to manipulate the value of the instance variable.  If I wanted to change the last name of my person from 'Johnson' to 'Ochocinco' I can simply use the line of code below to change the name.
+```javascript
+person.lastName = 'Ochocinco';
+```
+What this is actually doing is similar to the getter function and implicitly is the same as the function shown below.
+```javascript
+void set lastName(String newLastName) {
+lastName = newLastName;
+}
+```
+###Constructors
+Besides manipulating and accessing the variables of a class we also need to create instances of the class.  Instances of a class are created with a constructor and are named after the class itself.  In the Person example we can see the constructor is the method defined called 'Person'.  The 'this' refers to the instance of the class being constructed.  Therefore we are creating a new instance of person with the provided first name and last name.
+
+What you might have noticed is not only the brackets around the parameter lastName, but also that I created a Person object above and did not include the last name.  The brackets around the parameter indicate that this is an optional parameter.  Also, to write even less code Dart has also implemented a shortcut which is the same as the constructor above but much more concise.
+```javascript
+Person(this.firstName, {this.lastName});
+```
+If we wanted to create a new instance of Person with a last name the optional parameter is provided as a named parameter to the constructor.  This looks familiar to those who might know Objective-C.  The following lines after creating the new instance will manipulate the specific instance called 'person'.
+```javascript
+Person person = new Person('Ronald', lastName: 'Artest');
+person.firstName = 'Metta';
+person.lastName = 'World Peace';
+//Output: 'First: Metta, Last: World Peace
+```
+Finally, for constructors since Dart is an optionally typed language where all arguments to a method are not required a method cannot be overloaded based on its argument types.  This is not an issue for most methods as you can simply name your methods differently, but for constructors you are required to use the name of the class.  There is a feature that will allow you to create multiple constructors though by naming them.  The example below shows a class with two named constructors, 'fromXml' and 'fromJson'.  Each class also has a default constructor that receives no arguments.
+```javascript
+class FluffyBunny {
+FluffyBunny.fromXml(String xml) {
+// …
+}
+
+FluffyBunny.fromJson(String json) {
+// ...
+}
+}
+
+var xml = "<bunny><name>floppy</name></bunny>";
+var json = '{"bunny":{"name":"peter"}}';
+
+var floppy = new FluffyBunny.fromXml(xml);
+var peter = new FluffyBunny.fromJson(json);
+```
+
+**Factory Constructor**
+```javascript
+class Symbol {
+final String name;
+static Map<String, Symbol> _cache;
+
+factory Symbol(String name) {
+if (_cache == null) {
+_cache = {};
+}
+
+if (_cache.containsKey(name)) {
+return _cache[name];
+} else {
+final symbol = new Symbol._internal(name);
+_cache[name] = symbol;
+return symbol;
+}
+}
+
+Symbol._internal(this.name);
+}
+```
+
+##Operator Overloading
+Operators in Dart are the same operators as those in most languages but the difference in Dart is these operators can be overwritten.  Similar to overriding the toString() method for the Person class we can also redefine the meaning of common operators for manipulating the class instances.
+
+"This means that you can also override (most) operators for your own types.  That being said, please don’t go crazy with this. We’re giving you the keys to the car and trusting that you won’t turn around and drive it through the living room." - [dartlang.org]
+
+| <  | +  | &#124; | [] |
+|----|----|----|-----|
+| >  | /  | ^  | []= |
+| <= | ~/ | &  | ~  |
+| >= | *  | << | == |
+| -  | %  | >> |    |
+* Truncating division operator: ~/
+
+When using these operators they are actually calling a method.  For example, when using addition in the Dart language you can use the operator '+' to add the numbers 1 and 2, but under the hood of the language it is really a method call to the '+' operator, 1.+(2).
+
+Looking at this example we can see that it will always be the left-hand argument that the operator will be looked up for.  This is a good thing to know when overloading these methods.
+
+###The equality operator.
+Probably the most popular operator to overload is going to be the equality operator.  The equality operator defines requirements for what is expected when this method is overwritten in your definition.  When comparing two Objects the default behavior of the equality operator is to return true if and only if the Object and the Object to compare with are the same object.  To override this method the following constraints are required.
+
+* Total: It must return a boolean for all arguments. It should never throw or return null.
+* Reflexive: For all objects o, o == o must be true.
+* Symmetric: For all objects o1 and o2, o1 == o2 and o2 == o1 must either both be true, or both be false.
+* Transitive: For all objects o1, o2, and o3, if o1 == o2 and o2 == o3 are true, then o1 == o3 must be true.
+
+To overload the equality operator of the Person class above we can add the following definition to the Person class so that we can determine what will consider two Person objects to be equal.
+```javascript
+operator ==(Person p2) {
+if ((firstName.compareTo(p2.firstName) == 0) &&
+(lastName.compareTo(p2.lastName) == 0)) {
+return true;
+}
+return false;
+}
+```
+
+[Dart Homepage]:https://www.dartlang.org/
+[dartlang.org]:https://www.dartlang.org/articles/idiomatic-dart/
 
 ---
 
