@@ -796,13 +796,10 @@ mhandysi
 Python has been an 'Object Oriented' language since day one, making it extremely easy to use classes and objects in your programs.
 
 #####Class Syntax
-Classes in python, like most other object oriented languages, allow us to create structures to use as object.
 
 The syntax of a class in python is much like a method definition. You have the keyword 'class' followed by the class name followed by a colon. By convention th first letter of the class name is usually capitallized.
 
-After the class declaration usually follows class variables, variable that are visible to every instance of the class object. 
-
-Then the constructor and class methods.
+After the class declaration usually follows class variables, variable that are visible to every instance of the class object. Then the constructor and class methods.
 
 Example Class: 
 ```python
@@ -812,13 +809,15 @@ class Cutlery(object):
 		
 	#class constructor
 	def __init__(self, utensil, type):
-
+		self.utensil = utensil
+		self.type = type
 	#class methods
 	def cutleryUse(self):
 		#method body...
 	def cutleryWash(self):
 		#method body...
-
+	def cutleryDisplay(self):
+		print "This is a %s %s" % (self.type, self.utensil)
 ```
 
 Note: the object keyword in the class definition will be discuessed when we get into inheritance. 
@@ -826,6 +825,14 @@ Note: the object keyword in the class definition will be discuessed when we get 
 Note: the __init__ definition will be discussed as we get to private and public declarations.
 
 #####Creating Objects
+Creating object in python is simple enough; by using the class as a method. There is no 'new' keyword in python, we simply call our class and pass in our parameters.
+
+Example Object:
+```python
+fork = Cutlery("Fork", "Salad")
+spoon = Cutlery("Spoon", "Soup")
+```
+Note: the parameters in the object instantiation are one short according to our definition. But in python, the parameter self is much like 'this' in Java or C/C++ but it is not a definate keyword; it acts as a scoping mechanism.
 
 #####Accessing Objects
 
