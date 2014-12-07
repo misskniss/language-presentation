@@ -107,7 +107,7 @@ theMan = Mammal.new("Konrad","Human")
 The initialize method is a special type of method, which will be executed when the new method of the class is called with parameters.
 Using the class variable @@numMammals, you can determine the population of mammals that are created.
 
-I learned about classes in Ruby at Source: <a href="http://www.tutorialspoint.com/ruby/ruby_classes.htm"target="_blank">tutorialspoint.com/ruby</a>
+I learned about classes in Ruby at <a href="http://www.tutorialspoint.com/ruby/ruby_classes.htm"target="_blank">tutorialspoint.com/ruby</a>
 
 #Inheritance in Ruby
 In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but Ruby doesn't.
@@ -949,14 +949,58 @@ Stiring Coffee
 Using Steak Knife
 Cutting Steak
 ```
-Note: there is no construtor in these subclasses. This is because they are inheriting everything from their parent class __Cutlery__. They are abl to call parent methods as well as their own.
+Note: there is no construtor in these subclasses. This is because they are inheriting everything from their parent class __Cutlery__. They are able to call parent methods as well as their own.
 
 When creating objects from subclasses, if no constructor is defined, the parent constructor will take over. Which leads to Method Overriding in the next section.
 
 #####Method Overriding:
+In the example of inheritance, we made three subclasses. But we want to be able to tell each class a specific use for each utensil and a way to do that is to override the parent constructor. To do this we override the __init__ method from the parent.
+
+Example Override:
+```python
+class Fork(Cutlery):
+	def __init__(self, type, use):
+		self.type = type
+		self.use = use
+	#...
+class Spoon(Cutlery):
+	def __init__(self, type, use):
+		self.type = type
+		self.use = use
+	#...
+class Knife(Cutlery):
+	def __init__(self, type, use):
+		self.type = type
+		self.use = use
+	#...
+```
+
+Note: each class overrides the __init__ method, but we have no way of telling the parent what it is. We need to call the parent constructor as well to define the utensil we are creating.
+
+```python
+class Fork(Cutlery):
+	def __init__(self, type, use):
+		Cutlery.__init__(self, "Fork", type)
+		self.use = use
+	#...
+
+class Spoon(Cutlery):
+	def __init__(self, type, use):
+		Cutlery.__init__(self, "Spoon", type)
+		self.use = use
+	#...
+
+class Knife(Cutlery):
+	def __init__(self, type, use):
+		Cutlery.__init__(self, "Knife", type)
+		self.use = use
+	#...
+```
+Now we have our personal constructors for each subclass. Each type of utensil has a pecific use, hence the __use__ variable which will remain only visible to each individual subclass.
+
+Any method made inside a parent class can be overriden inside a subclass if it must have a different use from the parent.
 
 #####Private & Public Data
-
 
 ### Python: `modules`
 cbarton
