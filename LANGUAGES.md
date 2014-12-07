@@ -739,12 +739,38 @@ dhampiki
 #### Python: `OO` &amp; `classes`
 mhandysi
 
----
-
 ####Object Oriented Python
 Python has been an 'Object Oriented' language since day one, making it extremely easy to use classes and objects in your programs.
 
 #####Class Syntax
+Classes in python, like most other object oriented languages, allow us to create structures to use as object.
+
+The syntax of a class in python is much like a method definition. You have the keyword 'class' followed by the class name followed by a colon. By convention th first letter of the class name is usually capitallized.
+
+After the class declaration usually follows class variables, variable that are visible to every instance of the class object. 
+
+Then the constructor and class methods.
+
+Example Class: 
+```python
+class Cutlery(object):
+	#class variables
+	cutlery = 0
+		
+	#class constructor
+	def __init__(self, utensil, type):
+
+	#class methods
+	def cutleryUse(self):
+		#method body...
+	def cutleryWash(self):
+		#method body...
+
+```
+
+Note: the object keyword in the class definition will be discuessed when we get into inheritance. 
+
+Note: the __init__ definition will be discussed as we get to private and public declarations.
 
 #####Creating Objects
 
@@ -753,7 +779,7 @@ Python has been an 'Object Oriented' language since day one, making it extremely
 #####Class Iheritance
 
 #####Private & Public Data
-
+---
 
 ### Python: `modules`
 cbarton
