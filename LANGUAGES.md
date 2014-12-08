@@ -888,7 +888,80 @@ astout
 #### C#: `OO` &amp; `classes`
 dhampiki
 
----
+Classes in C#
+Daniel Hampikian
+
+C#, like Java, is an object-oriented programming language.  This means that objects are the fundamental units of the language, where classes define an objects variables, methods, events, and properties, then the objects are created and called by classes and their defined properties are utilized by the calling class.  Object-oriented languages like C# support encapsulation, where a group of related properties and methods are treated as a single objet, inheritance, or the ability to create new classes based on an existing class, and polymorphism, or the ability to have multiple classes that can be used interchangeably.  Classes describe the type of object, like a blueprint, and the object is the building made from that blueprint.  
+
+In C#, a class allows you to create custom types by grouping together variables, methods, and events, in a way similar to the class structure of Java.  A class functions like a roadmap that defines the data and behavior of a type.  A class can be declared as static, but if it is not it the client code calling the class can use it by creating objects or instances of that class which are assigned to a variable.  
+
+Classes in C# support inheritance also like the Java language.  They are declared by using the class keyword. 
+For example: 
+
+```
+public class ThisIsAClass
+{
+//The field:
+public string aString; 
+
+//A constructor that takes a string as an argument
+public ThisIsAClass(string s) {
+aString = s;
+}
+}
+class Test
+{
+	static void Main()
+{
+	ThisIsAClass example = new ThisIsAClass(“Alright!”);
+	Console.WriteLine(example.aString);
+
+}
+}
+```
+//output: Alright!
+
+This class contains a field, a method, and a constructor.  
+
+It is also interestingly possible to split the definition of a class over two or more source files.  
+When this occurs different source files contain different section of the type of method definition and all parts are combined when the application is compiled.  When this occurs we have partial classes.  
+
+This is pragmatic when large projects are worked on by multiple programers so that they can all work on the same class at the same time.  
+When you are working on automatically generated source this is also pragmatic because code can be added to the class without having to recreate the source file.  Visual studio, for example, uses this approach when it creates Windows Forms.  
+To split a class definition, you use the partial keyword modifier as shown:
+```
+public partial class Clowns
+{
+public void ClownWork()
+{
+}
+}
+
+public partial class Midgets 
+{
+public void MidgetWork()
+{
+}
+}
+```
+
+The partial keyword indicates that other parts of the class can be defined in the namespace.  All parts must use the partial key word and be available to compile time to form the final type and must also have the same accessibility modifier, abstract, or sealed modifiers must be consistent across the whole class. 
+
+The access modifiers of SC# are very similar to those of Java, where we have public, private, and protected modifier that limit access as follows:
+public is not restricted, protected is limited tot he class or types derived from the containing class.  
+And finally, private where access is strictly limited to the containing type. 
+However, C# has a a internal, and protected internal type, where for internal access is limited to the current assembly and for protected internal access is limited to the current assembly or types derived from the containing class.  
+
+References:
+
+For classes my information comes mostly from:
+
+http://msdn.microsoft.com/en-us/library/x9afc042.aspx
+
+For partial classes my information comes mostly from:
+
+http://msdn.microsoft.com/en-us/library/wa80x488.aspx
+
 
 #### Python: `OO` &amp; `classes`
 mhandysi
