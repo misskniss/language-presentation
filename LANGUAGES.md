@@ -330,29 +330,18 @@ puts sy.object_id
 
 ##### Output:
 
-String
-
-7496740
-
-Fixnum
-
-47
-
-Float
-
-7500300
-
-Hash
-
-7496660
-
-NilClass
-
-4
-
-Symbol
-
-294568
+String  
+7496740  
+Fixnum  
+47  
+Float  
+7500300  
+Hash  
+7496660  
+NilClass  
+4  
+Symbol  
+294568  
 
 
 ### Hashes
@@ -371,12 +360,9 @@ puts h[:Olaf]
 
 ##### Output:
 
-Ice Queen
-
-Energetic Princess
-
-Happy Snowman
-
+Ice Queen  
+Energetic Princess  
+Happy Snowman  
 
 # Symbols
 
@@ -396,9 +382,8 @@ puts sy.to_s
 
 ##### Output:
 
-294568
-
-sym
+294568  
+sym  
 
 ### Symbol vs String
 
