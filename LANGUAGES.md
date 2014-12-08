@@ -107,7 +107,7 @@ theMan = Mammal.new("Konrad","Human")
 The initialize method is a special type of method, which will be executed when the new method of the class is called with parameters.
 Using the class variable @@numMammals, you can determine the population of mammals that are created.
 
-I learned about classes in Ruby at Source: <a href="http://www.tutorialspoint.com/ruby/ruby_classes.htm"target="_blank">tutorialspoint.com/ruby</a>
+I learned about classes in Ruby at <a href="http://www.tutorialspoint.com/ruby/ruby_classes.htm"target="_blank">tutorialspoint.com/ruby</a>
 
 #Inheritance in Ruby
 In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but Ruby doesn't.
@@ -795,9 +795,83 @@ sbradbur
 ---
 
 #### C#: `typing system`
-dynamics, vars 
+
 cowens
 
+##### Typing
+C# is strongly and statically typed. C# enforces type safety. These allow for increased stability in C# development. C# has a few interesting topics within typing, including *dynamics* and *vars*. 
+##### Dynamics
+C# has a unique type, *dynamic*. In essence, declaring an object of type dynamic allows for this object to bypass standard type checking. This allows for flexibility of use, but places the burden of type checking on the programmer to avoid any runtime errors that would normally have been caught at compile time. 
+###### Example: 
+```C#
+using System;
+using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace Sandbox {
+    class Program {
+        static void Main(string[] args) {
+            dynamic obj = "Hello World";
+            foreach (char c in obj){
+                Console.Write(c);
+            }
+            Console.WriteLine();
+            obj = 1;
+            obj = obj + 1;
+            Console.WriteLine(obj);
+            obj = 2.5;
+            obj = obj * .75;
+            Console.WriteLine(obj);
+            obj = new Point(5, 10);
+            Console.WriteLine(obj);
+            Console.WriteLine("("+obj.X+","+obj.Y+")");
+			obj.missingMethod();
+            System.Threading.Thread.Sleep(10000);
+        }
+    }
+}
+```
+In the above example, obj is used as a String, then an int, then a double, and finally a point. Each of these compile without error, and the program runs as you would expect, with obj adapting to each use as needed. This demonstrates the power of the dynamic type in C#. It isn't until the line `obj.missingMethod();` that we have a runtime error. The runtime is unable to bind the missingMethod() method, since it doesn't exist. This demonstrates the risk of using dynamics - it's up to the programmer to ensure type safety. The compiler will not catch issues like this. 
+##### Vars
+Another unique type for C# is *var*. Declaring an object of type var allows the compiler to determine what type the object should be implicitly. 
+###### Example: 
+```C#
+using System;
+using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace Sandbox {
+    class Program {
+        static void Main(string[] args) {
+            var obj = "Hello World";
+            foreach (char c in obj){
+                Console.Write(c);
+            }
+            Console.WriteLine();
+            obj = 1;
+            obj = obj + 1;
+            Console.WriteLine(obj);
+            obj = 2.5;
+            obj = obj * .75;
+            Console.WriteLine(obj);
+            obj = new Point(5, 10);
+            Console.WriteLine(obj);
+            Console.WriteLine("("+obj.X+","+obj.Y+")");
+			obj.missingMethod();
+            System.Threading.Thread.Sleep(10000);
+        }
+    }
+}
+```
+Unlike the above example for dyamics, declaring obj as a var works for the first use, but attempting to redefine obj as an int, double, or point results in compile errors - the compiler determined that obj should be a String and will treat it as a String for the rest of its use. 
 ---
 
 #### C#: `debugging` &amp; `exception handling`
@@ -1015,14 +1089,86 @@ Stiring Coffee
 Using Steak Knife
 Cutting Steak
 ```
-Note: there is no construtor in these subclasses. This is because they are inheriting everything from their parent class __Cutlery__. They are abl to call parent methods as well as their own.
+Note: there is no construtor in these subclasses. This is because they are inheriting everything from their parent class __Cutlery__. They are able to call parent methods as well as their own.
 
 When creating objects from subclasses, if no constructor is defined, the parent constructor will take over. Which leads to Method Overriding in the next section.
 
 #####Method Overriding:
+In the example of inheritance, we made three subclasses. But we want to be able to tell each class a specific use for each utensil and a way to do that is to override the parent constructor. To do this we override the __init__ method from the parent.
+
+Example Override:
+```python
+class Fork(Cutlery):
+	def __init__(self, type, use):
+		self.type = type
+		self.use = use
+	#...
+class Spoon(Cutlery):
+	def __init__(self, type, use):
+		self.type = type
+		self.use = use
+	#...
+class Knife(Cutlery):
+	def __init__(self, type, use):
+		self.type = type
+		self.use = use
+	#...
+```
+
+Note: each class overrides the __init__ method, but we have no way of telling the parent what it is. We need to call the parent constructor as well to define the utensil we are creating.
+
+```python
+class Fork(Cutlery):
+	def __init__(self, type, use):
+		Cutlery.__init__(self, "Fork", type)
+		self.use = use
+	#...
+
+class Spoon(Cutlery):
+	def __init__(self, type, use):
+		Cutlery.__init__(self, "Spoon", type)
+		self.use = use
+	#...
+
+class Knife(Cutlery):
+	def __init__(self, type, use):
+		Cutlery.__init__(self, "Knife", type)
+		self.use = use
+	#...
+```
+Now we have our personal constructors for each subclass. Each type of utensil has a pecific use, hence the __use__ variable which will remain only visible to each individual subclass.
+
+Any method made inside a parent class can be overriden inside a subclass if it must have a different use from the parent.
 
 #####Private & Public Data
+It may have been noticed that the __init__ methods of our classes have two leading and trailing underscores. This is how python protects certain functions or variables.
 
+Say we wanted to make it so no one knows how many utensils we actually have. We could do this by using two leading underscores.
+
+Example Private variable:
+```python
+class Cutlery(object):
+	
+	__cutlery = 0
+
+	def __init__(self, utensil, type):
+		self.utensil = utensil
+		self.type = type
+		self.__cutlery += 1
+		
+	def getCutleryCount():
+		print self.__cutlery	
+
+cutlery = ("Fork", "Salad")
+cutlery.getCutleryCount()
+print cutlery.__cutlery
+```
+
+This code would run a error at the print statement because python sees the two underscores and internally changes th variable name to include the class name. _object.className__variable is what would be used for the print statement to work correctly.
+
+```python
+print cutlery._Cutlery__cutlery
+```
 
 ### Python: `modules`
 cbarton
