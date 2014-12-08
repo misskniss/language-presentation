@@ -288,7 +288,109 @@ Decimal arithmetic is also useful for general calculation, because it provides t
 #### Ruby: `blocks` &amp; `collections`
 mthurmon
 
-part 0.
+####OVERVIEW:
+
+Ruby is a dynamic, reflective, object-oriented, general-purpose programming language.  It was developed in the mid 90’s by Yukihiro “Matz” Matsumoto in Japan.  Ruby was influenced by perl, Smalltalk, Eiffel, Ada, and Lisp.  It supports multiple programming paradigms (functional, object-oriented, imperative).  It also has a dynamic type system and automatic memory management.  
+	
+Ruby is a general purpose dynamic language that is frequently used for scripting. It’s supposedly one of the easier languages to learn and it is mostly used for web apps.  Ruby can be interpreted or compiled and is not considered a low-level language.  Ruby has a lexical scope, but is sometimes dynamic.  It has a duck typing or dynamic type system.
+
+Ruby methods are used to bundle one or more reputable statements into a single unit.  Ruby methods are a set of expressions that return a value.  Methods should be defined before calling them.
+
+
+
+####COLLECTIONS:
+
+Collections in Ruby allow for the organization of large amounts of data, most of which you will loop through. Ruby collections include the following:
+
+Range: collection of numbers that represents an interval—a set of values with a beginning and an end. Ranges may be constructed using the s..e and s...e literals, or with ::new. Ranges constructed using .. run from the beginning to the end inclusively. Those created using ... exclude the end value. When used as an iterator, ranges return each value in the sequence. An example of a range is as follows:
+
+```ruby
+	(-1..-5).to_a      #=> []
+	(-5..-1).to_a      #=> [-5, -4, -3, -2, -1]
+	('a'..'e').to_a     #=> ["a", "b", "c", "d", "e"]
+	('a'...'e').to_a    #=> ["a", "b", "c", "d"]
+```
+
+Array: a data object that stores an ordered, integer-indexed, collection of values (can be any object).  Array indexing starts at 0.  A negative index is assumed to be relative to the end of the array. An index of -1 indicates the last element of the array, -2 is the next to last element in the array, etc.  Ruby uses square brackets, [],  to denote the beginning and end of an array. An example of an array is as follows:
+
+```ruby
+	my_first_array = [] #initializing an array
+
+	my_first_array[0] = "Alpha"   
+	my_first_array[1] = "Beta"
+	my_first_array[2] = 3
+
+	#initializing and filling the array in one step:
+	my_first_array = ["Alpha", "Beta", 3]
+```
+
+
+Hash: is a dictionary-like collection of unique keys and their values.  Uses an object-type to index.  Hashes enumerate their values in the order that the corresponding keys were inserted. An example of a hash is as follows:
+
+```ruby
+	grades = { "Jane Doe" => 10, "Jim Doe" => 6 }
+```
+
+Set: implements a collection of unordered values with no duplicates. It uses a hash as storage. A set is easy to use with Enumerable objects.  Most of the initializer methods and binary operators accept generic Enumerable objects besides sets and arrays.  An Enumerable object can be converted to Set using the to_set method.  An example of a set can be seen below:
+
+```ruby
+	require 'set'
+	s1 = Set.new [1, 2]                   # -> #<Set: {1, 2}>
+	s2 = [1, 2].to_set                      # -> #<Set: {1, 2}>
+	s1 == s2                                   # -> true
+	s1.add("foo")                            # -> #<Set: {1, 2, "foo"}>
+	s1.merge([2, 6])                       # -> #<Set: {1, 2, "foo", 6}>
+	s1.subset? s2                          # -> false
+	s2.subset? s1   
+```
+
+
+
+####BLOCKS:
+
+A Ruby block (called closures in other languages) is a way of grouping statements. There are two ways to write blocks. One is using the do..end statement and the other is surrounding the code in curly braces {}. Blocks are considered objects in Ruby, and by default all functions accept a block argument.  Blocks may appear only in the source adjacent to a method call. A block is written starting on the same line as the method call's last parameter (or the closing parenthesis of the parameter list). The code in the block is not executed at the time it is encountered. Instead, Ruby remembers the context in which the block appears (the local variables, the current object, etc) and then enters the method.  You do not need to specify the name of blocks within your methods.  Instead, you can use the yield keyword.  Calling “yield” will execute the code within the block provided to the method. The attributes passed to yield corresponds to the variable specified in the piped list of the block. That value is now available to the block and returned by the yield call.  Blocks are useful for some of the following situations:
+
+Transactions
+Wrapper Classes
+Iterators
+
+
+```ruby
+
+class Array
+  def iterate!
+    self.each_with_index do |n, i|
+      self[i] = yield(n)
+    end
+  end
+end
+
+array = [1, 2, 3, 4]
+
+array.iterate! do |n|
+  n ** 2
+end
+
+puts array.inspect
+
+######=> [1, 4, 9, 16]
+```
+
+
+```ruby
+def simple 
+	puts 'Here comes the code block'
+	yield
+	puts 'There was the code block'
+end
+simple { puts 'Hooray! code block HERE!' } 
+
+#####=> Here comes the code block!
+#####=> Hooray! code block HERE!
+#####=> There was the code block!
+
+```
+
 ---
 
 #### Ruby: `data types` &amp; `symbols`
