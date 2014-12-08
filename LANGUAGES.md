@@ -307,107 +307,6 @@ jdelagar
 #### Ruby: `duck typing`
 lmatsind
 
-Intro:
-
-Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.
-Every procedure in Ruby is a method of some object. Some method calls appear to be function calls as in other languages, but in fact they are actually invocations of methods belonging to self. Parentheses can be omitted if unambiguous.
-Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. It was designed and developed in the mid-1990s by Yukihiro "Matz" Matsumoto in Japan.
-
-Meat:
-
-Ruby’s dynamic nature facilitates a style of type system known as duck typing. In particular, duck typing breaks the strong association between an object’s class and its type by defining types based on what an object can do rather than what class it was born from.
-
-Duck typing to avoid scope creep
-
-
-def image(file, options={})
-  Prawn.verify_options [:at, :position, :vposition, :height,
-                        :width, :scale, :fit], options
-
-  if file.respond_to?(:read)
-    image_content = file.read
-  else
-    raise ArgumentError, "#{file} not found" unless File.file?(file)
-    image_content = File.binread(file)
-  end
-
-  # additional implementation details omitted.
-end
-
-The above code is used to make it so that the image() method can be called with either a file name or a file handle
-
-Some more examples
-
-```
-class Duck
-  def quack
-    puts "Quaaaaaack!"
-  end
- 
-  def feathers
-    puts "The duck has white and gray feathers."
-  end
-end
- 
-class Person
-  def quack
-    puts "The person imitates a duck."
-  end
- 
-  def feathers
-    puts "The person takes a feather from the ground and shows it."
-  end
-end
- 
-def in_the_forest(duck)
-  duck.quack
-  duck.feathers
-end
- 
-def game
-  donald = Duck.new
-  john = Person.new
-  in_the_forest donald
-  in_the_forest john
-end
- 
-```
-game
-Output:
-
-Quaaaaaack!
-The duck has white and gray feathers.
-The person imitates a duck.
-The person takes a feather from the ground and shows it.
-
-
-In Ruby, we rely less on the type (or class) of an object and more on its capabilities. Hence, Duck Typing means an object type is defined by what it can do, not by what it is. Duck Typing refers to the tendency of Ruby to be less concerned with the class of an object and more concerned with what methods can be called on it and what operations can be performed on it. In Ruby, we would use respond_to? or might simply pass an object to a method and know that an exception will be raised if it is used inappropriately.
-
-```
-# Check in irb, whether the object defines the to_str method  
->> 'A string'.respond_to?(:to str)  
-=> true  
->> Exception.new.respond_to?(:to_str)  
-=> false  
->> 4.respond_to?(:to_str)  
-=> false  
-```
-
-The example above is the simplest example of Ruby's philosophy of "duck typing:" if an object quacks like a duck (or acts like a string), just go ahead and treat it as a duck (or a string). Whenever possible, you should treat objects according to the methods they define rather than the classes from which they inherit or the modules they include.
-
-Outro:
-
-Duck Typing Pro’s
-i)  Convenient
-ii) Promotes code reuse
-    All that matters is what messages an object can receive
- 
-Duck Typing Con’s
-i) “Obvious” equivalences don’t hold: x+x, 2*x, x*2
-ii) May expose more about an object than might be
-    desirable (more coupling in code)
-
-
 ---
 
 #### Ruby: `method_missing` &amp; `const_missing`
@@ -425,12 +324,78 @@ cnelson
 #### Go: `goroutines`
 mclausen
 
+<<<<<<< HEAD
 ---
 <<<<<<< HEAD
 
 #### Scala: `pattern matching` 
 btombari
 =======
+=======
+#### 'Enumerations' and 'Subscripts'
+ncabral
+
+##### Enumerations
+
+Like in other languages, enumerations in Swift allow the programmer to define a common type for a group of related values. Enumerations are used when the programmer wants to work with user defined values in a type-safe way. Unlike languages such as C, enumerations in Swift do not have an implied "raw" value (0, 1, 2, etc). Rather, the members are treated as values of specific type. However, the programmer can still associate specific values of any type along with each member if they choose to. Enumerations are first class types in Swift, and they can have computed properties as well as instance methods.
+
+The best practice when defining an enumeration is to capitalize the name, since an enumeration is a type. It is also preferable that enumeration names are singular.
+
+One common mistake when using enumerations in Swift is assuming that each member has an implied numerical, like they do in C. It is important to remember that each member is a value in and of itself, of the type specified by the name of the enumeration.
+
+The following code sample shows a couple of ways to define an enumeration:
+```
+enum Directions{
+	case Up
+	case Down
+	case Left
+	case Right
+}
+
+enum Taste{
+	case Sweet, Sour, Bitter, Salty, Umami
+}
+```
+A variable's type is inferred when it is initialized to one of the possible values of an enumeration. It can then be reassigned to another value of that enumeration using a shorter dot syntax, as seen in the following code example:
+```
+	var foodTaste = Taste.Bitter
+	foodTaste = .Sour
+```
+##### Subscripts
+
+Subscripts in Swift are a shortcut for accessing the member elements of a collection. This allows the programmer to set and get values by index without the need for seperate methods. Subscripts can also be overloaded, in which case the correct subscript is called based on the index value that is passed.
+
+Subscripts are defined with the subscript keyword. They have a specific index value type, as well as a specific return type. The programmer has the option to make the subscript read/write or read-only. The following code example shows both types of subscript. Note that the example is an overloaded subscript.
+
+```
+subscript(index: Int) -> Int {
+	get {
+		//returns a type specified in line 1
+	}
+	set(newValue) {
+		// note that newValue is of this same type
+	}
+}
+
+subscript(index: String) -> Int {
+	get {
+		// returns a var of type Int
+	}
+}
+```
+The following code example shows subscript usage. Note that this example does not use the example code seen above.
+```
+var myNumbers = ["one":1, "two":2, "three":3]
+myNumbers["four"] = 4
+var myVar = myNumbers["one"] //myVar now equals 1
+```
+
+##### Sources
+<a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html">Apple Developer Website - Enumerations</a>
+
+<a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Subscripts.html">Apple Developer Website - Subscripts</a>
+
+>>>>>>> 008e5a7aa827e36f6bf483ae199789dac5a459b2
 #### Swift: `Control Flow Structures` and `Exception\Error Handling`
 mtaylor
 
@@ -1015,6 +980,33 @@ Basic
 #### R: `graphical features`
 charts
 sbradbur
+#Overview
+R is an object-oriented, high-level, statistical programming language.  It is designed for statistical computing and graphics and is widely used by scientists and mathematicians.  R is dynamically and strongly typed and uses lexical scoping.  
+#Graphical Features
+R can be used to create many kinds of graphs.  R has built in functions for graphing, and the arguments of the function specify what data will be graphed.  This language makes it easy to visually represent datasets in a large variety of ways.   
+A code example of making minimal graphs from built in data sets in R:
+```
+hist(faithful$eruptions)      
+hist(faithful$waiting)
+plot(faithful)			
+boxplot(faithful$eruptions)	
+stripchart(faithful$eruptions)	
+
+plot(women)
+lines(women)				#adding lines to a plot
+pie(women$height)
+```
+You can make a lot of graphs with very little coding, but these graphs are pretty minimal.  R uses method overloading to allow you to change aspects of the graph.  The first argument specifies what will be graphed, and the rest set the values of built in variables.  
+A code example, improving on an earlier graph: 
+```
+plot(faithful,
+     main = "Old Faithful Eruptions",
+     col = "red",
+     col.main = "blue",
+     col.lab = "purple",
+     xlab = "Time between Eruptions (min)",
+     ylab = "Duration of Eruption (min)")
+```
 
 ---
 
