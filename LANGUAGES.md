@@ -498,7 +498,8 @@ var myVar = myNumbers["one"] //myVar now equals 1
 
 <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Subscripts.html">Apple Developer Website - Subscripts</a>
 
->>>>>>> 008e5a7aa827e36f6bf483ae199789dac5a459b2
+---
+
 #### Swift: `Control Flow Structures` and `Exception\Error Handling`
 mtaylor
 
@@ -619,7 +620,6 @@ For programmer errors (like out of bounds access of array element, invalid argum
 NSException(name: "SomeName", reason: "SomeReason", userInfo: nil).raise()
 ```
 You cannot catch them in pure Swift, so you have to opt for catching exceptions in ObjC code.
->>>>>>> f8e8a3c867648d01d3985a52b9fda6688fa4fc28
 
 ---
 
