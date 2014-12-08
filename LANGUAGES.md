@@ -549,7 +549,7 @@ dmesenbr
 
 Ruby is a versatile scripting language which allows the user to build dynamic classes which can have an unlimited number of methods and constants. 
 
-Two methods in Ruby help in allowing the dynamic nature of the language. The first of which is a baseclass method 'method_missing' which is invoked when a non-existant class method is called using the dot operator. The method_missing method is overwritten by a class to provide functionality for dynamically created methods. For example, suppose I make a class called Books and I want to access any book in the library. I could add to the method_missing function and then access each books data like Books.Lord_of_the_Rings even though there is not a method called Lord_of_the_Rings. Here is a code block showing that behavior.
+Two methods in Ruby help in allowing the dynamic nature of the language. The first of which is a baseclass method *method_missing* which is invoked when a non-existant class method is called using the dot operator. The method_missing method is overwritten by a class to provide functionality for dynamically created methods. For example, suppose I make a class called Books and I want to access any book in the library. I could add to the method_missing function and then access each books data like Books.Lord_of_the_Rings even though there is not a method called Lord_of_the_Rings. Here is a code block showing that behavior.
 
 ```
 class Books
@@ -565,9 +565,9 @@ book1 = Books.new
 puts book1.Lord_of_the_Rings
 ```
 
-In this wawy we can call Books.Insert_book_title_here and return a reference to any book based on what we define in the method_missing method. This feature is very powerful. In addition to the simple example shown above the developer can check if the name of the method matches a pattern or call the objects super.
+In this way we can call Books.Insert_book_title_here and return a reference to any book based on what we define in the method_missing method. This feature is very powerful. In addition to the simple example shown above the developer can check if the name of the method matches a pattern or call the objects super.
 
-Another useful feature of Ruby is the const_missing method which allows developers to default or lookup a value for a requested constant. Since class names are considered constants it is very useful in dynamically loading classes when they are used instead of just using a require statement at the beginning of a program to load everything into memory which can be expensive. 
+Another useful feature of Ruby is the *const_missing* method which allows developers to default or lookup a value for a requested constant. Since class names are considered constants it is very useful in dynamically loading classes when they are used instead of just using a require statement at the beginning of a program to load everything into memory which can be expensive. 
 
 Here is an example of dynamically loading a class when it is invoked.
  
