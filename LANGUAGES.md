@@ -584,8 +584,79 @@ mtaylor,
 ---
 
 #### Swift: `typing system`
-types, nested types, generics
-jpeng
+types, nested types, generics - jpeng
+##### Types:
+Most common types: String, Int, Float, Double, Array, Dictionary
+
+Many of use are familiar with the most common types. A new type in Swift is dictionary
+which stores multiple values of the same type. Each value is associated with a key which
+acts like an index to that value.
+
+<a href="http://swiftstub.com/908860860/">Fibonacchi</a>
+
+```
+// declare dictonary of people
+var people: [String: String] = ["Key1": "Jim Peng", "Key2": "Joey Mazzarelli"]
+
+// add another person
+people["Key3"] = "Dr. Seuss"
+
+//access a person
+let person = people["Key3"]
+
+//remove a person
+people["Key3"] = nil
+
+for peopleKey in people.keys {
+    println("Keys: \(peopleKey)")
+}
+
+for peopleName in people.values {
+    println("People: \(peopleName)")
+}
+```
+<a href="http://swiftstub.com/660210187/">Code</a>
+
+##### Nested Types:
+
+<a href="http://swiftstub.com/865776464/">Blackjack Struct</a>
+
+##### Generics:
+Generics is for creating functions and classes that work with any type.
+Some Swift provided generics would be Array and Dictionary. They are generic
+collections that can stored the user specified type.
+
+```
+class Queue<T> {
+    var q = [T]()
+    
+    func enQueue(object: T) {
+        q.append(object)
+    }
+    
+    func deQueue() -> T {
+        return q.removeAtIndex(0)
+    }
+}
+
+var myQueue = Queue<String>()
+
+myQueue.enQueue("Peng")
+myQueue.enQueue("Jim")
+
+println(myQueue.deQueue())
+println(myQueue.deQueue())
+
+var yourQueue = Queue<Int>()
+
+yourQueue.enQueue(1)
+yourQueue.enQueue(2)
+
+println(yourQueue.deQueue())
+println(yourQueue.deQueue())
+```
+<a href="http://swiftstub.com/464254372/">Generic Queue</a>
+
 
 ---
 
