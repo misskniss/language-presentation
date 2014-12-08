@@ -921,6 +921,10 @@ Output is:
 Matt owns tens of types of twisty puzzles.
 ```
 
+##### Exception\Error Handling:
+
+Error shit when I get around to typing it
+
 ---
 #### Swift: `typing system`
 types, nested types, generics - jpeng
