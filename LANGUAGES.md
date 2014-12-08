@@ -641,7 +641,11 @@ test
 ---
 
 #### Swift: `control flow structures` &amp; `exception/error handling`
-mtaylor, 
+mtaylor
+
+##### Control Flow Structures:
+
+##### Exception/Error Handling
 
 ---
 
