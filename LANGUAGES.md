@@ -551,7 +551,7 @@ Ruby is a versatile scripting language which allows the user to build dynamic cl
 
 Two methods in Ruby help in allowing the dynamic nature of the language. The first of which is a baseclass method 'method_missing' which is invoked when a non-existant class method is called using the dot operator. The method_missing method is overwritten by a class to provide functionality for dynamically created methods. For example, suppose I make a class called Books and I want to access any book in the library. I could add to the method_missing function and then access each books data like Books.Lord_of_the_Rings even though there is not a method called Lord_of_the_Rings. Here is a code block showing that behavior.
 
-'''
+```
 class Books
 	def get_book(str)
 		# stuff here
@@ -563,7 +563,7 @@ class Books
 end
 book1 = Books.new
 puts book1.Lord_of_the_Rings
-'''
+```
 
 In this wawy we can call Books.Insert_book_title_here and return a reference to any book based on what we define in the method_missing method. This feature is very powerful. In addition to the simple example shown above the developer can check if the name of the method matches a pattern or call the objects super.
 
@@ -571,7 +571,7 @@ Another useful feature of Ruby is the const_missing method which allows develope
 
 Here is an example of dynamically loading a class when it is invoked.
  
-'''
+```
 class Object
 	def self.const_missing(const)
 		Obj.const_get(const)
@@ -579,19 +579,18 @@ class Object
 end
 
 ThisIsAClass.new.print_Something
-
-'''
+```
 
 In a separate file you could have the ThisIsAClass class
 
-'''
+```
 #ThisIsAClass.rb
 class ThisIsAClass
 	def print_Something
 		puts "Something"
 	end
 end
-'''
+```
 
 When I referenced ThisIsAClass in the first part it dynamically loaded that class because of the const_missing method. In this case const_missing calls the const_get method which would be configured in most cases to load the class from a file (in this case ThisIsAClass.rb). 
 
