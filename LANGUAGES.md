@@ -795,8 +795,15 @@ sbradbur
 ---
 
 #### C#: `typing system`
-dynamics, vars 
+
 cowens
+
+##### Typing
+C# is strongly and statically typed. C# enforces type safety. These allow for increased stability in C# development. C# has a few interesting topics within typing, including *dynamics* and *vars*. 
+##### Dynamics
+C# has a unique type, *dynamic*. In essence, declaring an object of type dynamic allows for this object to bypass standard type checking. This allows for flexibility of use, but places the burden of type checking on the programmer to avoid any runtime errors that would normally have been caught at compile time. 
+##### Vars
+Another unique type for C# is *var*. Declaring an object of type var allows the compiler to determine what type the object should be implicitly. 
 
 ---
 
