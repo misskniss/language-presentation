@@ -194,16 +194,20 @@ puts -1234.abs     #abs value; 1234
 check the number to be zero; only for Fixnum
 could check the divisor to be not zero
 puts 2.zero?     #false
-
- #Float
+ 
+ 
+ # Float
 
 	puts 10 / 3     #3，the two numbers are Fixnum
  
 make either dividend or divisor to be Float，Ruby can process the result
+
 puts 10.0 / 3     #3.3333333333333
 puts 10 / 3.0     #3.3333333333333
+
  
 pass the minimum integer which is greater than the value
+
 puts (0.1).ceil     #1
 puts (-0.1).ceil     #0
  
@@ -216,23 +220,33 @@ puts (3.3).round     #3
 puts (4.5).round     #5
 puts (-5.1).round     #-5
 puts (-6.6).round     #-7
+
 The Ruby Way mention the output cannot be 10.0  for the result of 10.0 / 3 (3.3333333333333)  to multiply the original divisor (3). But according to the code below, it can be 10.0.
+
 	x = 10.0 / 3
 puts x       #3.3333333333333
  
 y = x * 3
 puts y       #10.0
+
+
+
 Besides, we can use BigDecimal class to have accurate floating point numbers.
+
 	require 'bigdecimal'
  
 x = BigDecimal.new("0.3333333333")
  
 puts x * 3     #0.9999999999E0
 
+
 # BigDecimal
 BigDecimal provides similar support for very large or very accurate floating point numbers. Ruby provides built-in support for arbitrary precision integer arithmetic. For example:
+
 42**13 -> 1265437718438866624512
+
 Decimal arithmetic is also useful for general calculation, because it provides the correct answers people expect–whereas normal binary floating point arithmetic often introduces subtle errors because of the conversion between base 10 and base 2. For example,
+
 (BigDecimal.new(“1.2”) - BigDecimal(“1.0”)) == BigDecimal(“0.2”) -> true
 (1.2 - 1.0) == 0.2 -> false
 
