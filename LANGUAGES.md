@@ -828,7 +828,69 @@ One good practice I discovered during my research is to use s
 
 which removes the guesswork created using time.Sleep at the end of a program using goroutines. In order to do this you must create a variable and assign sync.WaitGroup to it. After this you can add the number of goroutines that must wait.
 
----
+#### 'Enumerations' and 'Subscripts'
+ncabral
+
+##### Enumerations
+
+Like in other languages, enumerations in Swift allow the programmer to define a common type for a group of related values. Enumerations are used when the programmer wants to work with user defined values in a type-safe way. Unlike languages such as C, enumerations in Swift do not have an implied "raw" value (0, 1, 2, etc). Rather, the members are treated as values of specific type. However, the programmer can still associate specific values of any type along with each member if they choose to. Enumerations are first class types in Swift, and they can have computed properties as well as instance methods.
+
+The best practice when defining an enumeration is to capitalize the name, since an enumeration is a type. It is also preferable that enumeration names are singular.
+
+One common mistake when using enumerations in Swift is assuming that each member has an implied numerical, like they do in C. It is important to remember that each member is a value in and of itself, of the type specified by the name of the enumeration.
+
+The following code sample shows a couple of ways to define an enumeration:
+```
+enum Directions{
+	case Up
+	case Down
+	case Left
+	case Right
+}
+
+enum Taste{
+	case Sweet, Sour, Bitter, Salty, Umami
+}
+```
+A variable's type is inferred when it is initialized to one of the possible values of an enumeration. It can then be reassigned to another value of that enumeration using a shorter dot syntax, as seen in the following code example:
+```
+	var foodTaste = Taste.Bitter
+	foodTaste = .Sour
+```
+##### Subscripts
+
+Subscripts in Swift are a shortcut for accessing the member elements of a collection. This allows the programmer to set and get values by index without the need for seperate methods. Subscripts can also be overloaded, in which case the correct subscript is called based on the index value that is passed.
+
+Subscripts are defined with the subscript keyword. They have a specific index value type, as well as a specific return type. The programmer has the option to make the subscript read/write or read-only. The following code example shows both types of subscript. Note that the example is an overloaded subscript.
+
+```
+subscript(index: Int) -> Int {
+	get {
+		//returns a type specified in line 1
+	}
+	set(newValue) {
+		// note that newValue is of this same type
+	}
+}
+
+subscript(index: String) -> Int {
+	get {
+		// returns a var of type Int
+	}
+}
+```
+The following code example shows subscript usage. Note that this example does not use the example code seen above.
+```
+var myNumbers = ["one":1, "two":2, "three":3]
+myNumbers["four"] = 4
+var myVar = myNumbers["one"] //myVar now equals 1
+```
+
+##### Sources
+<a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html">Apple Developer Website - Enumerations</a>
+
+<a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Subscripts.html">Apple Developer Website - Subscripts</a>
+
 #### Swift: `Control Flow Structures` and `Exception\Error Handling`
 mtaylor
 
