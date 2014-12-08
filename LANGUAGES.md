@@ -616,39 +616,172 @@ contents = file.read
 puts contents   #=> Lorem ipsum etc.
 ```
 
+
+ ---
+ ####Go: `goroutines`
+##mclausen
+
+
+####How it is Used and How it Works
+
+A goroutine is a function that is capable of running concurrently with other function. Concurrency is where components (i.e. functions) are able to make progress on more than one task simultaneously. Concurrency should not be confused with Parallelism which is where two or more threads execute code at the same time using two processors. Below is an example of Concurrency and Parallelism from goinggo.net with there results so you can compare the difference in output.
+
+Concurrency:
+
+	package main
+
+	import (
+    "fmt"
+    "sync"
+    "time"	)
+
+	func main() {
+  	  var wg sync.WaitGroup
+   	  wg.Add(2)
+
+    fmt.Println("Starting Go Routines")
+    go func() {
+        defer wg.Done()
+
+        time.Sleep(1 * time.Microsecond)
+        for char := 'a'; char < 'a'+26; char++ {
+            fmt.Printf("%c ", char)
+        }
+    }()
+
+    go func() {
+        defer wg.Done()
+
+        for number := 1; number < 27; number++ {
+            fmt.Printf("%d ", number)
+        }
+    }()
+
+    fmt.Println("Waiting To Finish")
+    wg.Wait()
+
+    fmt.Println("\nTerminating Program")
+	}
+
+ 
+Parallelism: 
+	package main
+
+	import (
+    "fmt"
+    "runtime"
+    "sync"
+	)
+
+	func main() {
+    runtime.GOMAXPROCS(2)
+
+    var wg sync.WaitGroup
+    wg.Add(2)
+
+    fmt.Println("Starting Go Routines")
+    go func() {
+        defer wg.Done()
+
+        for char := 'a'; char < 'a'+26; char++ {
+            fmt.Printf("%c ", char)
+        }
+    }()
+
+    go func() {
+        defer wg.Done()
+
+        for number := 1; number < 27; number++ {
+            fmt.Printf("%d ", number)
+        }
+    }()
+
+    fmt.Println("Waiting To Finish")
+    wg.Wait()
+
+    fmt.Println("\nTerminating Program")
+	}
+
+
+Output:
+
+	Starting Go Routines
+	Waiting To Finish
+	a b 1 2 3 4 c d e f 5 g h 6 i 7 j 8 k 9 10 11 12 l m n o p q 13 r s 14
+	t 15 u v 16 w 17 x y 18 z 19 20 21 22 23 24 25 26
+	Terminating Program
+
+Go makes writing these concurrent programs easier and not as prone to errors. These goroutines are considered light weight because they use a small amount of memory and resources on top of their already small stack size.
+
+####Syntax
+In order to create a goroutine you must use the keyword go proceeded by the function invocation like so:
+
+	go f("goroutine")
+
+Here is a complete program using a goroutine:
+
+	package main
+	
+	import "fmt"
+	
+
+	func f(this string){
+		for i:=1; i<4; i++{
+			fmt.Println(this," ", i)
+		}	
+	}
+	func main(){
+		
+
+		go f("goroutine")
+		
+		var input string
+    	fmt.Scanln(&input)
+	
+
+	}
+
+
+Note we have two routines running the main routine and the goroutine. The main routine is implicit.
+
+
+
+
+
+####Common Mistakes
+
+One common mistake made using goroutines is  creating a goroutine inside a loop and not including a variable at the declairation of the function. Doing this creates a problem because now each goroutine is referencing the same variable:
+	
+
+	// Source: https://code.google.com/p/go-wiki/wiki/CommonMistakes
+	for val := range values {
+    go func() {
+        	fmt.Println(val)
+    	}()
+	}
+
+Corrected code:
+
+	// Source: https://code.google.com/p/go-wiki/wiki/CommonMistakes
+	for val := range values {
+    	go func(val interface{}) {
+      	  fmt.Println(val)
+    	}(val)
+	}
+
+
+Note that the corrected code displays the included val parameter to the closure.
+
+####Best Practices
+
+One good practice I discovered during my research is to use s
+	
+	sync.WaitGroup 
+
+which removes the guesswork created using time.Sleep at the end of a program using goroutines. In order to do this you must create a variable and assign sync.WaitGroup to it. After this you can add the number of goroutines that must wait.
+
+
 ---
-
-#### Go: `goroutines`
-mclausen
-
----
-
-#### Scala: `pattern matching` 
-btombari
-
----
-
-#### Scala: `classes` &amp; `traits`
-sodham
-
----
-
-#### Swift: `enumerations` &amp; `subscripts`
-ncabral
-
-test
-
----
-
-#### Swift: `control flow structures` &amp; `exception/error handling`
-mtaylor
-
-##### Control Flow Structures:
-
-##### Exception/Error Handling
-
----
-
 #### Swift: `typing system`
 types, nested types, generics - jpeng
 ##### Types:
