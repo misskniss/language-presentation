@@ -829,14 +829,49 @@ namespace Sandbox {
             obj = new Point(5, 10);
             Console.WriteLine(obj);
             Console.WriteLine("("+obj.X+","+obj.Y+")");
+			obj.missingMethod();
             System.Threading.Thread.Sleep(10000);
         }
     }
 }
 ```
+In the above example, obj is used as a String, then an int, then a double, and finally a point. Each of these compile without error, and the program runs as you would expect, with obj adapting to each use as needed. This demonstrates the power of the dynamic type in C#. It isn't until the line `obj.missingMethod();` that we have a runtime error. The runtime is unable to bind the missingMethod() method, since it doesn't exist. This demonstrates the risk of using dynamics - it's up to the programmer to ensure type safety. The compiler will not catch issues like this. 
 ##### Vars
 Another unique type for C# is *var*. Declaring an object of type var allows the compiler to determine what type the object should be implicitly. 
+######Example: 
+```C#
+using System;
+using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
+
+namespace Sandbox {
+    class Program {
+        static void Main(string[] args) {
+            var obj = "Hello World";
+            foreach (char c in obj){
+                Console.Write(c);
+            }
+            Console.WriteLine();
+            obj = 1;
+            obj = obj + 1;
+            Console.WriteLine(obj);
+            obj = 2.5;
+            obj = obj * .75;
+            Console.WriteLine(obj);
+            obj = new Point(5, 10);
+            Console.WriteLine(obj);
+            Console.WriteLine("("+obj.X+","+obj.Y+")");
+			obj.missingMethod();
+            System.Threading.Thread.Sleep(10000);
+        }
+    }
+}
+```
+Unlike the above example for dyamics, declaring obj as a var works for the first use, but attempting to redefine obj as an int, double, or point results in compile errors - the compiler determined that obj should be a String and will treat it as a String for the rest of its use. 
 ---
 
 #### C#: `debugging` &amp; `exception handling`
