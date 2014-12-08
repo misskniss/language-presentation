@@ -426,9 +426,132 @@ cnelson
 mclausen
 
 ---
+<<<<<<< HEAD
 
 #### Scala: `pattern matching` 
 btombari
+=======
+#### Swift: `Control Flow Structures` and `Exception\Error Handling`
+mtaylor
+
+##### Control Flow Structures:
+Swift uses the same famliar control flow statements from modern programming languages.
+
+Most common ones are: for-in, for, if, case
+
+<a href=http://swiftstub.com/805263090/>For-in Loop</a href>
+
+```
+for i in 0...10 {
+    println("\(i) times 7 is \(i * 7)")
+}
+
+Output is:
+0 times 7 is 0
+1 times 7 is 7
+2 times 7 is 14
+3 times 7 is 21
+4 times 7 is 28
+5 times 7 is 35
+6 times 7 is 42
+7 times 7 is 49
+8 times 7 is 56
+9 times 7 is 63
+10 times 7 is 70
+```
+
+<a href=http://swiftstub.com/539183439/>For Loop</a href>
+
+```
+for var i = 1; i <= 10; i++ {
+    println("Iteration: \(i)")
+}
+
+Output is:
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+Iteration: 5
+Iteration: 6
+Iteration: 7
+Iteration: 8
+Iteration: 9
+Iteration: 10
+```
+
+<a href=http://swiftstub.com/739944485/>If Statements</a href>
+
+```
+var drinkingAge = 21
+var age = 19
+if age >= drinkingAge {
+     println("You may buy alcohol because you are \(age)")
+} else {
+    println("You may not buy alcohol because \(age) is underage")
+}
+
+Output is:
+You may not buy alcohol because 19 is underage
+```
+
+<a href=http://swiftstub.com/473864834/>Case Statements</a href>
+
+```
+let count = 25
+let str = "types of twisty puzzles"
+var incrementalCount: String
+switch count {
+case 0:
+    incrementalCount = "no"
+case 1...3:
+    incrementalCount = "a few"
+case 4...9:
+    incrementalCount = "several"
+case 10...99:
+    incrementalCount = "tens of"
+case 100...999:
+    incrementalCount = "hundreds of"
+case 1000...999_999:
+    incrementalCount = "thousands of"
+default:
+    incrementalCount = "millions and millions of"
+}
+println("There are \(incrementalCount) \(str).")
+
+Output is:
+Matt owns tens of types of twisty puzzles.
+```
+
+##### Exception\Error Handling:
+
+Runtime errors:
+
+As someone on StackOverFlow suggests: "for handling runtime errors (like network connectivity problems, parsing data, opening file, etc) you should use NSError like you did in ObjC, because the Foundation, AppKit, UIKit, etc report their errors in this way. So it's more framework thing than language thing."
+
+In addition he said that: "Another frequent pattern that is being used are separator success/failure blocks like in AFNetworking:"
+
+```
+var sessionManager = AFHTTPSessionManager(baseURL: NSURL(string: "yavin4.yavin.planets"))
+sessionManager.HEAD("/api/destoryDeathStar", parameters: xwingSquad,
+    success: { (NSURLSessionDataTask) -> Void in
+        println("Success")
+    },
+    failure:{ (NSURLSessionDataTask, NSError) -> Void in
+        println("Failure")
+    })
+Still the failure block frequently received NSError instance, describing the error.
+```
+
+Programmer errors:
+
+For programmer errors (like out of bounds access of array element, invalid arguments passed to a function call, etc) you used exceptions in ObjC. Swift language does not seem to have any language support for exceptions (like throw, catch, etc keyword). However, as documentation suggests it is running on the same runtime as ObjC, and therefore you are still able to throw NSExceptions like this:
+
+```
+NSException(name: "SomeName", reason: "SomeReason", userInfo: nil).raise()
+```
+You cannot catch them in pure Swift, so you have to opt for catching exceptions in ObjC code.
+>>>>>>> f8e8a3c867648d01d3985a52b9fda6688fa4fc28
 
 ---
 
