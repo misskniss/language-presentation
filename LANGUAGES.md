@@ -1033,6 +1033,34 @@ Now we have our personal constructors for each subclass. Each type of utensil ha
 Any method made inside a parent class can be overriden inside a subclass if it must have a different use from the parent.
 
 #####Private & Public Data
+It may have been noticed that the __init__ methods of our classes have two leading and trailing underscores. This is how python protects certain functions or variables.
+
+Say we wanted to make it so no one knows how many utensils we actually have. We could do this by using two leading underscores.
+
+Example Private variable:
+```python
+class Cutlery(object):
+	
+	__cutlery = 0
+
+	def __init__(self, utensil, type):
+		self.utensil = utensil
+		self.type = type
+		self.__cutlery += 1
+		
+	def getCutleryCount():
+		print self.__cutlery	
+
+cutlery = ("Fork", "Salad")
+cutlery.getCutleryCount()
+print cutlery.__cutlery
+```
+
+This code would run a error at the print statement because python sees the two underscores and internally changes th variable name to include the class name. _object.className__variable is what would be used for the print statement to work correctly.
+
+```python
+print cutlery._Cutlery__cutlery
+```
 
 ### Python: `modules`
 cbarton
