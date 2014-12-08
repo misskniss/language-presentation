@@ -923,7 +923,32 @@ Matt owns tens of types of twisty puzzles.
 
 ##### Exception\Error Handling:
 
-Error shit when I get around to typing it
+Runtime errors:
+
+As someone on StackOverFlow suggests: "for handling runtime errors (like network connectivity problems, parsing data, opening file, etc) you should use NSError like you did in ObjC, because the Foundation, AppKit, UIKit, etc report their errors in this way. So it's more framework thing than language thing."
+
+In addition he said that: "Another frequent pattern that is being used are separator success/failure blocks like in AFNetworking:"
+
+```
+var sessionManager = AFHTTPSessionManager(baseURL: NSURL(string: "yavin4.yavin.planets"))
+sessionManager.HEAD("/api/destoryDeathStar", parameters: xwingSquad,
+    success: { (NSURLSessionDataTask) -> Void in
+        println("Success")
+    },
+    failure:{ (NSURLSessionDataTask, NSError) -> Void in
+        println("Failure")
+    })
+Still the failure block frequently received NSError instance, describing the error.
+```
+
+Programmer errors:
+
+For programmer errors (like out of bounds access of array element, invalid arguments passed to a function call, etc) you used exceptions in ObjC. Swift language does not seem to have any language support for exceptions (like throw, catch, etc keyword). However, as documentation suggests it is running on the same runtime as ObjC, and therefore you are still able to throw NSExceptions like this:
+
+```
+NSException(name: "SomeName", reason: "SomeReason", userInfo: nil).raise()
+```
+You cannot catch them in pure Swift, so you have to opt for catching exceptions in ObjC code.
 
 ---
 #### Swift: `typing system`
