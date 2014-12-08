@@ -1005,6 +1005,8 @@ led_angle(60)
 
 ```
 
+[Accelerometer Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoRzZnYTRQSjhEOHY1cmg4UElmdWxadlB6X3NB/view?usp=sharing)
+
 
 ##### Light Sensor
 
@@ -1027,7 +1029,7 @@ eyes.read()
 
 
 ##### Bluetooth Control
-[Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
+[Bluetooth Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
 
 ```Python
 # main.py -- on pyboard
