@@ -958,8 +958,37 @@ jkniss
 
 
 ##### Basic Accelerometer Control
+
+```
+import pyb
  
- (next up...)
+    def led_angle(seconds):
+        one = pyb.LED(1)
+        two = pyb.LED(2)
+        three = pyb.LED(3)
+        four = pyb.LED(4)
+        acl = pyb.Accel()
+
+    for i in range(20 * seconds):
+        x = acl.x()
+
+        if x >= 10:
+            one.on()
+        elif x >= 5:
+            two.on()
+        elif x <= -5:
+            four.on()
+        else:
+            one.off()
+            teo.off()
+            three.off()
+            four.off()
+   pyb.delay(50)
+
+
+led_angle(60)
+
+```
 
 
 ##### Light Sensor
