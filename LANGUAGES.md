@@ -1629,8 +1629,76 @@ cbarton
 ---
 
 #### Haskell: `monads`
-jpack
+#Monads
 
---
+Haskell is a purely functional language. This means that Haskell programs behave exactly like mathematical functions; mapping input to output with no other side effects. This presents a problem when we want to do useful things with Haskell, like taking user input. Monads help us address that problem. At a high level, Monads allow us to chain functions together in steps, in effect allowing Haskell to behave like an imperative language. However, Monads also offer us the ability to provide rules between each of these steps, informing how these functions should interact with each other. Monads can be thought of as assembly lines, where functions act on data being moved down the line.
+
+###Maybe
+
+The maybe Monad lets us deal with the possibility of failure. Here's how it's defined in Haskell:
+
+```haskell
+instance Monad Maybe where  
+    return x = Just x  
+    Nothing >>= f = Nothing
+    Just x >>= f  = f x  
+```
+
+So what does this mean?
+
+```haskell
+instance Monad Maybe where  
+```
+
+Here we're defining the type Maybe, which is an instance of the Monad typeclass.
+
+```haskell
+return x = Just x
+```
+
+In Haskell, `return` specifies how to "wrap" a value in a Monad. In other words, it allows a given value to behave like a Maybe monad. 'Just' is a type that simply means the value exists.
+
+```haskell
+    Nothing >>= f = Nothing
+```
+The '>>=' (pronounced bind) operator tells us how the Monad handles Nothing input. Nothing is a type that means, well, nothing's there. It's analogous to null in Java.
+
+```haskell
+    Just x >>= f  = f x 
+```
+
+Now we're defining how a value of Just x will behave given an input function. Here we just return the value of the just passed to the function f.
+
+Now we can look at how maybe works:
+
+```haskell
+ghci> return "WHAT" :: Maybe String  
+Just "WHAT"  
+ghci> Just 9 >>= \x -> return (x*10)  
+Just 90  
+ghci> Nothing >>= \x -> return (x*10)  
+Nothing  
+```
+###'do'
+Haskell also provides some syntactic sugar for when we'd like to use monads to emulate an imperative style. The monad
+
+```haskell
+foo :: Maybe String  
+foo = Just 3   >>= (\x -> 
+      Just "!" >>= (\y -> 
+      Just (show x ++ y)))  
+```
+
+can be written as 
+
+```haskell
+foo :: Maybe String  
+foo = do  
+    x <- Just 3  
+    y <- Just "!"  
+    Just (show x ++ y) 
+```
+
+Monads are generally considered one of the more confusing concepts when learning Haskell, but their expressive power makes them well worth the effort. 
 
 
