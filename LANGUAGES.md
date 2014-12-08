@@ -1618,6 +1618,33 @@ def go():
 #### R: `graphical features`
 charts
 sbradbur
+#Overview
+R is an object-oriented, high-level, statistical programming language.  It is designed for statistical computing and graphics and is widely used by scientists and mathematicians.  R is dynamically and strongly typed and uses lexical scoping.  
+#Graphical Features
+R can be used to create many kinds of graphs.  R has built in functions for graphing, and the arguments of the function specify what data will be graphed.  This language makes it easy to visually represent datasets in a large variety of ways.   
+A code example of making minimal graphs from built in data sets in R:
+```
+hist(faithful$eruptions)      
+hist(faithful$waiting)
+plot(faithful)			
+boxplot(faithful$eruptions)	
+stripchart(faithful$eruptions)	
+
+plot(women)
+lines(women)				#adding lines to a plot
+pie(women$height)
+```
+You can make a lot of graphs with very little coding, but these graphs are pretty minimal.  R uses method overloading to allow you to change aspects of the graph.  The first argument specifies what will be graphed, and the rest set the values of built in variables.  
+A code example, improving on an earlier graph: 
+```
+plot(faithful,
+     main = "Old Faithful Eruptions",
+     col = "red",
+     col.main = "blue",
+     col.lab = "purple",
+     xlab = "Time between Eruptions (min)",
+     ylab = "Duration of Eruption (min)")
+```
 
 ---
 
