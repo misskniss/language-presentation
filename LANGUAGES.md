@@ -364,6 +364,7 @@ Ice Queen
 Energetic Princess
 Happy Snowman
 
+
 # Symbols
 
 Because everything in ruby is an object ruby can be a memory hog especially when 
