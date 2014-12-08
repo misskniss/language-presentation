@@ -781,6 +781,97 @@ One good practice I discovered during my research is to use s
 
 which removes the guesswork created using time.Sleep at the end of a program using goroutines. In order to do this you must create a variable and assign sync.WaitGroup to it. After this you can add the number of goroutines that must wait.
 
+---
+#### Swift: `Control Flow Structures` and `Exception\Error Handling`
+mtaylor
+
+##### Control Flow Structures:
+Swift uses the same famliar control flow statements from modern programming languages.
+Most common ones are: for-in, for, if, switch
+
+<a href=http://swiftstub.com/805263090/>For-in Loop</a href>
+
+```
+for i in 0...10 {
+    println("\(i) times 7 is \(i * 7)")
+}
+
+Output is:
+0 times 7 is 0
+1 times 7 is 7
+2 times 7 is 14
+3 times 7 is 21
+4 times 7 is 28
+5 times 7 is 35
+6 times 7 is 42
+7 times 7 is 49
+8 times 7 is 56
+9 times 7 is 63
+10 times 7 is 70
+```
+
+<a href=http://swiftstub.com/539183439/>For Loop</a href>
+
+```
+for var i = 1; i <= 10; i++ {
+    println("Iteration: \(i)")
+}
+
+Output is:
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+Iteration: 5
+Iteration: 6
+Iteration: 7
+Iteration: 8
+Iteration: 9
+Iteration: 10
+```
+
+<a href=http://swiftstub.com/739944485/>If Statements</a href>
+
+```
+var drinkingAge = 21
+var age = 19
+if age >= drinkingAge {
+     println("You may buy alcohol because you are \(age)")
+} else {
+    println("You may not buy alcohol because \(age) is underage")
+}
+
+Output is:
+You may not buy alcohol because 19 is underage
+```
+
+<a href=http://swiftstub.com/473864834/>Case Statements</a href>
+
+```
+let count = 25
+let str = "types of twisty puzzles"
+var incrementalCount: String
+switch count {
+case 0:
+    incrementalCount = "no"
+case 1...3:
+    incrementalCount = "a few"
+case 4...9:
+    incrementalCount = "several"
+case 10...99:
+    incrementalCount = "tens of"
+case 100...999:
+    incrementalCount = "hundreds of"
+case 1000...999_999:
+    incrementalCount = "thousands of"
+default:
+    incrementalCount = "millions and millions of"
+}
+println("There are \(incrementalCount) \(str).")
+
+Output is:
+Matt owns tens of types of twisty puzzles.
+```
 
 ---
 #### Swift: `typing system`
