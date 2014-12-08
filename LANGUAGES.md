@@ -872,6 +872,7 @@ namespace Sandbox {
 }
 ```
 Unlike the above example for dyamics, declaring obj as a var works for the first use, but attempting to redefine obj as an int, double, or point results in compile errors - the compiler determined that obj should be a String and will treat it as a String for the rest of its use. 
+
 ---
 
 #### C#: `debugging` &amp; `exception handling`
