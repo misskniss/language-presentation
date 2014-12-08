@@ -1022,6 +1022,51 @@ adebaca
 #### MicroPython: `controlling hardware`
 jkniss
 
+Micro Python and the pyboard for Controlling Hardware
+
+###### The Language
+
+Micro Python is a reimplementation of the Python3 and a subset of the Python3
+libraries. It was reimplemented to greatly reduce its RAM usage to make it
+usable with embedded systems - RAM being the bigest constraint for most
+Microcintrollers. 
+
+For example: integers that fit in 31 bits do not require heap allocation, only
+stack allocation. 
+
+Like Python3, it implements a lexer, parser, compiler and standard Python
+command line. It is a strongly and dynamically typed high-level scripting
+language that reaches speeds close to ANSI C when running on the PyBoard.
+
+Code can be written and executed "on the fly" using the python 
+command line (REPL or read-evaluate-print-loop) and a serial communications
+program like ```screen``. The board can be mounted directly to write, save
+and run as modules in the way we normally think of writing and executing
+programs. Or, programs can be written then "drag and drop" to the device as it
+appears as a USB device.
+
+Garbage collection is "mark and sweep" and takes just 4ms to complete a full
+collection. 
+
+Syntax and best practices are the same as Python3.
+
+Micro Python is open source and release under the MIT license. 
+[My Prog-Lang write up](https://github.com/misskniss/language-research/tree/master/jkniss)
+[Micro Python official Site](http://micropython.org/)
+
+###### The Board
+
+- Based on the STM32F405 ARM microcontroller clocked at 168MHz with 1MB flash
+ and 192KB of RAM.
+ <sub>Arduino Uno(Atmel): 16Mhz & 2KB RAM</sub>
+ <sub>Raspberry Pi(ARM): 700Mhz+ & up to 512MB RAM</sub>
+- Compiles and runs Micro Python
+- Built in USB interface for programming
+- 4 LEDS, 1 Aceleromter, PWM, ADC, DAC, I2C, SPI, 5 UARTS, 4 servo ports, etc...
+- 3.3v - 5.0v and 3.3v output
+
+[source](https://www.kickstarter.com/projects/214379695/micro-python-python-for-microcontrollers/description)
+
 ##### Accessing the REPL prompt
 
 (python interpreter on the pyboard)
@@ -1135,6 +1180,26 @@ def go():
     pyb.delay(200)
 ```
 
+
+##### PROS & CONS
+
+*PROS*
+- Very fast to get things working, little time is wasted with the compile-flash
+cycle we normally experience with embedded systems programming.
+- Compact and powerful.
+- More natural language with much less typing time then C (or worse...Java)
+- Much more fun to program and convinient to test your code with the python 
+command-line before loading it to board as a full module.
+- It is much more powerful than the ATMEGA series by ATMel
+- Cheaper than the Raspberry Pi
+- There is a huge community for Python support.
+
+*CONS*
+- Not all the standard python libraries are implemented yet (but you can contribute!)
+- The language is only about a year old and getting better but the support for 
+both the board and language (where it differs from Python3) is still maturing.
+<sub>This month is the 1-year anneversary of the Kickstarter for Micro Python</sub>
+- Not as powerful as the Raspberry Pi (but then, the RaspPi is a full computer not a development board.)
 
 ---
 
