@@ -1,4 +1,4 @@
-
+﻿
 
 #### Ruby: `mixins`
 acole
@@ -1002,6 +1002,139 @@ SQL is a simple but powerful language for working with relational database syste
 
 #### SQL: `operators` &amp; `views`
 adebaca
+
+A “OPERATOR” in SQL is a reserved word or a character that is used primarily in an SQL statement’s WHERE clause to perform some type of operation, such as comparisons and arithmetic operations.
+
+Operators are used in special conditions in SQL statements and to serve as conjunctions for multiple conditions in a statement.
+
+Arithmetic operators
+
+Comparison operators
+
+Logical operators
+
+Operators used to negate conditions
+
+#### SQL Arithmetic Operators:
+
+```
+       +  Addition-Adds values on either side of the operator
+	
+- Subtraction-Subtracts right hand operand from left hand operand
+
+• Multiplication-Multiplies values on either side of the operator
+
+/  Division-Divides left hand operand by right hand operand
+
+%  Modulus-Divides left hand operand by right hand operand and returns remainder
+```
+
+#### SQL Comparison Operators:
+SQL Comparison Operators are the heart and soul of SQL.
+
+```
+	=  Checks if two operands are equal or not. If they are equal then 	
+		the conditions becomes true. 
+
+	!= Checks if two operands are not equal then the condition becomes 	
+		True.
+
+      <> Checks if two values are equal or not, if they are not equal then 
+		it comes true.
+
+      >  Checks if the left operand is greater than the right operand, 
+		then the condition becomes true.
+
+	<   Checks if the left operand is less than the right operand.
+
+	>=  Checks if the left operand is greater than or equal to the right 
+		Operand.
+
+	<= Checks if the right operand is greater than or equal to the right 
+		Operand.
+
+	!<  Checks if the left operand is not less than the right operand
+
+	!>  Checks if the left operand is not greater than the right operand
+```
+
+#### SQL Logical Operators:
+ 
+Following is a list of logical operators
+
+```
+	ALL	Selects all values in a set
+	AND	Adding multiple conditions in a SQL WHERE clause
+	ANY	Compare any applicable value in the list condition
+	BETWEEN	Gets values between minimum and maximum value.
+	EXISTS Searches for a row that meets a criteria.
+	IN	Used to compare a value that meets a criteria.
+	LIKE	Compares value that have similar values.
+	NOT	This is a negate operator.
+	OR	This operator is used is a WHERE clause.
+	IS NULL	Used to compare a value with a NULL value
+	UNIQUE	Searches every row of a table for uniqueness. 
+```
+	
+
+
+
+The basic syntax for a operators work something like this: 
+```
+SELECT [realestate].[address]
+FROM realestate 
+WHERE address LIKE CONCAT('%', 1234, '%')
+ 
+```
+
+##### VIEWS
+A view is a SQL statement that is stored in the database with an associated name. Basically it is a predefined SQL query.
+
+A view can contain the rows of a table and are a kind of virtual table. 
+
+Following is an example of how views are created.
+
+```
+CREATE VIEW view_name AS
+SELECT column1, column2.....
+FROM table_name
+WHERE [condition];
+```
+
+
+##### Updating a View
+
+A view can be updated under certain conditions:
+
+```
+• The SELECT clause may not contain the keyword DISTINCT.
+• The SELECT clause may not contain summary functions.
+• The SELECT clause may not contain set functions.
+• The SELECT clause may not contain set operators.
+• The SELECT clause may not contain an ORDER BY clause.
+• The FROM clause may not contain multiple tables.
+• The WHERE clause may not contain subqueries.
+• The query may not contain GROUP BY or HAVING.
+• Calculated columns may not be updated.
+• All NOT NULL columns from the base table must be included in the view in order for the INSERT query to function.
+```
+
+####Inserting Rows into a View:
+Rows of data can be inserted into a view. 
+
+####Deleting Rows into a View:
+Rows of data can be deleted from a view.
+
+####Dropping Views:
+You can also drop views that are no longer need.
+```
+DROP VIEW view_name;
+```
+
+##### Conclusion
+SQL has many uses this day and age and I don’t think it’s going to be going away anytime soon. Most of the old database systems are built off SQL, and I feel that NOSQL is not going to take over anytime soon. Knowing basic SQL queries is a key to any programming language and every programmer should have a basic understanding of it. 
+
+
 
 ---
 
