@@ -951,6 +951,20 @@ adebaca
 #### MicroPython: `controlling hardware`
 jkniss
 
+##### Accessing the REPL prompt
+
+(python interpreter on the pyboard)
+- Plug board to machine via usb
+- ```screen /dev/tty.usbmodemfa132```
+<sub>For Linux & OSX</sub>
+
+##### Accessing the Bluetooth Connection
+
+(assumes pyboard REPL prompt is pushed to UART)
+- Connect machine to pyboard bluetooth module
+- ```screen /dev/tty.HC-05_DEVB```
+<sub>For Linux & OSX</sub>
+
 
 ##### Basic Motor Control
 
