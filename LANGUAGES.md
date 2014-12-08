@@ -1721,8 +1721,102 @@ This code would run a error at the print statement because python sees the two u
 print cutlery._Cutlery__cutlery
 ```
 
-### Python: `modules`
+#### Python: `modules`
 cbarton
+
+####What are modules?
+Modules are python files that contain variables, functions, and classes which can be imported and used by a running python program. 
+
+####Why are they useful?
+The benefit of modules is that they're generally easier to write and work with than class files when storing simple, frequently used functions and variables. Although, classes must still be used in order to instantiate an object. 
+
+####Syntax
+The code to import and use modules is extremely simple. For example,
+```
+import math
+print math.sqrt(10)
+```
+This imports the math module and calls it's sqrt() function.
+
+It's also possible to import individual variables, functions, and classes as well as rename them during the import. 
+```
+from string import whitespace
+from math import *
+from math import sin as SIN
+print sqrt(10)
+```
+When they're included in this way, they're added to the current scope and don't need to be preceded by their module name.
+
+Creating modules is also very simple. For example, the easiest way to create a module named mymod is by having a file called mymod.py either in a directory recognized by the PYTHONPATH variable or in the same directory. Given the following file mymod.py,
+```
+class Object1:
+        def __init__(self):
+                self.name = 'object 1'
+```
+this module can be imported to make instances of the object Object1.
+```
+import mymod
+myobject = mymod.Object1()
+from mymod import *
+myobject = Object1()
+```
+
+####Packages
+For larger projects its best to organize modules into packages. In Python this is accomplished by sorting the modules into folders and including a file named \__init__.py in each folder. For example,
+```
+sound/                          Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              __init__.py
+              wavread.py
+              wavwrite.py
+              auwrite.py
+              ...
+      effects/                  Subpackage for sound effects
+              __init__.py
+              echo.py
+              surround.py
+              reverse.py
+              ...
+      filters/                  Subpackage for filters
+              __init__.py
+              equalizer.py
+              vocoder.py
+              karaoke.py
+              ...
+```
+Given this package, the function `echofilter` in the module `echo` could be accessed in three different ways:
+```
+import sound.effects.echo
+sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)
+```
+```
+from sound.effects import echo
+echo.echofilter(input, output, delay=0.7, atten=4)
+```
+```
+from sound.effects.echo import echofilter
+echofilter(input, output, delay=0.7, atten=4)
+```
+As you can see, the second and third examples are less verbose but at the cost of being more likely to cause a naming conflict.
+
+The following code,
+```
+from sound.effects import *
+```
+doesn't perform the expected function unless the \__init\__.py module in the effects folder has the \__all__ variable initialized like so,
+```
+__all__ = ["echo", "surround", "reverse"]
+```
+With this line, the module echo, surround, and reverse would be imported but nothing else. The reasoning behind this is to avoid loading modules that might not typically be necessary along with the rest of the package.
+
+####Executable Statements
+If there are any executable statements in an imported module or in the \__init__.py file of a package, these statments will be executed as soon as the module or package is imported. These statements are typically used only to initialize the modules.
+
+
+####Naming Conflicts
+When a module is imported, the interpreter first searches the standard library for a built-in module with that name, if not found, it then searches for a module file. For this reason, attention must be paid to the naming of modules to avoid inadvertently loading the wrong module.
+
 
 ---
 
