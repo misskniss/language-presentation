@@ -802,7 +802,7 @@ cowens
 C# is strongly and statically typed. C# enforces type safety. These allow for increased stability in C# development. C# has a few interesting topics within typing, including *dynamics* and *vars*. 
 ##### Dynamics
 C# has a unique type, *dynamic*. In essence, declaring an object of type dynamic allows for this object to bypass standard type checking. This allows for flexibility of use, but places the burden of type checking on the programmer to avoid any runtime errors that would normally have been caught at compile time. 
-######Example: 
+###### Example: 
 ```C#
 using System;
 using System.Drawing;
@@ -838,7 +838,7 @@ namespace Sandbox {
 In the above example, obj is used as a String, then an int, then a double, and finally a point. Each of these compile without error, and the program runs as you would expect, with obj adapting to each use as needed. This demonstrates the power of the dynamic type in C#. It isn't until the line `obj.missingMethod();` that we have a runtime error. The runtime is unable to bind the missingMethod() method, since it doesn't exist. This demonstrates the risk of using dynamics - it's up to the programmer to ensure type safety. The compiler will not catch issues like this. 
 ##### Vars
 Another unique type for C# is *var*. Declaring an object of type var allows the compiler to determine what type the object should be implicitly. 
-######Example: 
+###### Example: 
 ```C#
 using System;
 using System.Drawing;
