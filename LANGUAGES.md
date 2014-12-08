@@ -331,16 +331,27 @@ puts sy.object_id
 ##### Output:
 
 String
+
 7496740
+
 Fixnum
+
 47
+
 Float
+
 7500300
+
 Hash
+
 7496660
+
 NilClass
+
 4
+
 Symbol
+
 294568
 
 
@@ -361,7 +372,9 @@ puts h[:Olaf]
 ##### Output:
 
 Ice Queen
+
 Energetic Princess
+
 Happy Snowman
 
 
@@ -384,6 +397,7 @@ puts sy.to_s
 ##### Output:
 
 294568
+
 sym
 
 ### Symbol vs String
