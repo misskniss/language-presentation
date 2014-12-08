@@ -294,7 +294,124 @@ part 0.
 #### Ruby: `data types` &amp; `symbols`
 zlambert
 
-herp derp
+# Data Types
+
+Ruby is strongly and dynamically typed programming language. It 
+was designed to be a balance between functional programming and
+imperative programming.
+
+In ruby everything is an object. Every object has a class method 
+that will return that object's class. Every object has an object_id
+method that will return the objects id.
+
+##### Code:
+
+``` ruby
+s = "Stringy McString"
+i = 23
+d = 5.23
+h = {:Elsa => "Ice Queen", :Anna => "Energetic Princess", :Olaf => "Happy Snowman"}
+n = nil
+sy = :sym
+
+puts s.class
+puts s.object_id
+puts i.class
+puts i.object_id
+puts d.class
+puts d.object_id
+puts h.class
+puts h.object_id
+puts n.class
+puts n.object_id
+puts sy.class
+puts sy.object_id
+```
+
+##### Output:
+
+String
+7496740
+Fixnum
+47
+Float
+7500300
+Hash
+7496660
+NilClass
+4
+Symbol
+294568
+
+
+### Hashes
+
+Hashes are similar to structs in c.  You can access individual elements in the
+hash by there specific name.
+
+##### Code:
+
+``` ruby
+h = {:Elsa => "Ice Queen", :Anna => "Energetic Princess", :Olaf => "Happy Snowman"}
+puts h[:Elsa]
+puts h[:Anna]
+puts h[:Olaf]
+```
+
+##### Output:
+
+Ice Queen
+Energetic Princess
+Happy Snowman
+
+# Symbols
+
+Because everything in ruby is an object ruby can be a memory hog especially when 
+using strings as identifiers. To make up for this ruby has the symbol data type. 
+Symbols are a _lightweight_, _immutable_ object that is commonly used for 
+comparisons and internal logic. Each symbol has string representation as 
+well as an object_id.
+
+
+##### Code:
+
+``` ruby
+puts sy.object_id
+puts sy.to_s
+```
+
+##### Output:
+
+294568
+sym
+
+### Symbol vs String
+
+The general rule for when to use a symbol vs when to use a string is as follows:
+
++ If the contents of an object is important, use a string
++ If identity of an object is important, use a symbol
+
+##### Code:
+
+``` ruby
+cool = :yes  				#'yes'
+if cool == :yes			#'yes'
+  puts 'You are cool'
+else
+  puts 'You are not cool'
+end
+```
+
+##### Output:
+You are cool
+
+In the above code if we replace the symbol :yes with a string 'yes' the result is 
+the same. However the string version is not as efficient because ruby generates two
+versions of the string instead of just reusing one of them.
+
+When you use a symbol, ruby just references the first one in the if statement so
+it is more efficient.
 
 ---
 
