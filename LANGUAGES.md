@@ -1,4 +1,4 @@
-
+﻿
 
 #### Ruby: `mixins`
 acole
@@ -602,35 +602,326 @@ Both method_missing and const_missing are essentials when building dynamic web a
 #### Ruby: `IO` `files`
 cnelson
 
----
+IO or Input/Output refers to the ways that the computer interacts with the
+world.  It can be reading in from files and keyboards or writing out to files
+or the console/screen.  The default for standard input is reading from the keyboard
+and the default for standard output is writing to the terminal.
+
+# Output
+
+There are several ways to output on the console. The following example is from 
+the Kernel module which are available to all objects in Ruby.
+
+```
+#!/usr/bin/ruby
+
+print "Apple "
+print "Apple\n"
+
+puts "Orange"
+puts "Orange"
+
+```
+
+Both print and put methods will produce the text to the console.
+The puts method will automatically include a new line. There are other 
+ways to print out in the following example:
+
+```
+#!/usr/bin/ruby
+
+$stdout.print "Ruby language\n"
+$stdout.puts "Python language"
+
+p "Lemon"
+p "Lemon"
+
+printf "There are %d apples\n", 3
+
+putc 'K'
+
+```
+
+# Creating a file and writing to it
+
+```
+somefile = File.open("sample.txt", "w")
+somefile.puts "Hello file!"
+somefile.close   
+
+```
+Ruby has a file class that has methods to manipulate files. The above will
+create a file called sample.txt and write "Hello file!" to the newly created file.
+
+## Reading from a file
+
+Reading from a file will use the same method as above with one small change, using "r"
+instead of "w".
+
+```
+file = File.open("sample.txt", "r")
+contents = file.read
+puts contents   #=> Lorem ipsum etc.
+```
+
+
+ ---
 
 #### Go: `goroutines`
-mclausen
+##mclausen
+
+
+####How it is Used and How it Works
+
+A goroutine is a function that is capable of running concurrently with other function. Concurrency is where components (i.e. functions) are able to make progress on more than one task simultaneously. Concurrency should not be confused with Parallelism which is where two or more threads execute code at the same time using two processors. Below is an example of Concurrency and Parallelism from goinggo.net with there results so you can compare the difference in output.
+
+Concurrency:
+
+	package main
+
+	import (
+    "fmt"
+    "sync"
+    "time"	)
+
+	func main() {
+  	  var wg sync.WaitGroup
+   	  wg.Add(2)
+
+    fmt.Println("Starting Go Routines")
+    go func() {
+        defer wg.Done()
+
+        time.Sleep(1 * time.Microsecond)
+        for char := 'a'; char < 'a'+26; char++ {
+            fmt.Printf("%c ", char)
+        }
+    }()
+
+    go func() {
+        defer wg.Done()
+
+        for number := 1; number < 27; number++ {
+            fmt.Printf("%d ", number)
+        }
+    }()
+
+    fmt.Println("Waiting To Finish")
+    wg.Wait()
+
+    fmt.Println("\nTerminating Program")
+	}
+
+ 
+Parallelism: 
+	package main
+
+	import (
+    "fmt"
+    "runtime"
+    "sync"
+	)
+
+	func main() {
+    runtime.GOMAXPROCS(2)
+
+    var wg sync.WaitGroup
+    wg.Add(2)
+
+    fmt.Println("Starting Go Routines")
+    go func() {
+        defer wg.Done()
+
+        for char := 'a'; char < 'a'+26; char++ {
+            fmt.Printf("%c ", char)
+        }
+    }()
+
+    go func() {
+        defer wg.Done()
+
+        for number := 1; number < 27; number++ {
+            fmt.Printf("%d ", number)
+        }
+    }()
+
+    fmt.Println("Waiting To Finish")
+    wg.Wait()
+
+    fmt.Println("\nTerminating Program")
+	}
+
+
+Output:
+
+	Starting Go Routines
+	Waiting To Finish
+	a b 1 2 3 4 c d e f 5 g h 6 i 7 j 8 k 9 10 11 12 l m n o p q 13 r s 14
+	t 15 u v 16 w 17 x y 18 z 19 20 21 22 23 24 25 26
+	Terminating Program
+
+Go makes writing these concurrent programs easier and not as prone to errors. These goroutines are considered light weight because they use a small amount of memory and resources on top of their already small stack size.
+
+####Syntax
+In order to create a goroutine you must use the keyword go proceeded by the function invocation like so:
+
+	go f("goroutine")
+
+Here is a complete program using a goroutine:
+
+	package main
+	
+	import "fmt"
+	
+
+	func f(this string){
+		for i:=1; i<4; i++{
+			fmt.Println(this," ", i)
+		}	
+	}
+	func main(){
+		
+
+		go f("goroutine")
+		
+		var input string
+    	fmt.Scanln(&input)
+	
+
+	}
+
+
+Note we have two routines running the main routine and the goroutine. The main routine is implicit.
+
+
+
+
+
+####Common Mistakes
+
+One common mistake made using goroutines is  creating a goroutine inside a loop and not including a variable at the declairation of the function. Doing this creates a problem because now each goroutine is referencing the same variable:
+	
+
+	// Source: https://code.google.com/p/go-wiki/wiki/CommonMistakes
+	for val := range values {
+    go func() {
+        	fmt.Println(val)
+    	}()
+	}
+
+Corrected code:
+
+	// Source: https://code.google.com/p/go-wiki/wiki/CommonMistakes
+	for val := range values {
+    	go func(val interface{}) {
+      	  fmt.Println(val)
+    	}(val)
+	}
+
+
+Note that the corrected code displays the included val parameter to the closure.
+
+####Best Practices
+
+One good practice I discovered during my research is to use s
+	
+	sync.WaitGroup 
+
+which removes the guesswork created using time.Sleep at the end of a program using goroutines. In order to do this you must create a variable and assign sync.WaitGroup to it. After this you can add the number of goroutines that must wait.
 
 ---
+#### Swift: `Control Flow Structures` and `Exception\Error Handling`
+mtaylor
 
-#### Scala: `pattern matching` 
-btombari
+##### Control Flow Structures:
+Swift uses the same famliar control flow statements from modern programming languages.
+Most common ones are: for-in, for, if, switch
+
+<a href=http://swiftstub.com/805263090/>For-in Loop</a href>
+
+```
+for i in 0...10 {
+    println("\(i) times 7 is \(i * 7)")
+}
+
+Output is:
+0 times 7 is 0
+1 times 7 is 7
+2 times 7 is 14
+3 times 7 is 21
+4 times 7 is 28
+5 times 7 is 35
+6 times 7 is 42
+7 times 7 is 49
+8 times 7 is 56
+9 times 7 is 63
+10 times 7 is 70
+```
+
+<a href=http://swiftstub.com/539183439/>For Loop</a href>
+
+```
+for var i = 1; i <= 10; i++ {
+    println("Iteration: \(i)")
+}
+
+Output is:
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+Iteration: 5
+Iteration: 6
+Iteration: 7
+Iteration: 8
+Iteration: 9
+Iteration: 10
+```
+
+<a href=http://swiftstub.com/739944485/>If Statements</a href>
+
+```
+var drinkingAge = 21
+var age = 19
+if age >= drinkingAge {
+     println("You may buy alcohol because you are \(age)")
+} else {
+    println("You may not buy alcohol because \(age) is underage")
+}
+
+Output is:
+You may not buy alcohol because 19 is underage
+```
+
+<a href=http://swiftstub.com/473864834/>Case Statements</a href>
+
+```
+let count = 25
+let str = "types of twisty puzzles"
+var incrementalCount: String
+switch count {
+case 0:
+    incrementalCount = "no"
+case 1...3:
+    incrementalCount = "a few"
+case 4...9:
+    incrementalCount = "several"
+case 10...99:
+    incrementalCount = "tens of"
+case 100...999:
+    incrementalCount = "hundreds of"
+case 1000...999_999:
+    incrementalCount = "thousands of"
+default:
+    incrementalCount = "millions and millions of"
+}
+println("There are \(incrementalCount) \(str).")
+
+Output is:
+Matt owns tens of types of twisty puzzles.
+```
 
 ---
-
-#### Scala: `classes` &amp; `traits`
-sodham
-
----
-
-#### Swift: `enumerations` &amp; `subscripts`
-ncabral
-
-test
-
----
-
-#### Swift: `control flow structures` &amp; `exception/error handling`
-mtaylor, 
-
----
-
 #### Swift: `typing system`
 types, nested types, generics - jpeng
 ##### Types:
@@ -1064,6 +1355,140 @@ SQL is a simple but powerful language for working with relational database syste
 
 #### SQL: `operators` &amp; `views`
 adebaca
+
+
+A “OPERATOR” in SQL is a reserved word or a character that is used primarily in an SQL statement’s WHERE clause to perform some type of operation, such as comparisons and arithmetic operations.
+
+Operators are used in special conditions in SQL statements and to serve as conjunctions for multiple conditions in a statement.
+
+Arithmetic operators
+
+Comparison operators
+
+Logical operators
+
+Operators used to negate conditions
+
+#### SQL Arithmetic Operators:
+
+```
+       +  Addition-Adds values on either side of the operator
+	
+- Subtraction-Subtracts right hand operand from left hand operand
+
+• Multiplication-Multiplies values on either side of the operator
+
+/  Division-Divides left hand operand by right hand operand
+
+%  Modulus-Divides left hand operand by right hand operand and returns remainder
+```
+
+#### SQL Comparison Operators:
+SQL Comparison Operators are the heart and soul of SQL.
+
+```
+	=  Checks if two operands are equal or not. If they are equal then 	
+		the conditions becomes true. 
+
+	!= Checks if two operands are not equal then the condition becomes 	
+		True.
+
+      <> Checks if two values are equal or not, if they are not equal then 
+		it comes true.
+
+      >  Checks if the left operand is greater than the right operand, 
+		then the condition becomes true.
+
+	<   Checks if the left operand is less than the right operand.
+
+	>=  Checks if the left operand is greater than or equal to the right 
+		Operand.
+
+	<= Checks if the right operand is greater than or equal to the right 
+		Operand.
+
+	!<  Checks if the left operand is not less than the right operand
+
+	!>  Checks if the left operand is not greater than the right operand
+```
+
+#### SQL Logical Operators:
+ 
+Following is a list of logical operators
+
+```
+	ALL	Selects all values in a set
+	AND	Adding multiple conditions in a SQL WHERE clause
+	ANY	Compare any applicable value in the list condition
+	BETWEEN	Gets values between minimum and maximum value.
+	EXISTS Searches for a row that meets a criteria.
+	IN	Used to compare a value that meets a criteria.
+	LIKE	Compares value that have similar values.
+	NOT	This is a negate operator.
+	OR	This operator is used is a WHERE clause.
+	IS NULL	Used to compare a value with a NULL value
+	UNIQUE	Searches every row of a table for uniqueness. 
+```
+	
+
+
+
+The basic syntax for a operators work something like this: 
+```
+SELECT [realestate].[address]
+FROM realestate 
+WHERE address LIKE CONCAT('%', 1234, '%')
+ 
+```
+
+##### VIEWS
+A view is a SQL statement that is stored in the database with an associated name. Basically it is a predefined SQL query.
+
+A view can contain the rows of a table and are a kind of virtual table. 
+
+Following is an example of how views are created.
+
+```
+CREATE VIEW view_name AS
+SELECT column1, column2.....
+FROM table_name
+WHERE [condition];
+```
+
+
+##### Updating a View
+
+A view can be updated under certain conditions:
+
+```
+• The SELECT clause may not contain the keyword DISTINCT.
+• The SELECT clause may not contain summary functions.
+• The SELECT clause may not contain set functions.
+• The SELECT clause may not contain set operators.
+• The SELECT clause may not contain an ORDER BY clause.
+• The FROM clause may not contain multiple tables.
+• The WHERE clause may not contain subqueries.
+• The query may not contain GROUP BY or HAVING.
+• Calculated columns may not be updated.
+• All NOT NULL columns from the base table must be included in the view in order for the INSERT query to function.
+```
+
+####Inserting Rows into a View:
+Rows of data can be inserted into a view. 
+
+####Deleting Rows into a View:
+Rows of data can be deleted from a view.
+
+####Dropping Views:
+You can also drop views that are no longer need.
+```
+DROP VIEW view_name;
+```
+
+##### Conclusion
+SQL has many uses this day and age and I don’t think it’s going to be going away anytime soon. Most of the old database systems are built off SQL, and I feel that NOSQL is not going to take over anytime soon. Knowing basic SQL queries is a key to any programming language and every programmer should have a basic understanding of it. 
+
+
 
 ---
 
@@ -1569,82 +1994,108 @@ This code would run a error at the print statement because python sees the two u
 print cutlery._Cutlery__cutlery
 ```
 
-### Python: `modules`
+#### Python: `modules`
 cbarton
+
+####What are modules?
+Modules are python files that contain variables, functions, and classes which can be imported and used by a running python program. 
+
+####Why are they useful?
+The benefit of modules is that they're generally easier to write and work with than class files when storing simple, frequently used functions and variables. Although, classes must still be used in order to instantiate an object. 
+
+####Syntax
+The code to import and use modules is extremely simple. For example,
+```
+import math
+print math.sqrt(10)
+```
+This imports the math module and calls it's sqrt() function.
+
+It's also possible to import individual variables, functions, and classes as well as rename them during the import. 
+```
+from string import whitespace
+from math import *
+from math import sin as SIN
+print sqrt(10)
+```
+When they're included in this way, they're added to the current scope and don't need to be preceded by their module name.
+
+Creating modules is also very simple. For example, the easiest way to create a module named mymod is by having a file called mymod.py either in a directory recognized by the PYTHONPATH variable or in the same directory. Given the following file mymod.py,
+```
+class Object1:
+        def __init__(self):
+                self.name = 'object 1'
+```
+this module can be imported to make instances of the object Object1.
+```
+import mymod
+myobject = mymod.Object1()
+from mymod import *
+myobject = Object1()
+```
+
+####Packages
+For larger projects its best to organize modules into packages. In Python this is accomplished by sorting the modules into folders and including a file named \__init__.py in each folder. For example,
+```
+sound/                          Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              __init__.py
+              wavread.py
+              wavwrite.py
+              auwrite.py
+              ...
+      effects/                  Subpackage for sound effects
+              __init__.py
+              echo.py
+              surround.py
+              reverse.py
+              ...
+      filters/                  Subpackage for filters
+              __init__.py
+              equalizer.py
+              vocoder.py
+              karaoke.py
+              ...
+```
+Given this package, the function `echofilter` in the module `echo` could be accessed in three different ways:
+```
+import sound.effects.echo
+sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)
+```
+```
+from sound.effects import echo
+echo.echofilter(input, output, delay=0.7, atten=4)
+```
+```
+from sound.effects.echo import echofilter
+echofilter(input, output, delay=0.7, atten=4)
+```
+As you can see, the second and third examples are less verbose but at the cost of being more likely to cause a naming conflict.
+
+The following code,
+```
+from sound.effects import *
+```
+doesn't perform the expected function unless the \__init\__.py module in the effects folder has the \__all__ variable initialized like so,
+```
+__all__ = ["echo", "surround", "reverse"]
+```
+With this line, the module echo, surround, and reverse would be imported but nothing else. The reasoning behind this is to avoid loading modules that might not typically be necessary along with the rest of the package.
+
+####Executable Statements
+If there are any executable statements in an imported module or in the \__init__.py file of a package, these statments will be executed as soon as the module or package is imported. These statements are typically used only to initialize the modules.
+
+
+####Naming Conflicts
+When a module is imported, the interpreter first searches the standard library for a built-in module with that name, if not found, it then searches for a module file. For this reason, attention must be paid to the naming of modules to avoid inadvertently loading the wrong module.
+
 
 ---
 
 #### Haskell: `monads`
-#Monads
+jpack
 
-Haskell is a purely functional language. This means that Haskell programs behave exactly like mathematical functions; mapping input to output with no other side effects. This presents a problem when we want to do useful things with Haskell, like taking user input. Monads help us address that problem. At a high level, Monads allow us to chain functions together in steps, in effect allowing Haskell to behave like an imperative language. However, Monads also offer us the ability to provide rules between each of these steps, informing how these functions should interact with each other. Monads can be thought of as assembly lines, where functions act on data being moved down the line.
-
-###Maybe
-
-The maybe Monad lets us deal with the possibility of failure. Here's how it's defined in Haskell:
-
-```haskell
-instance Monad Maybe where  
-    return x = Just x  
-    Nothing >>= f = Nothing
-    Just x >>= f  = f x  
-```
-
-So what does this mean?
-
-```haskell
-instance Monad Maybe where  
-```
-
-Here we're defining the type Maybe, which is an instance of the Monad typeclass.
-
-```haskell
-return x = Just x
-```
-
-In Haskell, `return` specifies how to "wrap" a value in a Monad. In other words, it allows a given value to behave like a Maybe monad. 'Just' is a type that simply means the value exists.
-
-```haskell
-    Nothing >>= f = Nothing
-```
-The '>>=' (pronounced bind) operator tells us how the Monad handles Nothing input. Nothing is a type that means, well, nothing's there. It's analogous to null in Java.
-
-```haskell
-    Just x >>= f  = f x 
-```
-
-Now we're defining how a value of Just x will behave given an input function. Here we just return the value of the just passed to the function f.
-
-Now we can look at how maybe works:
-
-```haskell
-ghci> return "WHAT" :: Maybe String  
-Just "WHAT"  
-ghci> Just 9 >>= \x -> return (x*10)  
-Just 90  
-ghci> Nothing >>= \x -> return (x*10)  
-Nothing  
-```
-###'do'
-Haskell also provides some syntactic sugar for when we'd like to use monads to emulate an imperative style. The monad
-
-```haskell
-foo :: Maybe String  
-foo = Just 3   >>= (\x -> 
-      Just "!" >>= (\y -> 
-      Just (show x ++ y)))  
-```
-
-can be written as 
-
-```haskell
-foo :: Maybe String  
-foo = do  
-    x <- Just 3  
-    y <- Just "!"  
-    Just (show x ++ y) 
-```
-
-Monads are generally considered one of the more confusing concepts when learning Haskell, but their expressive power makes them well worth the effort. 
+--
 
 
