@@ -959,7 +959,8 @@ jkniss
 
 ##### Basic Accelerometer Control
 
-```
+```Python
+# main.py -- on pyboard
 import pyb
  
     def led_angle(seconds):
@@ -993,7 +994,7 @@ led_angle(60)
 
 ##### Light Sensor
 
-```
+```Python
 from pyb import ADC
 light = ADC(Pin('X7'))
 light.read()
@@ -1003,7 +1004,7 @@ light.read()
 
 ##### IR Sensor
 
-```
+```Python
 from pyb import ADC
 eyes = ADC(Pin('Y11'))
 eyes.read()
@@ -1014,7 +1015,7 @@ eyes.read()
 ##### Bluetooth Control
 [Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
 
-```
+```Python
 # main.py -- on pyboard
 import pyb
 from pyb import Pin
@@ -1047,8 +1048,6 @@ def go():
     pyb.delay(200)
 ```
 
-
-Basic 
 
 ---
 
