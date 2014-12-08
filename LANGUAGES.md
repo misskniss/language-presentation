@@ -822,7 +822,8 @@ In C#, a class allows you to create custom types by grouping together variables,
 
 Classes in C# support inheritance also like the Java language.  They are declared by using the class keyword. 
 For example: 
-'''
+
+```
 public class ThisIsAClass
 {
 //The field:
@@ -842,7 +843,7 @@ class Test
 
 }
 }
-'''
+```
 //output: Alright!
 
 This class contains a field, a method, and a constructor.  
@@ -853,7 +854,7 @@ When this occurs different source files contain different section of the type of
 This is pragmatic when large projects are worked on by multiple programers so that they can all work on the same class at the same time.  
 When you are working on automatically generated source this is also pragmatic because code can be added to the class without having to recreate the source file.  Visual studio, for example, uses this approach when it creates Windows Forms.  
 To split a class definition, you use the partial keyword modifier as shown:
-'''
+```
 public partial class Clowns
 {
 public void ClownWork()
@@ -867,7 +868,7 @@ public void MidgetWork()
 {
 }
 }
-'''
+```
 
 The partial keyword indicates that other parts of the class can be defined in the namespace.  All parts must use the partial key word and be available to compile time to form the final type and must also have the same accessibility modifier, abstract, or sealed modifiers must be consistent across the whole class. 
 
