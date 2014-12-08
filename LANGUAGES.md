@@ -618,7 +618,8 @@ puts contents   #=> Lorem ipsum etc.
 
 
  ---
- ####Go: `goroutines`
+
+#### Go: `goroutines`
 ##mclausen
 
 
