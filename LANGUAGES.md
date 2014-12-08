@@ -307,6 +307,108 @@ jdelagar
 #### Ruby: `duck typing`
 lmatsind
 
+
+Intro:
+
+Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.
+Every procedure in Ruby is a method of some object. Some method calls appear to be function calls as in other languages, but in fact they are actually invocations of methods belonging to self. Parentheses can be omitted if unambiguous.
+Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. It was designed and developed in the mid-1990s by Yukihiro "Matz" Matsumoto in Japan.
+
+Meat:
+
+Ruby’s dynamic nature facilitates a style of type system known as duck typing. In particular, duck typing breaks the strong association between an object’s class and its type by defining types based on what an object can do rather than what class it was born from.
+
+Duck typing to avoid scope creep
+
+
+def image(file, options={})
+  Prawn.verify_options [:at, :position, :vposition, :height,
+                        :width, :scale, :fit], options
+
+  if file.respond_to?(:read)
+    image_content = file.read
+  else
+    raise ArgumentError, "#{file} not found" unless File.file?(file)
+    image_content = File.binread(file)
+  end
+
+  # additional implementation details omitted.
+end
+
+The above code is used to make it so that the image() method can be called with either a file name or a file handle
+
+Some more examples
+
+```
+class Duck
+  def quack
+    puts "Quaaaaaack!"
+  end
+ 
+  def feathers
+    puts "The duck has white and gray feathers."
+  end
+end
+ 
+class Person
+  def quack
+    puts "The person imitates a duck."
+  end
+ 
+  def feathers
+    puts "The person takes a feather from the ground and shows it."
+  end
+end
+ 
+def in_the_forest(duck)
+  duck.quack
+  duck.feathers
+end
+ 
+def game
+  donald = Duck.new
+  john = Person.new
+  in_the_forest donald
+  in_the_forest john
+end
+game
+```
+
+Output:
+
+Quaaaaaack!
+The duck has white and gray feathers.
+The person imitates a duck.
+The person takes a feather from the ground and shows it.
+
+
+In Ruby, we rely less on the type (or class) of an object and more on its capabilities. Hence, Duck Typing means an object type is defined by what it can do, not by what it is. Duck Typing refers to the tendency of Ruby to be less concerned with the class of an object and more concerned with what methods can be called on it and what operations can be performed on it. In Ruby, we would use respond_to? or might simply pass an object to a method and know that an exception will be raised if it is used inappropriately.
+
+```
+# Check in irb, whether the object defines the to_str method  
+>> 'A string'.respond_to?(:to str)  
+=> true  
+>> Exception.new.respond_to?(:to_str)  
+=> false  
+>> 4.respond_to?(:to_str)  
+=> false  
+```
+
+The example above is the simplest example of Ruby's philosophy of "duck typing:" if an object quacks like a duck (or acts like a string), just go ahead and treat it as a duck (or a string). Whenever possible, you should treat objects according to the methods they define rather than the classes from which they inherit or the modules they include.
+
+Outro:
+
+Duck Typing Pro’s
+i)  Convenient
+ii) Promotes code reuse
+    All that matters is what messages an object can receive
+ 
+Duck Typing Con’s
+i) “Obvious” equivalences don’t hold: x+x, 2*x, x*2
+ii) May expose more about an object than might be
+    desirable (more coupling in code)
+
+
 ---
 
 #### Ruby: `method_missing` &amp; `const_missing`
