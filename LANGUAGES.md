@@ -320,7 +320,7 @@ Ruby’s dynamic nature facilitates a style of type system known as duck typing.
 
 Duck typing to avoid scope creep
 
-
+```
 def image(file, options={})
   Prawn.verify_options [:at, :position, :vposition, :height,
                         :width, :scale, :fit], options
@@ -334,6 +334,7 @@ def image(file, options={})
 
   # additional implementation details omitted.
 end
+```
 
 The above code is used to make it so that the image() method can be called with either a file name or a file handle
 
