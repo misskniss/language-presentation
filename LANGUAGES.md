@@ -1024,7 +1024,7 @@ cutlery.getCutleryCount()
 print cutlery.__cutlery
 ```
 
-This code would run a error at the print statement because python sees the two underscores and internally changes th variable name to include the class name. ___object.className__variable is what would be used for the print statement to work correctly.
+This code would run a error at the print statement because python sees the two underscores and internally changes th variable name to include the class name. _object.className__variable is what would be used for the print statement to work correctly.
 
 ```python
 print cutlery._Cutlery__cutlery
