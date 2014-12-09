@@ -165,6 +165,9 @@ Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"targe
 #### Ruby: `numbers` `arithmetic`
 arthurfc
 
+![alt text]( https://gradyli.files.wordpress.com/2007/11/rubydataclasses.jpg
+ "Ruby self definition")
+
  
 Before to introduce Numeric class, let's check out the figure for Ruby data type. All of the class are from Object Class. There are the Numeric class and sub-class.
 
@@ -172,7 +175,8 @@ Before to introduce Numeric class, let's check out the figure for Ruby data type
 Two dat type for integer : Fixnum and Bignum。
 The following arithmetic show the , e.g.,
 
-	puts 10     #output integer 10
+```
+puts 10     #output integer 10
 
 puts 10.class     #what class for output integer 10; Fixnum
  
@@ -199,39 +203,50 @@ puts 1 == 2     #false
 puts 2 == 2.0     #true
  
 puts -1234.abs     #abs value; 1234
+```
  
 check the number to be zero; only for Fixnum
 
 could check the divisor to be not zero
 
+```
 puts 2.zero?     #false
+```
 
 
 # Float
 
-	puts 10 / 3     #3，the two numbers are Fixnum
- 
+```
+puts 10 / 3     #3，the two numbers are Fixnum
+``` 
+
 make either dividend or divisor to be Float，Ruby can process the result
 
+```
 puts 10.0 / 3     #3.3333333333333
 
 puts 10 / 3.0     #3.3333333333333
-
+```
  
 pass the minimum integer which is greater than the value
 
+```
 puts (0.1).ceil     #1
 
 puts (-0.1).ceil     #0
+```
  
 pass the maximum integer which is less than the value
 
+```
 puts (2.1).floor     #2
 
 puts (-2.1).floor    #-3
+```
  
 round the number
 
+```
 puts (3.3).round     #3
 
 puts (4.5).round     #5
@@ -239,28 +254,40 @@ puts (4.5).round     #5
 puts (-5.1).round     #-5
 
 puts (-6.6).round     #-7
-
+```
 
 
 The Ruby Way mention the output cannot be 10.0  for the result of 10.0 / 3 (3.3333333333333)  to multiply the original divisor (3). But according to the code below, it can be 10.0.
 
-	x = 10.0 / 3
+```
+x = 10.0 / 3
 
 puts x       #3.3333333333333
  
 y = x * 3
 
 puts y       #10.0
-
+```
 
 
 Besides, we can use BigDecimal class to have accurate floating point numbers.
 
-	require 'bigdecimal'
+```
+require 'bigdecimal'
  
 x = BigDecimal.new("0.3333333333")
  
 puts x * 3     #0.9999999999E0
+```
+
+# Complex
+
+A complex number can be represented as a paired real number with imaginary unit; a+bi. Where a is real part, b is imaginary part and i is imaginary unit.
+
+```
+Complex(1)           #=> (1+0i)
+Complex(2, 3)        #=> (2+3i)
+```
 
 # BigDecimal
 BigDecimal provides similar support for very large or very accurate floating point numbers. Ruby provides built-in support for arbitrary precision integer arithmetic. For example:
@@ -269,11 +296,11 @@ BigDecimal provides similar support for very large or very accurate floating poi
 
 Decimal arithmetic is also useful for general calculation, because it provides the correct answers people expect–whereas normal binary floating point arithmetic often introduces subtle errors because of the conversion between base 10 and base 2. For example,
 
-
+```
 (BigDecimal.new(“1.2”) - BigDecimal(“1.0”)) == BigDecimal(“0.2”) -> true
 
 (1.2 - 1.0) == 0.2 -> false
-
+```
 ---
 
 #### Ruby: `blocks` &amp; `collections`
@@ -283,7 +310,7 @@ part 0.
 ---
 
 #### Ruby: `data types` &amp; `symbols`
-zlambert
+
 
 herp derp
 
@@ -1771,6 +1798,73 @@ rlamichh
 
 #### C#: `anonymous types` &amp; `properties`
 astout
+
+# Anonymous Types
+Anonymous types are essentially wrappers that allow you to store multiple values inside of one variable. 
+####How to use them?
+They are invoked using the keyword 'var' and its members are added in curly braces, separated by commas. This is done like so-
+```
+var totallyVar = new { Name = "William Wallace", Place = "Roswell, New Mexico", Year = 1492};
+```
+These properties can now be accessed as if they were regular member variables (i.e., by using the dot operator). The following code writes "William Wallace" to the console.
+```
+Console.Out.Write(totallyVar.Name);
+```
+
+####Limitations
+Despite seeming really cool, they can't be used as flexibly as it might initially appear.
+- Anonymous types can't be returned from a function
+- The values in anonymous types are read-only (and can't be null)
+- The values can't be pointers
+- An anonymous type can't have functions or events 
+
+####What are they good for?
+Not a lot.
+Anonymous types are used almost exclusively for LINQ (Language-Integrated Query) queries of databases.
+```
+var productQuery = 
+    from prod in products
+    select new { prod.Color, prod.Price };
+
+foreach (var v in productQuery)
+{
+    Console.WriteLine("Color={0}, Price={1}", v.Color, v.Price);
+}
+```
+# Properties
+Properties in C# are like shorthand notation for a private variable that uses a getter and a setter to do a specific job.
+
+####How to use them
+In the following code, a class is used to keep track of a number of hours, but uses seconds in the background to accomplish this. The user doesn't care about the seconds.
+```
+class TimePeriod
+{
+    private double seconds;
+    public double Hours
+    {
+        get { return seconds / 3600; }
+        set { seconds = value * 3600; }
+    }
+}
+```
+When making a setter, using the keyword "value" will refer to the value being assigned to the variable. At this point, the property can be treated like a typical public variable
+```
+TimePeriod t = new TimePeriod();
+
+t.Hours = 10;
+Console.Out.Write(t.Hours);
+```
+If a property is provided a getter but no setter, it is essentially a read-only public variable.
+
+#### Auto-impelmented properties
+An auto-implemented property is just a property that has the most basic getter and setter.
+```
+public boolean CanadianEh{ get; set;}
+```
+What is the advantage to this over accessing the public variable directly? 
+- If a property is eventually expanded to include more activities in its getter or setter, it's an easier change to make.
+- C# will occasionally treat variables and properties differently and result in compile errors.
+
 
 ---
 
