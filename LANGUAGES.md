@@ -1787,6 +1787,73 @@ rlamichh
 #### C#: `anonymous types` &amp; `properties`
 astout
 
+# Anonymous Types
+Anonymous types are essentially wrappers that allow you to store multiple values inside of one variable. 
+####How to use them?
+They are invoked using the keyword 'var' and its members are added in curly braces, separated by commas. This is done like so-
+```
+var totallyVar = new { Name = "William Wallace", Place = "Roswell, New Mexico", Year = 1492};
+```
+These properties can now be accessed as if they were regular member variables (i.e., by using the dot operator). The following code writes "William Wallace" to the console.
+```
+Console.Out.Write(totallyVar.Name);
+```
+
+####Limitations
+Despite seeming really cool, they can't be used as flexibly as it might initially appear.
+- Anonymous types can't be returned from a function
+- The values in anonymous types are read-only (and can't be null)
+- The values can't be pointers
+- An anonymous type can't have functions or events 
+
+####What are they good for?
+Not a lot.
+Anonymous types are used almost exclusively for LINQ (Language-Integrated Query) queries of databases.
+```
+var productQuery = 
+    from prod in products
+    select new { prod.Color, prod.Price };
+
+foreach (var v in productQuery)
+{
+    Console.WriteLine("Color={0}, Price={1}", v.Color, v.Price);
+}
+```
+# Properties
+Properties in C# are like shorthand notation for a private variable that uses a getter and a setter to do a specific job.
+
+####How to use them
+In the following code, a class is used to keep track of a number of hours, but uses seconds in the background to accomplish this. The user doesn't care about the seconds.
+```
+class TimePeriod
+{
+    private double seconds;
+    public double Hours
+    {
+        get { return seconds / 3600; }
+        set { seconds = value * 3600; }
+    }
+}
+```
+When making a setter, using the keyword "value" will refer to the value being assigned to the variable. At this point, the property can be treated like a typical public variable
+```
+TimePeriod t = new TimePeriod();
+
+t.Hours = 10;
+Console.Out.Write(t.Hours);
+```
+If a property is provided a getter but no setter, it is essentially a read-only public variable.
+
+#### Auto-impelmented properties
+An auto-implemented property is just a property that has the most basic getter and setter.
+```
+public boolean CanadianEh{ get; set;}
+```
+What is the advantage to this over accessing the public variable directly? 
+- If a property is eventually expanded to include more activities in its getter or setter, it's an easier change to make.
+- C# will occasionally treat variables and properties differently and result in compile errors.
+
+
 ---
 
 #### C#: `OO` &amp; `classes`
