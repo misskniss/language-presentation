@@ -1278,13 +1278,10 @@ the language implmentation and the accompanying development board..
 - can be written as a full module and downloaded to the board ("drag-and-drop")
 - files can be directly opened and written to on the board
 - code can be written "live" using the REPL (read-execute-print-loop) command-line
-
 - garbage collection is "mark and sweep" and takes just 4ms for a full collection
 - open source and released under the MIT license
-
--- [My Prog-Lang write up](https://github.com/misskniss/language-research/tree/master/jkniss)
-
--- [Micro Python official Site](http://micropython.org/)
+- [My Prog-Lang write up](https://github.com/misskniss/language-research/tree/master/jkniss)
+- [Micro Python official Site](http://micropython.org/)
 
 
 #####The PyBoard
@@ -1293,12 +1290,11 @@ the language implmentation and the accompanying development board..
 and 192KB of RAM.
 
 <sub>Arduino Uno(Atmel): 16Mhz & 2KB RAM</sub>
-
 <sub>Raspberry Pi(ARM): 700Mhz+ & up to 512MB RAM</sub>
 
 - Compiles and runs Micro Python
 - Built in USB interface for programming
-- 4 LEDS, 1 Aceleromter, PWM, ADC, DAC, I2C, SPI, 5 UARTS, 4 servo ports, etc...
+- 4 LEDS, 1 Acelerometer, PWM, ADC, DAC, I2C, SPI, 5 UARTS, 4 servo ports, etc...
 - 3.3v - 5.0v and 3.3v output
 
 [info source](https://www.kickstarter.com/projects/214379695/micro-python-python-for-microcontrollers/description)
