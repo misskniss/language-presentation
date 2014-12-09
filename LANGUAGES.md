@@ -1,4 +1,4 @@
-
+﻿
 
 #### Ruby: `mixins`
 acole
@@ -17,7 +17,7 @@ However, there are times when you want to group things together that don't natur
 
 The answer is the module mechanism. Modules define a namespace, a sandbox in which your methods and constants can play without having to worry about being stepped on by other methods and constants. The trig functions can go into one module:
 
-```
+```ruby
 module Trig
   PI = 3.141592654
   def Trig.sin(x)
@@ -37,7 +37,7 @@ Modules have another, wonderful use. At a stroke, they pretty much eliminate the
 
 A module can't have instances, because a module isn't a class. However, you can include a module within a class definition. When this happens, all the module's instance methods are suddenly available as methods in the class as well. They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
 
-```
+```ruby
 module Debug
   def whoAmI?
     "#{self.type.name} (\##{self.id}): #{self.to_s}"
@@ -59,7 +59,7 @@ et.whoAmI?	»	"EightTrack (#537765860): Surrealistic Pillow"
 
 Mixins give you a wonderfully controlled way of adding functionality to classes. However, their true power comes out when the code in the mixin starts to interact with code in the class that uses it. Let's take the standard Ruby mixin Comparable as an example. The Comparable mixin can be used to add the comparison operators (<, <=, ==, >=, and >), as well as the method between?, to a class. For this to work, Comparable assumes that any class that uses it defines the operator <=>. So, as a class writer, you define the one method, <=>, include Comparable, and get six comparison functions for free. Let's try this with our Song class, by making the songs comparable based on their duration. All we have to do is include the Comparable module and implement the comparison operator <=>.
 
-```
+```ruby
 class Song
   include Comparable
   def <=>(other)
@@ -68,7 +68,7 @@ class Song
 end
 ```
 
-```
+```ruby
 song1 = Song.new("My Way",  "Sinatra", 225)
 song2 = Song.new("Bicylops", "Fleck",  260)
 song1 <=> song2	»	-1
@@ -165,6 +165,142 @@ Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"targe
 #### Ruby: `numbers` `arithmetic`
 arthurfc
 
+![alt text]( https://gradyli.files.wordpress.com/2007/11/rubydataclasses.jpg
+ "Ruby self definition")
+
+ 
+Before to introduce Numeric class, let's check out the figure for Ruby data type. All of the class are from Object Class. There are the Numeric class and sub-class.
+
+# Integer (Fixnum and Bignum)
+Two dat type for integer : Fixnum and Bignum。
+The following arithmetic show the , e.g.,
+
+```
+puts 10     #output integer 10
+
+puts 10.class     #what class for output integer 10; Fixnum
+ 
+puts 10 + 5     #arithmetic result 15
+
+puts 10 - 1     #9
+
+puts 5 * 5     #25
+
+puts 100 / 5     #20
+
+puts 10 ** 2     #** is power; 100
+
+puts 10 % 3     #mod; 1
+ 
+puts 10.to_f     #for Float data type; 10.0
+
+puts 10.to_s     #for String data type; 10
+ 
+puts 123456789987654321.class     #Bignum
+ 
+puts 1 == 2     #false
+
+puts 2 == 2.0     #true
+ 
+puts -1234.abs     #abs value; 1234
+```
+ 
+check the number to be zero; only for Fixnum
+
+could check the divisor to be not zero
+
+```
+puts 2.zero?     #false
+```
+
+
+# Float
+
+```
+puts 10 / 3     #3，the two numbers are Fixnum
+``` 
+
+make either dividend or divisor to be Float，Ruby can process the result
+
+```
+puts 10.0 / 3     #3.3333333333333
+
+puts 10 / 3.0     #3.3333333333333
+```
+ 
+pass the minimum integer which is greater than the value
+
+```
+puts (0.1).ceil     #1
+
+puts (-0.1).ceil     #0
+```
+ 
+pass the maximum integer which is less than the value
+
+```
+puts (2.1).floor     #2
+
+puts (-2.1).floor    #-3
+```
+ 
+round the number
+
+```
+puts (3.3).round     #3
+
+puts (4.5).round     #5
+
+puts (-5.1).round     #-5
+
+puts (-6.6).round     #-7
+```
+
+
+The Ruby Way mention the output cannot be 10.0  for the result of 10.0 / 3 (3.3333333333333)  to multiply the original divisor (3). But according to the code below, it can be 10.0.
+
+```
+x = 10.0 / 3
+
+puts x       #3.3333333333333
+ 
+y = x * 3
+
+puts y       #10.0
+```
+
+
+Besides, we can use BigDecimal class to have accurate floating point numbers.
+
+```
+require 'bigdecimal'
+ 
+x = BigDecimal.new("0.3333333333")
+ 
+puts x * 3     #0.9999999999E0
+```
+
+# Complex
+
+A complex number can be represented as a paired real number with imaginary unit; a+bi. Where a is real part, b is imaginary part and i is imaginary unit.
+
+```
+Complex(1)           #=> (1+0i)
+Complex(2, 3)        #=> (2+3i)
+```
+
+# BigDecimal
+BigDecimal provides similar support for very large or very accurate floating point numbers. Ruby provides built-in support for arbitrary precision integer arithmetic. For example:
+
+42**13 -> 1265437718438866624512
+
+Decimal arithmetic is also useful for general calculation, because it provides the correct answers people expect–whereas normal binary floating point arithmetic often introduces subtle errors because of the conversion between base 10 and base 2. For example,
+
+```
+(BigDecimal.new(“1.2”) - BigDecimal(“1.0”)) == BigDecimal(“0.2”) -> true
+
+(1.2 - 1.0) == 0.2 -> false
+```
 ---
 
 #### Ruby: `blocks` &amp; `collections`
@@ -174,7 +310,7 @@ part 0.
 ---
 
 #### Ruby: `data types` &amp; `symbols`
-zlambert
+
 
 herp derp
 
@@ -302,10 +438,214 @@ Conclusion
 #### Ruby: `scope`
 jdelagar
 
+#Ruby Scope Intro
+
+Ruby has static scoping despite being an interpreted language. Even though ruby is considered an interpreted language it does have a simple compiler that translates 
+the code to intermediate code and allows for it to be statically Scoped. Like in Java, ruby has different types of variable scopes which are global variables, instance 
+variables, class variables, local variables, and constants. Ruby also has Method scopes which are public, private and protected.
+
+#Ruby Scope Of Variables
+
+|Syntax	|Variable type		|Short description                                                                                         |
+|:-----:|:-----------------:|----------------------------------------------------------------------------------------------------------|
+|$		|Global Variable	|Global variables are variables accessible anywhere in the program                                         |
+|@      |Instance Variable  |Instance variables are contained inside an instance object of a certain class                             |
+|@@     |Class Variable     |Class variables are shared with all instanced objects of the same class                                   |
+|[a-z] _|Local Variables    |Local variables are local to the code construct in wich they are declared                                 |
+|[A-Z}  |Constants          |Available in the class or construct they are defined. Ruby will allow to change constant but gives warning|
+
+
+#Who am I? Finding self in Ruby scope
+
+![alt text](https://thenewcircle.com/static/bookshelf/ruby_tutorial/self2.png "Ruby self definition")
+
+
+#Ruby Method Scope
+
+Public Methods in Ruby are the default setting of scoping in methods.
+
+```ruby
+class MyClass
+    def initialize
+      @foo = 28
+    end
+ 
+    def foo
+      return @foo
+    end
+ 
+    def foo=(value)
+      @foo = value
+    end
+  end
+```
+It is a common practice to use them to create accessor methods for instance or class variables. Notice the getter and setters have the same name. This may cause issues 
+when attempting to use the setter to set a value. You can't use the setter of a variable inside the instance because it looks just like a local variable assignment 
+to the interpreter.
+```ruby
+def somedef
+	foo = 4
+end
+```
+instead use
+```ruby
+def somedef
+	self.foo = 4
+end
+```
+
+
+
+Private methods in Ruby are denoted by the keyword "private". Private methods are only available to that instance. Ex, inside an instance method of a class.
+
+```ruby
+@@@ ruby
+class Midas
+  def initialize(initial_gold)
+    @gold = initial_gold
+  end
+
+  def gold
+    @gold
+  end
+
+  def take_gold_from(other)
+    @gold += other.gold
+  end
+
+  private :gold
+end
+
+>> m1 = Midas.new(10)
+>> m2 = Midas.new(20)
+>> m1.take_gold_from(m2)
+NoMethodError: private method `gold' called
+```
+The code showed a message error because m1 was trying to touch m2's privates. Siblings can't touch each others privates!!!
+
+
+Protected methods in Ruby are denoted by the keyword private. Protected methods are available when self is an instance of that class or one of its descendants.
+
+```ruby
+@@@ruby
+  class Midas
+    protected :gold
+  end
+
+  m1.take_gold_from(m2)
+  => 30
+```
+But siblings can touch each others protected items!!
+
+image and example code hosted at (https://thenewcircle.com/static/bookshelf/ruby_tutorial/scope.html)
+
 ---
 
 #### Ruby: `duck typing`
 lmatsind
+
+
+Intro:
+
+Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.
+Every procedure in Ruby is a method of some object. Some method calls appear to be function calls as in other languages, but in fact they are actually invocations of methods belonging to self. Parentheses can be omitted if unambiguous.
+Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. It was designed and developed in the mid-1990s by Yukihiro "Matz" Matsumoto in Japan.
+
+Meat:
+
+Ruby’s dynamic nature facilitates a style of type system known as duck typing. In particular, duck typing breaks the strong association between an object’s class and its type by defining types based on what an object can do rather than what class it was born from.
+
+Duck typing to avoid scope creep
+
+```
+def image(file, options={})
+  Prawn.verify_options [:at, :position, :vposition, :height,
+                        :width, :scale, :fit], options
+
+  if file.respond_to?(:read)
+    image_content = file.read
+  else
+    raise ArgumentError, "#{file} not found" unless File.file?(file)
+    image_content = File.binread(file)
+  end
+
+  # additional implementation details omitted.
+end
+```
+
+The above code is used to make it so that the image() method can be called with either a file name or a file handle
+
+Some more examples
+
+```
+class Duck
+  def quack
+    puts "Quaaaaaack!"
+  end
+ 
+  def feathers
+    puts "The duck has white and gray feathers."
+  end
+end
+ 
+class Person
+  def quack
+    puts "The person imitates a duck."
+  end
+ 
+  def feathers
+    puts "The person takes a feather from the ground and shows it."
+  end
+end
+ 
+def in_the_forest(duck)
+  duck.quack
+  duck.feathers
+end
+ 
+def game
+  donald = Duck.new
+  john = Person.new
+  in_the_forest donald
+  in_the_forest john
+end
+game
+```
+
+Output:
+
+Quaaaaaack!
+The duck has white and gray feathers.
+The person imitates a duck.
+The person takes a feather from the ground and shows it.
+
+
+In Ruby, we rely less on the type (or class) of an object and more on its capabilities. Hence, Duck Typing means an object type is defined by what it can do, not by what it is. Duck Typing refers to the tendency of Ruby to be less concerned with the class of an object and more concerned with what methods can be called on it and what operations can be performed on it. In Ruby, we would use respond_to? or might simply pass an object to a method and know that an exception will be raised if it is used inappropriately.
+
+```
+# Check in irb, whether the object defines the to_str method  
+>> 'A string'.respond_to?(:to str)  
+=> true  
+>> Exception.new.respond_to?(:to_str)  
+=> false  
+>> 4.respond_to?(:to_str)  
+=> false  
+```
+
+The example above is the simplest example of Ruby's philosophy of "duck typing:" if an object quacks like a duck (or acts like a string), just go ahead and treat it as a duck (or a string). Whenever possible, you should treat objects according to the methods they define rather than the classes from which they inherit or the modules they include.
+
+Outro:
+
+Duck Typing Pro’s
+i)  Convenient
+ii) Promotes code reuse
+    All that matters is what messages an object can receive
+ 
+Duck Typing Con’s
+i) “Obvious” equivalences don’t hold: x+x, 2*x, x*2
+ii) May expose more about an object than might be
+    desirable (more coupling in code)
+
 
 ---
 
@@ -328,11 +668,323 @@ mclausen
 
 #### Scala: `pattern matching` 
 btombari
+=======
+=======
+#### 'Enumerations' and 'Subscripts'
+ncabral
+
+##### Enumerations
+
+Like in other languages, enumerations in Swift allow the programmer to define a common type for a group of related values. Enumerations are used when the programmer wants to work with user defined values in a type-safe way. Unlike languages such as C, enumerations in Swift do not have an implied "raw" value (0, 1, 2, etc). Rather, the members are treated as values of specific type. However, the programmer can still associate specific values of any type along with each member if they choose to. Enumerations are first class types in Swift, and they can have computed properties as well as instance methods.
+
+The best practice when defining an enumeration is to capitalize the name, since an enumeration is a type. It is also preferable that enumeration names are singular.
+
+One common mistake when using enumerations in Swift is assuming that each member has an implied numerical, like they do in C. It is important to remember that each member is a value in and of itself, of the type specified by the name of the enumeration.
+
+The following code sample shows a couple of ways to define an enumeration:
+```
+enum Directions{
+	case Up
+	case Down
+	case Left
+	case Right
+}
+
+enum Taste{
+	case Sweet, Sour, Bitter, Salty, Umami
+}
+```
+A variable's type is inferred when it is initialized to one of the possible values of an enumeration. It can then be reassigned to another value of that enumeration using a shorter dot syntax, as seen in the following code example:
+```
+	var foodTaste = Taste.Bitter
+	foodTaste = .Sour
+```
+##### Subscripts
+
+Subscripts in Swift are a shortcut for accessing the member elements of a collection. This allows the programmer to set and get values by index without the need for seperate methods. Subscripts can also be overloaded, in which case the correct subscript is called based on the index value that is passed.
+
+Subscripts are defined with the subscript keyword. They have a specific index value type, as well as a specific return type. The programmer has the option to make the subscript read/write or read-only. The following code example shows both types of subscript. Note that the example is an overloaded subscript.
+
+```
+subscript(index: Int) -> Int {
+	get {
+		//returns a type specified in line 1
+	}
+	set(newValue) {
+		// note that newValue is of this same type
+	}
+}
+
+subscript(index: String) -> Int {
+	get {
+		// returns a var of type Int
+	}
+}
+```
+The following code example shows subscript usage. Note that this example does not use the example code seen above.
+```
+var myNumbers = ["one":1, "two":2, "three":3]
+myNumbers["four"] = 4
+var myVar = myNumbers["one"] //myVar now equals 1
+```
+
+##### Sources
+<a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html">Apple Developer Website - Enumerations</a>
+
+<a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Subscripts.html">Apple Developer Website - Subscripts</a>
+
+---
+
+#### Swift: `Control Flow Structures` and `Exception\Error Handling`
+mtaylor
+
+##### Control Flow Structures:
+Swift uses the same famliar control flow statements from modern programming languages.
+
+Most common ones are: for-in, for, if, case
+
+<a href=http://swiftstub.com/805263090/>For-in Loop</a href>
+
+```
+for i in 0...10 {
+    println("\(i) times 7 is \(i * 7)")
+}
+
+Output is:
+0 times 7 is 0
+1 times 7 is 7
+2 times 7 is 14
+3 times 7 is 21
+4 times 7 is 28
+5 times 7 is 35
+6 times 7 is 42
+7 times 7 is 49
+8 times 7 is 56
+9 times 7 is 63
+10 times 7 is 70
+```
+
+<a href=http://swiftstub.com/539183439/>For Loop</a href>
+
+```
+for var i = 1; i <= 10; i++ {
+    println("Iteration: \(i)")
+}
+
+Output is:
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+Iteration: 5
+Iteration: 6
+Iteration: 7
+Iteration: 8
+Iteration: 9
+Iteration: 10
+```
+
+<a href=http://swiftstub.com/739944485/>If Statements</a href>
+
+```
+var drinkingAge = 21
+var age = 19
+if age >= drinkingAge {
+     println("You may buy alcohol because you are \(age)")
+} else {
+    println("You may not buy alcohol because \(age) is underage")
+}
+
+Output is:
+You may not buy alcohol because 19 is underage
+```
+
+<a href=http://swiftstub.com/473864834/>Case Statements</a href>
+
+```
+let count = 25
+let str = "types of twisty puzzles"
+var incrementalCount: String
+switch count {
+case 0:
+    incrementalCount = "no"
+case 1...3:
+    incrementalCount = "a few"
+case 4...9:
+    incrementalCount = "several"
+case 10...99:
+    incrementalCount = "tens of"
+case 100...999:
+    incrementalCount = "hundreds of"
+case 1000...999_999:
+    incrementalCount = "thousands of"
+default:
+    incrementalCount = "millions and millions of"
+}
+println("There are \(incrementalCount) \(str).")
+
+Output is:
+Matt owns tens of types of twisty puzzles.
+```
+
+##### Exception\Error Handling:
+
+Runtime errors:
+
+As someone on StackOverFlow suggests: "for handling runtime errors (like network connectivity problems, parsing data, opening file, etc) you should use NSError like you did in ObjC, because the Foundation, AppKit, UIKit, etc report their errors in this way. So it's more framework thing than language thing."
+
+In addition he said that: "Another frequent pattern that is being used are separator success/failure blocks like in AFNetworking:"
+
+```
+var sessionManager = AFHTTPSessionManager(baseURL: NSURL(string: "yavin4.yavin.planets"))
+sessionManager.HEAD("/api/destoryDeathStar", parameters: xwingSquad,
+    success: { (NSURLSessionDataTask) -> Void in
+        println("Success")
+    },
+    failure:{ (NSURLSessionDataTask, NSError) -> Void in
+        println("Failure")
+    })
+Still the failure block frequently received NSError instance, describing the error.
+```
+
+Programmer errors:
+
+For programmer errors (like out of bounds access of array element, invalid arguments passed to a function call, etc) you used exceptions in ObjC. Swift language does not seem to have any language support for exceptions (like throw, catch, etc keyword). However, as documentation suggests it is running on the same runtime as ObjC, and therefore you are still able to throw NSExceptions like this:
+
+```
+NSException(name: "SomeName", reason: "SomeReason", userInfo: nil).raise()
+```
+You cannot catch them in pure Swift, so you have to opt for catching exceptions in ObjC code.
 
 ---
 
 #### Scala: `classes` &amp; `traits`
 sodham
+
+
+### Classes
+Classes in Scala are very similar to Java. Classes are defined using the the "class" type then the class name. An object can be created from a class using the "new" keyword, just like java.
+
+#### Example:
+```
+class ScalaExample() {
+  var x: Int = 7
+  var y: Int = 9
+  def addXY(){
+  var z: Int = x + y
+  println ("X + Y = " + z);
+  }
+}
+
+```
+
+In this basic class the type class is given before the name of the class. We then initiate two variables, X and Y, to the numbers 7 and 9 respectively. The syntax to instantiating a variable is a little different than what we are used to seeing in java. var x: Int = 7 is literally translated to variable x of type Integer is set to 7. This is a bit verbose, however, because this could be shortened to just var x = 7. This is completely valid but if we did not know the value that will be assigned to x, we would have to explicitly choose the type for x via the following: var x: Int , now x can hold any Int value. Method calls have a little bit of a different syntax as well, they are preceded by the def type. def addXY() is the equivalent of void addXY() in java. Within the addXY() method we just instantiate a new variable, z, then set it to the sum of x and y, after which we print the sum.
+
+One other interesting feature about Scala's classes is that the class name works as a class constructor and arguments can be specified that must be provided when this class is newed up as an object.
+
+#### ConstructorExample:
+```
+class ConstructorExample(val x1: Int, val x2: Int) {
+  var x: Int = x1
+  var y: Int = x2
+  def addXY(){
+  var z: Int = x + y
+  println ("X + Y = " + z);
+  }
+}
+
+```
+
+This example is very similar to the above example, the only real difference is that now the values of x and y are not hard-coded. Two integer values can be passed to this class on creation, to create this object we would use the following methodology:
+#### CreatingObject:
+```
+class Test {
+  def main(args: Array[String]){
+  val sum = new ConstructorExample(15, 20);
+  }
+}
+
+```
+
+This is just a simple driver class to test the functionality of the ConstructorExample class by newing up the object and putting it into a "val", then passing the necessary arguments. We could have also typed sum as var and the code would work just as well. The difference between var and val is that a var typed variable can be changed, while a val type variable is constant.
+
+#### Sources
+<a href = http://www.tutorialspoint.com/scala/scala_classes_objects.htm>Tutorial's Point</a>
+
+### Traits
+Traits have a lot of the same functionality of a Interface in Java, both of them can pretty much mimic eachother to a point (will go into that later). To easily explain how traits work, I will compare them with Java's Interface code. The first code snippet will be Java followed by a second code snippet that is the Scala implementation of the same functionality.
+
+#### Java Interface:
+```
+interface Car {
+  String model;
+  String make;
+  int year;
+  void makeCarGo();
+}
+
+```
+
+This is just a simple inteface for a car in Java, now I will mimic this using Scala's trait type.
+
+#### Scala Trait:
+```
+trait Vehicle {
+  var model: String
+  var make: String
+  var year: Int
+  def makeVehicleGo()
+}
+
+```
+
+We can also implement the makeVehicleGo() method
+
+#### Scala Trait Explicit:
+
+```
+trait Vehicle {
+  var model: String
+  var make: String
+  var year: Int
+  def makeVehicleGo() {
+    println("Vehicle is moving!");
+  }
+}
+
+```
+
+This will do the same thing as the java code above it. Any class that has this trait must have a make, model, year, and makeVehicleGo() method. The way we implement traits, however, can be a little different.
+
+#### Trait Implementation:
+```
+class Car extends Vehicle {
+  var model: String = Ford
+  var make: String = Mustang
+  var year: Int = 2012
+  def makeVehicleGo(){
+    println("Vehicle is moving!")
+  }
+}
+
+```
+
+This is basically the same way that Java does it, so we can use a trait as an interface for Objects, but we can also create a one-off object that has a trait without affecting all other objects created from the same class.
+
+#### Trait Singleton:
+```
+class Test {
+  val newCar = new Car with Vehicle
+}
+
+```
+
+This now creates a singleton object that has the trait "Vehicle". There will not be another class that uses Vehicle unless we do the same new "Object" with "Trait" call to make another object. This can be pretty valuable if you only want certain instances of the same Object to contain a trait. Like say if we had a Person class and we wanted a person's race to be a trait related to the Person object. We could just choose which Trait to link with each object when we create them.
+
+#### Sources
+<a href = http://www.scala-lang.org/old/node/126>Scala-Lang</a>
+
+<a href = http://en.wikibooks.org/wiki/Scala/Traits>Wiki</a>
 
 ---
 
@@ -711,10 +1363,191 @@ SQL is a simple but powerful language for working with relational database syste
 #### SQL: `operators` &amp; `views`
 adebaca
 
+A “OPERATOR” in SQL is a reserved word or a character that is used primarily in an SQL statement’s WHERE clause to perform some type of operation, such as comparisons and arithmetic operations.
+
+Operators are used in special conditions in SQL statements and to serve as conjunctions for multiple conditions in a statement.
+
+Arithmetic operators
+
+Comparison operators
+
+Logical operators
+
+Operators used to negate conditions
+
+#### SQL Arithmetic Operators:
+
+```
+       +  Addition-Adds values on either side of the operator
+	
+- Subtraction-Subtracts right hand operand from left hand operand
+
+• Multiplication-Multiplies values on either side of the operator
+
+/  Division-Divides left hand operand by right hand operand
+
+%  Modulus-Divides left hand operand by right hand operand and returns remainder
+```
+
+#### SQL Comparison Operators:
+SQL Comparison Operators are the heart and soul of SQL.
+
+```
+	=  Checks if two operands are equal or not. If they are equal then 	
+		the conditions becomes true. 
+
+	!= Checks if two operands are not equal then the condition becomes 	
+		True.
+
+      <> Checks if two values are equal or not, if they are not equal then 
+		it comes true.
+
+      >  Checks if the left operand is greater than the right operand, 
+		then the condition becomes true.
+
+	<   Checks if the left operand is less than the right operand.
+
+	>=  Checks if the left operand is greater than or equal to the right 
+		Operand.
+
+	<= Checks if the right operand is greater than or equal to the right 
+		Operand.
+
+	!<  Checks if the left operand is not less than the right operand
+
+	!>  Checks if the left operand is not greater than the right operand
+```
+
+#### SQL Logical Operators:
+ 
+Following is a list of logical operators
+
+```
+	ALL	Selects all values in a set
+	AND	Adding multiple conditions in a SQL WHERE clause
+	ANY	Compare any applicable value in the list condition
+	BETWEEN	Gets values between minimum and maximum value.
+	EXISTS Searches for a row that meets a criteria.
+	IN	Used to compare a value that meets a criteria.
+	LIKE	Compares value that have similar values.
+	NOT	This is a negate operator.
+	OR	This operator is used is a WHERE clause.
+	IS NULL	Used to compare a value with a NULL value
+	UNIQUE	Searches every row of a table for uniqueness. 
+```
+	
+
+
+
+The basic syntax for a operators work something like this: 
+```
+SELECT [realestate].[address]
+FROM realestate 
+WHERE address LIKE CONCAT('%', 1234, '%')
+ 
+```
+
+##### VIEWS
+A view is a SQL statement that is stored in the database with an associated name. Basically it is a predefined SQL query.
+
+A view can contain the rows of a table and are a kind of virtual table. 
+
+Following is an example of how views are created.
+
+```
+CREATE VIEW view_name AS
+SELECT column1, column2.....
+FROM table_name
+WHERE [condition];
+```
+
+
+##### Updating a View
+
+A view can be updated under certain conditions:
+
+```
+• The SELECT clause may not contain the keyword DISTINCT.
+• The SELECT clause may not contain summary functions.
+• The SELECT clause may not contain set functions.
+• The SELECT clause may not contain set operators.
+• The SELECT clause may not contain an ORDER BY clause.
+• The FROM clause may not contain multiple tables.
+• The WHERE clause may not contain subqueries.
+• The query may not contain GROUP BY or HAVING.
+• Calculated columns may not be updated.
+• All NOT NULL columns from the base table must be included in the view in order for the INSERT query to function.
+```
+
+####Inserting Rows into a View:
+Rows of data can be inserted into a view. 
+
+####Deleting Rows into a View:
+Rows of data can be deleted from a view.
+
+####Dropping Views:
+You can also drop views that are no longer need.
+```
+DROP VIEW view_name;
+```
+
+##### Conclusion
+SQL has many uses this day and age and I don’t think it’s going to be going away anytime soon. Most of the old database systems are built off SQL, and I feel that NOSQL is not going to take over anytime soon. Knowing basic SQL queries is a key to any programming language and every programmer should have a basic understanding of it. 
+
+
+
 ---
 
 #### MicroPython: `controlling hardware`
 jkniss
+
+
+#####General Info
+Micro Python is a re-implementation of Python3 and a subset of the standard
+Python3 libraries.
+
+Micro Python was re-implemented to run on embedded systems - which required
+greatly reducing the amount of RAM the language used.
+
+RAM is a primary constriant for embedded systems / microcontrollers.
+
+For example: ```i = 5``` in Python3 will alocate a full 4KB of RAM because the
+compiler anticipates (and tries to optimize for) future small integer use by
+allocating an array of 262  small integers first then returning the value you
+asked for. But for a microcontroller with only 192KB of RAM, a 4KB
+allocation for a single integer is very expesive.
+
+Micro Python was created by Damien George and he used Kickstarter to fund the
+the language implmentation and the accompanying development board..
+
+#####Code
+
+- object oriented "scripting" language that is written in C and compiled with gcc
+- dynamically & strongly typed
+- space delimited methods (rather than curly braces and semi-colons)
+- includes a lexer, parser, compiler, interpreter
+- can be written as a full module and downloaded to the board ("drag-and-drop")
+- files can be directly opened and written to on the board
+- code can be written "live" using the REPL (read-execute-print-loop) command-line
+- garbage collection is "mark and sweep" and takes just 4ms for a full collection
+- open source and released under the MIT license
+- [My Prog-Lang write up](https://github.com/misskniss/language-research/tree/master/jkniss)
+- [Micro Python official Site](http://micropython.org/)
+
+
+#####The PyBoard
+
+- Based on the STM32F405 ARM microcontroller clocked at 168MHz with 1MB flash
+and 192KB of RAM.
+
+<sub>NOTE: Arduino Uno(Atmel): 16Mhz/2KB RAM & Raspberry Pi(ARM): 700Mhz+/512MB RAM</sub>
+
+- Compiles and runs Micro Python
+- Built in USB interface for programming
+- 4 LEDS, 1 Acelerometer, PWM, ADC, DAC, I2C, SPI, 5 UARTS, 4 servo ports, etc...
+- 3.3v - 5.0v and 3.3v output
+
+[info source](https://www.kickstarter.com/projects/214379695/micro-python-python-for-microcontrollers/description)
 
 
 ##### Basic Motor Control
@@ -723,13 +1556,47 @@ jkniss
 
 
 ##### Basic Accelerometer Control
- 
- (next up...)
+
++[Accelerometer Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoRzZnYTRQSjhEOHY1cmg4UElmdWxadlB6X3NB/view?usp=sharing)
+
+```Python
+# main.py -- on pyboard
+
+import pyb
+
+def led_angle(seconds):
+
+    one = pyb.LED(1)
+    two = pyb.LED(2)
+    three = pyb.LED(3)
+    four = pyb.LED(4)
+    acl = pyb.Accel()
+
+    for i in range(20 * seconds):
+       x = acl.x()
+
+       if x >= 10:
+         one.on()
+       elif x >= 5:
+         two.on()
+       elif x <= -5:
+         four.on()
+       else:
+         one.off()
+         two.off()
+         three.off()
+         four.off()
+       pyb.delay(50)
+
+
+led_angle(60)
+
+```
 
 
 ##### Light Sensor
 
-```
+```Python
 from pyb import ADC
 light = ADC(Pin('X7'))
 light.read()
@@ -739,7 +1606,7 @@ light.read()
 
 ##### IR Sensor
 
-```
+```Python
 from pyb import ADC
 eyes = ADC(Pin('Y11'))
 eyes.read()
@@ -748,10 +1615,12 @@ eyes.read()
 
 
 ##### Bluetooth Control
-[Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
 
-```
+[Bluetooth Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
+
+```Python
 # main.py -- on pyboard
+
 import pyb
 from pyb import Pin
 from pyb import UART
@@ -783,14 +1652,63 @@ def go():
     pyb.delay(200)
 ```
 
+##### PROS & CONS
 
-Basic 
+*PROS*
+- Get things working fast. Little time is wasted with the compile-flash
+cycle we normally experience with embedded systems programming.
+- Compact and powerful.
+- More natural language with much less typing time then C (or worse...Java)
+- Much more fun to program
+- convinient to test your code with the python command-line before loading it
+to board as a full module.
+- It is much more powerful than the ATMEGA series by ATMel
+- Cheaper than the Raspberry Pi
+- There is a huge community for Python support.
+
+*CONS*
+- Not all the standard python libraries are implemented yet (but you can contribute!)
+- The language is only about a year old and getting better but the support for
+both the board and language (where it differs from Python3) is still maturing -
+ <sub>This month is the 1-year anneversary of the Kickstarter for Micro Python</sub>
+- Not as powerful as the Raspberry Pi (but then, the RaspPi is a full computer
+not a development board.)
+
+
+
 
 ---
 
 #### R: `graphical features`
 charts
 sbradbur
+#Overview
+R is an object-oriented, high-level, statistical programming language.  It is designed for statistical computing and graphics and is widely used by scientists and mathematicians.  R is dynamically and strongly typed and uses lexical scoping.  
+#Graphical Features
+R can be used to create many kinds of graphs.  R has built in functions for graphing, and the arguments of the function specify what data will be graphed.  This language makes it easy to visually represent datasets in a large variety of ways.   
+A code example of making minimal graphs from built in data sets in R:
+```
+hist(faithful$eruptions)      
+hist(faithful$waiting)
+plot(faithful)			
+boxplot(faithful$eruptions)	
+stripchart(faithful$eruptions)	
+
+plot(women)
+lines(women)				#adding lines to a plot
+pie(women$height)
+```
+You can make a lot of graphs with very little coding, but these graphs are pretty minimal.  R uses method overloading to allow you to change aspects of the graph.  The first argument specifies what will be graphed, and the rest set the values of built in variables.  
+A code example, improving on an earlier graph: 
+```
+plot(faithful,
+     main = "Old Faithful Eruptions",
+     col = "red",
+     col.main = "blue",
+     col.lab = "purple",
+     xlab = "Time between Eruptions (min)",
+     ylab = "Duration of Eruption (min)")
+```
 
 ---
 
@@ -802,8 +1720,76 @@ cowens
 C# is strongly and statically typed. C# enforces type safety. These allow for increased stability in C# development. C# has a few interesting topics within typing, including *dynamics* and *vars*. 
 ##### Dynamics
 C# has a unique type, *dynamic*. In essence, declaring an object of type dynamic allows for this object to bypass standard type checking. This allows for flexibility of use, but places the burden of type checking on the programmer to avoid any runtime errors that would normally have been caught at compile time. 
+###### Example: 
+```C#
+using System;
+using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace Sandbox {
+    class Program {
+        static void Main(string[] args) {
+            dynamic obj = "Hello World";
+            foreach (char c in obj){
+                Console.Write(c);
+            }
+            Console.WriteLine();
+            obj = 1;
+            obj = obj + 1;
+            Console.WriteLine(obj);
+            obj = 2.5;
+            obj = obj * .75;
+            Console.WriteLine(obj);
+            obj = new Point(5, 10);
+            Console.WriteLine(obj);
+            Console.WriteLine("("+obj.X+","+obj.Y+")");
+			obj.missingMethod();
+            System.Threading.Thread.Sleep(10000);
+        }
+    }
+}
+```
+In the above example, obj is used as a String, then an int, then a double, and finally a point. Each of these compile without error, and the program runs as you would expect, with obj adapting to each use as needed. This demonstrates the power of the dynamic type in C#. It isn't until the line `obj.missingMethod();` that we have a runtime error. The runtime is unable to bind the missingMethod() method, since it doesn't exist. This demonstrates the risk of using dynamics - it's up to the programmer to ensure type safety. The compiler will not catch issues like this. 
 ##### Vars
 Another unique type for C# is *var*. Declaring an object of type var allows the compiler to determine what type the object should be implicitly. 
+###### Example: 
+```C#
+using System;
+using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace Sandbox {
+    class Program {
+        static void Main(string[] args) {
+            var obj = "Hello World";
+            foreach (char c in obj){
+                Console.Write(c);
+            }
+            Console.WriteLine();
+            obj = 1;
+            obj = obj + 1;
+            Console.WriteLine(obj);
+            obj = 2.5;
+            obj = obj * .75;
+            Console.WriteLine(obj);
+            obj = new Point(5, 10);
+            Console.WriteLine(obj);
+            Console.WriteLine("("+obj.X+","+obj.Y+")");
+			obj.missingMethod();
+            System.Threading.Thread.Sleep(10000);
+        }
+    }
+}
+```
+Unlike the above example for dyamics, declaring obj as a var works for the first use, but attempting to redefine obj as an int, double, or point results in compile errors - the compiler determined that obj should be a String and will treat it as a String for the rest of its use. 
 
 ---
 
@@ -815,12 +1801,152 @@ rlamichh
 #### C#: `anonymous types` &amp; `properties`
 astout
 
+# Anonymous Types
+Anonymous types are essentially wrappers that allow you to store multiple values inside of one variable. 
+####How to use them?
+They are invoked using the keyword 'var' and its members are added in curly braces, separated by commas. This is done like so-
+```
+var totallyVar = new { Name = "William Wallace", Place = "Roswell, New Mexico", Year = 1492};
+```
+These properties can now be accessed as if they were regular member variables (i.e., by using the dot operator). The following code writes "William Wallace" to the console.
+```
+Console.Out.Write(totallyVar.Name);
+```
+
+####Limitations
+Despite seeming really cool, they can't be used as flexibly as it might initially appear.
+- Anonymous types can't be returned from a function
+- The values in anonymous types are read-only (and can't be null)
+- The values can't be pointers
+- An anonymous type can't have functions or events 
+
+####What are they good for?
+Not a lot.
+Anonymous types are used almost exclusively for LINQ (Language-Integrated Query) queries of databases.
+```
+var productQuery = 
+    from prod in products
+    select new { prod.Color, prod.Price };
+
+foreach (var v in productQuery)
+{
+    Console.WriteLine("Color={0}, Price={1}", v.Color, v.Price);
+}
+```
+# Properties
+Properties in C# are like shorthand notation for a private variable that uses a getter and a setter to do a specific job.
+
+####How to use them
+In the following code, a class is used to keep track of a number of hours, but uses seconds in the background to accomplish this. The user doesn't care about the seconds.
+```
+class TimePeriod
+{
+    private double seconds;
+    public double Hours
+    {
+        get { return seconds / 3600; }
+        set { seconds = value * 3600; }
+    }
+}
+```
+When making a setter, using the keyword "value" will refer to the value being assigned to the variable. At this point, the property can be treated like a typical public variable
+```
+TimePeriod t = new TimePeriod();
+
+t.Hours = 10;
+Console.Out.Write(t.Hours);
+```
+If a property is provided a getter but no setter, it is essentially a read-only public variable.
+
+#### Auto-impelmented properties
+An auto-implemented property is just a property that has the most basic getter and setter.
+```
+public boolean CanadianEh{ get; set;}
+```
+What is the advantage to this over accessing the public variable directly? 
+- If a property is eventually expanded to include more activities in its getter or setter, it's an easier change to make.
+- C# will occasionally treat variables and properties differently and result in compile errors.
+
+
 ---
 
 #### C#: `OO` &amp; `classes`
 dhampiki
 
----
+Classes in C#
+Daniel Hampikian
+
+C#, like Java, is an object-oriented programming language.  This means that objects are the fundamental units of the language, where classes define an objects variables, methods, events, and properties, then the objects are created and called by classes and their defined properties are utilized by the calling class.  Object-oriented languages like C# support encapsulation, where a group of related properties and methods are treated as a single objet, inheritance, or the ability to create new classes based on an existing class, and polymorphism, or the ability to have multiple classes that can be used interchangeably.  Classes describe the type of object, like a blueprint, and the object is the building made from that blueprint.  
+
+In C#, a class allows you to create custom types by grouping together variables, methods, and events, in a way similar to the class structure of Java.  A class functions like a roadmap that defines the data and behavior of a type.  A class can be declared as static, but if it is not it the client code calling the class can use it by creating objects or instances of that class which are assigned to a variable.  
+
+Classes in C# support inheritance also like the Java language.  They are declared by using the class keyword. 
+For example: 
+
+```
+public class ThisIsAClass
+{
+//The field:
+public string aString; 
+
+//A constructor that takes a string as an argument
+public ThisIsAClass(string s) {
+aString = s;
+}
+}
+class Test
+{
+	static void Main()
+{
+	ThisIsAClass example = new ThisIsAClass(“Alright!”);
+	Console.WriteLine(example.aString);
+
+}
+}
+```
+//output: Alright!
+
+This class contains a field, a method, and a constructor.  
+
+It is also interestingly possible to split the definition of a class over two or more source files.  
+When this occurs different source files contain different section of the type of method definition and all parts are combined when the application is compiled.  When this occurs we have partial classes.  
+
+This is pragmatic when large projects are worked on by multiple programers so that they can all work on the same class at the same time.  
+When you are working on automatically generated source this is also pragmatic because code can be added to the class without having to recreate the source file.  Visual studio, for example, uses this approach when it creates Windows Forms.  
+To split a class definition, you use the partial keyword modifier as shown:
+```
+public partial class Clowns
+{
+public void ClownWork()
+{
+}
+}
+
+public partial class Midgets 
+{
+public void MidgetWork()
+{
+}
+}
+```
+
+The partial keyword indicates that other parts of the class can be defined in the namespace.  All parts must use the partial key word and be available to compile time to form the final type and must also have the same accessibility modifier, abstract, or sealed modifiers must be consistent across the whole class. 
+
+The access modifiers of SC# are very similar to those of Java, where we have public, private, and protected modifier that limit access as follows:
+public is not restricted, protected is limited tot he class or types derived from the containing class.  
+And finally, private where access is strictly limited to the containing type. 
+However, C# has a a internal, and protected internal type, where for internal access is limited to the current assembly and for protected internal access is limited to the current assembly or types derived from the containing class.  
+
+References:
+
+For classes my information comes mostly from:
+
+http://msdn.microsoft.com/en-us/library/x9afc042.aspx
+
+For partial classes my information comes mostly from:
+
+http://msdn.microsoft.com/en-us/library/wa80x488.aspx
+
 
 #### Python: `OO` &amp; `classes`
 mhandysi
@@ -1048,6 +2174,74 @@ cbarton
 ---
 
 #### Haskell: `monads`
-jpack
+#Monads
 
----
+Haskell is a purely functional language. This means that Haskell programs behave exactly like mathematical functions; mapping input to output with no other side effects. This presents a problem when we want to do useful things with Haskell, like taking user input. Monads help us address that problem. At a high level, Monads allow us to chain functions together in steps, in effect allowing Haskell to behave like an imperative language. However, Monads also offer us the ability to provide rules between each of these steps, informing how these functions should interact with each other. Monads can be thought of as assembly lines, where functions act on data being moved down the line.
+
+###Maybe
+
+The maybe Monad lets us deal with the possibility of failure. Here's how it's defined in Haskell:
+
+```haskell
+instance Monad Maybe where  
+    return x = Just x  
+    Nothing >>= f = Nothing
+    Just x >>= f  = f x  
+```
+
+So what does this mean?
+
+```haskell
+instance Monad Maybe where  
+```
+
+Here we're defining the type Maybe, which is an instance of the Monad typeclass.
+
+```haskell
+return x = Just x
+```
+
+In Haskell, `return` specifies how to "wrap" a value in a Monad. In other words, it allows a given value to behave like a Maybe monad. 'Just' is a type that simply means the value exists.
+
+```haskell
+    Nothing >>= f = Nothing
+```
+The '>>=' (pronounced bind) operator tells us how the Monad handles Nothing input. Nothing is a type that means, well, nothing's there. It's analogous to null in Java.
+
+```haskell
+    Just x >>= f  = f x 
+```
+
+Now we're defining how a value of Just x will behave given an input function. Here we just return the value of the just passed to the function f.
+
+Now we can look at how maybe works:
+
+```haskell
+ghci> return "WHAT" :: Maybe String  
+Just "WHAT"  
+ghci> Just 9 >>= \x -> return (x*10)  
+Just 90  
+ghci> Nothing >>= \x -> return (x*10)  
+Nothing  
+```
+###'do'
+Haskell also provides some syntactic sugar for when we'd like to use monads to emulate an imperative style. The monad
+
+```haskell
+foo :: Maybe String  
+foo = Just 3   >>= (\x -> 
+      Just "!" >>= (\y -> 
+      Just (show x ++ y)))  
+```
+
+can be written as 
+
+```haskell
+foo :: Maybe String  
+foo = do  
+    x <- Just 3  
+    y <- Just "!"  
+    Just (show x ++ y) 
+```
+
+Monads are generally considered one of the more confusing concepts when learning Haskell, but their expressive power makes them well worth the effort. 
