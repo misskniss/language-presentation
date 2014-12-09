@@ -862,7 +862,7 @@ You cannot catch them in pure Swift, so you have to opt for catching exceptions 
 sodham
 
 
-##### Classes
+### Classes
 Classes in Scala are very similar to Java. Classes are defined using the the "class" type then the class name. An object can be created from a class using the "new" keyword, just like java.
 
 #### Example:
@@ -911,7 +911,7 @@ This is just a simple driver class to test the functionality of the ConstructorE
 #### Sources
 <a href = http://www.tutorialspoint.com/scala/scala_classes_objects.htm>Tutorial's Point</a>
 
-##### Traits
+### Traits
 Traits have a lot of the same functionality of a Interface in Java, both of them can pretty much mimic eachother to a point (will go into that later). To easily explain how traits work, I will compare them with Java's Interface code. The first code snippet will be Java followed by a second code snippet that is the Scala implementation of the same functionality.
 
 #### Java Interface:
@@ -956,7 +956,7 @@ trait Vehicle {
 
 This will do the same thing as the java code above it. Any class that has this trait must have a make, model, year, and makeVehicleGo() method. The way we implement traits, however, can be a little different.
 
-####T rait Implementation:
+#### Trait Implementation:
 ```
 class Car extends Vehicle {
   var model: String = Ford
@@ -983,6 +983,7 @@ This now creates a singleton object that has the trait "Vehicle". There will not
 
 #### Sources
 <a href = http://www.scala-lang.org/old/node/126>Scala-Lang</a>
+
 <a href = http://en.wikibooks.org/wiki/Scala/Traits>Wiki</a>
 
 ---
