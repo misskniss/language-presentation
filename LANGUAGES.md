@@ -1289,8 +1289,7 @@ the language implmentation and the accompanying development board..
 - Based on the STM32F405 ARM microcontroller clocked at 168MHz with 1MB flash
 and 192KB of RAM.
 
-<sub>Arduino Uno(Atmel): 16Mhz & 2KB RAM</sub>
-<sub>Raspberry Pi(ARM): 700Mhz+ & up to 512MB RAM</sub>
+<sub>NOTE: Arduino Uno(Atmel): 16Mhz & 2KB RAM & Raspberry Pi(ARM): 700Mhz+ & up to 512MB RAM</sub>
 
 - Compiles and runs Micro Python
 - Built in USB interface for programming
