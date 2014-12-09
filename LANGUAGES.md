@@ -280,6 +280,15 @@ x = BigDecimal.new("0.3333333333")
 puts x * 3     #0.9999999999E0
 ```
 
+# Complex
+
+A complex number can be represented as a paired real number with imaginary unit; a+bi. Where a is real part, b is imaginary part and i is imaginary unit.
+
+```
+Complex(1)           #=> (1+0i)
+Complex(2, 3)        #=> (2+3i)
+```
+
 # BigDecimal
 BigDecimal provides similar support for very large or very accurate floating point numbers. Ruby provides built-in support for arbitrary precision integer arithmetic. For example:
 
@@ -301,7 +310,7 @@ part 0.
 ---
 
 #### Ruby: `data types` &amp; `symbols`
-zlambert
+
 
 herp derp
 
