@@ -1009,26 +1009,38 @@ Example Private variable:
 ```python
 class Cutlery(object):
 	
-	__cutlery = 0
+	__utensils = 0
 
-	def __init__(self, utensil, type):
-		self.utensil = utensil
-		self.type = type
-		self.__cutlery += 1
-		
-	def getCutleryCount():
-		print self.__cutlery	
+	def __init__(self):
+		self.__utensils += 1
+		print self.__utensils
+	
+	def addUTensil(self):
+		self.__utensils += 1
+		print "adding from public"
+		self.__addUtensil()
+	def __addUtensil(self):
+		Cutlery._Cutlery__utensils += 5
+		print "adding from private"	
 
-cutlery = ("Fork", "Salad")
-cutlery.getCutleryCount()
-print cutlery.__cutlery
+c = Cutlery()
+c.addUtensil()
+print "instance counter", c.__utensils
+print "class counter", Cutlery.__utensils
+
 ```
+Python does not have private data. We can emulate it in a way though. What python does is recognizes the double underscores, and mangles the name a bit by adding the class name to the variable of function name.
 
-This code would run a error at the print statement because python sees the two underscores and internally changes th variable name to include the class name. _object.className__variable is what would be used for the print statement to work correctly.
+So in order to access the __utensils__ class and instance variables, we call them by the mangled names as per below:
 
 ```python
-print cutlery._Cutlery__cutlery
+print "instance counter", c._Cutlery__utensils
+print "class counter", Cutlery._Cutlery__utensils
 ```
+This new code will print the correct values without errors:
+1
+5
+
 
 ### Python: `modules`
 cbarton
