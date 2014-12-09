@@ -165,6 +165,8 @@ Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"targe
 #### Ruby: `numbers` `arithmetic`
 arthurfc
 
+![alt text]( https://gradyli.files.wordpress.com/2007/11/rubydataclasses.jpg
+ "Ruby self definition")
 
  
 Before to introduce Numeric class, let's check out the figure for Ruby data type. All of the class are from Object Class. There are the Numeric class and sub-class.
