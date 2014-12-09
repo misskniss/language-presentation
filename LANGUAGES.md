@@ -865,7 +865,7 @@ sodham
 ##### Classes
 Classes in Scala are very similar to Java. Classes are defined using the the "class" type then the class name. An object can be created from a class using the "new" keyword, just like java.
 
-Example:
+#### Example:
 ```
 class ScalaExample() {
   var x: Int = 7
@@ -882,7 +882,7 @@ In this basic class the type class is given before the name of the class. We the
 
 One other interesting feature about Scala's classes is that the class name works as a class constructor and arguments can be specified that must be provided when this class is newed up as an object.
 
-ConstructorExample:
+#### ConstructorExample:
 ```
 class ConstructorExample(val x1: Int, val x2: Int) {
   var x: Int = x1
@@ -896,7 +896,7 @@ class ConstructorExample(val x1: Int, val x2: Int) {
 ```
 
 This example is very similar to the above example, the only real difference is that now the values of x and y are not hard-coded. Two integer values can be passed to this class on creation, to create this object we would use the following methodology:
-
+#### CreatingObject:
 ```
 class Test {
   def main(args: Array[String]){
@@ -914,7 +914,7 @@ This is just a simple driver class to test the functionality of the ConstructorE
 ##### Traits
 Traits have a lot of the same functionality of a Interface in Java, both of them can pretty much mimic eachother to a point (will go into that later). To easily explain how traits work, I will compare them with Java's Interface code. The first code snippet will be Java followed by a second code snippet that is the Scala implementation of the same functionality.
 
-Java Interface:
+#### Java Interface:
 ```
 interface Car {
   String model;
@@ -927,7 +927,7 @@ interface Car {
 
 This is just a simple inteface for a car in Java, now I will mimic this using Scala's trait type.
 
-Scala Trait:
+#### Scala Trait:
 ```
 trait Vehicle {
   var model: String
@@ -940,7 +940,8 @@ trait Vehicle {
 
 We can also implement the makeVehicleGo() method
 
-Scala Trait Explicit:
+#### Scala Trait Explicit:
+
 ```
 trait Vehicle {
   var model: String
@@ -955,7 +956,7 @@ trait Vehicle {
 
 This will do the same thing as the java code above it. Any class that has this trait must have a make, model, year, and makeVehicleGo() method. The way we implement traits, however, can be a little different.
 
-Trait Implementation:
+####T rait Implementation:
 ```
 class Car extends Vehicle {
   var model: String = Ford
@@ -970,7 +971,7 @@ class Car extends Vehicle {
 
 This is basically the same way that Java does it, so we can use a trait as an interface for Objects, but we can also create a one-off object that has a trait without affecting all other objects created from the same class.
 
-Trait Singleton:
+#### Trait Singleton:
 ```
 class Test {
   val newCar = new Car with Vehicle
@@ -981,7 +982,7 @@ class Test {
 This now creates a singleton object that has the trait "Vehicle". There will not be another class that uses Vehicle unless we do the same new "Object" with "Trait" call to make another object. This can be pretty valuable if you only want certain instances of the same Object to contain a trait. Like say if we had a Person class and we wanted a person's race to be a trait related to the Person object. We could just choose which Trait to link with each object when we create them.
 
 #### Sources
-<a href = http://www.scala-lang.org/old/node/126>Scala-Lang></a>
+<a href = http://www.scala-lang.org/old/node/126>Scala-Lang</a>
 <a href = http://en.wikibooks.org/wiki/Scala/Traits>Wiki</a>
 
 ---
