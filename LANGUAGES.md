@@ -411,6 +411,93 @@ Conclusion
 #### Ruby: `scope`
 jdelagar
 
+#Ruby Scope Intro
+
+Ruby has static scoping despite being an interpreted language. Even though ruby is considered an interpreted language it does have a simple compiler that translates 
+the code to intermediate code and allows for it to be statically Scoped. Like in Java ruby has different types of variable scopes which are global variables, instance 
+variables, class variables, local variables, and constants. Ruby also has Method scopes which are public, privatem and protected.
+
+#Ruby Scope Of Variables
+
+|syntax	|variable type		|short description                                                                                         |
+|:-----:|:-----------------:|----------------------------------------------------------------------------------------------------------|
+|$		|Global Variable	|Global variables are variables accessible anywhere in the program                                         |
+|@      |Instance Variable  |Instance variables are contained inside an instance object of a certain class                             |
+|@@     |Class Variable     |Class variables are shared with all instanced objects of the same class                                   |
+|[a-z] _|Local Variables    |Local variables are local to the code construct in wich they are declared                                 |
+|[A-Z}  |Constants          |Available in the class or construct they are defined. Ruby will allow to change constant but gives warning|
+
+
+#Who am I? Finding self in Ruby scope
+
+![alt text](https://thenewcircle.com/static/bookshelf/ruby_tutorial/self2.png "Ruby self definition")
+
+
+#Ruby Method Scope
+
+Public Methods in Ruby are the default setting of scoping in methods.
+
+```ruby
+class MyClass
+    def initialize
+      @foo = 28
+    end
+ 
+    def foo
+      return @foo
+    end
+ 
+    def foo=(value)
+      @foo = value
+    end
+  end
+```
+It is a common practice to use them to create accessors methods for instance or class variables.
+
+
+Private methods in Ruby are denoted by the keyword "private". Private methods are only available to that instance. Ex, inside an instance method of a class.
+
+```ruby
+@@@ ruby
+class Midas
+  def initialize(initial_gold)
+    @gold = initial_gold
+  end
+
+  def gold
+    @gold
+  end
+
+  def take_gold_from(other)
+    @gold += other.gold
+  end
+
+  private :gold
+end
+
+>> m1 = Midas.new(10)
+>> m2 = Midas.new(20)
+>> m1.take_gold_from(m2)
+NoMethodError: private method `gold' called
+```
+The code showed a message error because m1 was trying to touch m2's privates. Siblings can't touch each others privates!!!
+
+
+Protected methods in Ruby are denoted by the keyword private. Protected methods are available when self is an instance of that class or one of its descendants.
+
+```ruby
+@@@ruby
+  class Midas
+    protected :gold
+  end
+
+  m1.take_gold_from(m2)
+  => 30
+```
+But siblings can touch each others protected items!!
+
+image and example code hosted at (https://thenewcircle.com/static/bookshelf/ruby_tutorial/scope.html)
+
 ---
 
 #### Ruby: `duck typing`
