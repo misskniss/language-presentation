@@ -452,7 +452,21 @@ class MyClass
     end
   end
 ```
-It is a common practice to use them to create accessor methods for instance or class variables.
+It is a common practice to use them to create accessor methods for instance or class variables. Notice the getter and setters have the same name. This may cause issues 
+when attempting to use the setter to set a value. You can't use the setter of a variable inside the instance because it looks just like a local variable assignment 
+to the interpreter.
+```ruby
+def somedef
+	foo = 4
+end
+```
+instead use
+```ruby
+def somedef
+	self.foo = 4
+end
+```
+
 
 
 Private methods in Ruby are denoted by the keyword "private". Private methods are only available to that instance. Ex, inside an instance method of a class.
