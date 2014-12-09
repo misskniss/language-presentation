@@ -841,36 +841,45 @@ sodham
 Classes in Scala are very similar to Java. Classes are defined using the the "class" type then the class name. An object can be created from a class using the "new" keyword, just like java.
 
 Example:
-```class ScalaExample() {
+```
+class ScalaExample() {
   var x: Int = 7
   var y: Int = 9
   def addXY(){
   var z: Int = x + y
   println ("X + Y = " + z);
   }
-}```
+}
+
+```
 
 In this basic class the type class is given before the name of the class. We then initiate two variables, X and Y, to the numbers 7 and 9 respectively. The syntax to instantiating a variable is a little different than what we are used to seeing in java. var x: Int = 7 is literally translated to variable x of type Integer is set to 7. This is a bit verbose, however, because this could be shortened to just var x = 7. This is completely valid but if we did not know the value that will be assigned to x, we would have to explicitly choose the type for x via the following: var x: Int , now x can hold any Int value. Method calls have a little bit of a different syntax as well, they are preceded by the def type. def addXY() is the equivalent of void addXY() in java. Within the addXY() method we just instantiate a new variable, z, then set it to the sum of x and y, after which we print the sum.
 
 One other interesting feature about Scala's classes is that the class name works as a class constructor and arguments can be specified that must be provided when this class is newed up as an object.
 
 ConstructorExample:
-```class ConstructorExample(val x1: Int, val x2: Int) {
+```
+class ConstructorExample(val x1: Int, val x2: Int) {
   var x: Int = x1
   var y: Int = x2
   def addXY(){
   var z: Int = x + y
   println ("X + Y = " + z);
   }
-}```
+}
+
+```
 
 This example is very similar to the above example, the only real difference is that now the values of x and y are not hard-coded. Two integer values can be passed to this class on creation, to create this object we would use the following methodology:
 
-```class Test {
+```
+class Test {
   def main(args: Array[String]){
   val sum = new ConstructorExample(15, 20);
   }
-}```
+}
+
+```
 
 This is just a simple driver class to test the functionality of the ConstructorExample class by newing up the object and putting it into a "val", then passing the necessary arguments. We could have also typed sum as var and the code would work just as well. The difference between var and val is that a var typed variable can be changed, while a val type variable is constant.
 
@@ -879,53 +888,68 @@ This is just a simple driver class to test the functionality of the ConstructorE
 Traits have a lot of the same functionality of a Interface in Java, both of them can pretty much mimic eachother to a point (will go into that later). To easily explain how traits work, I will compare them with Java's Interface code. The first code snippet will be Java followed by a second code snippet that is the Scala implementation of the same functionality.
 
 Java Interface:
-```interface Car {
+```
+interface Car {
   String model;
   String make;
   int year;
   void makeCarGo();
-}```
+}
+
+```
 
 This is just a simple inteface for a car in Java, now I will mimic this using Scala's trait type.
 
 Scala Trait:
-```trait Vehicle {
+```
+trait Vehicle {
   var model: String
   var make: String
   var year: Int
   def makeVehicleGo()
-}```
+}
+
+```
 
 We can also implement the makeVehicleGo() method
 
 Scala Trait Explicit:
-```trait Vehicle {
+```
+trait Vehicle {
   var model: String
   var make: String
   var year: Int
   def makeVehicleGo() {
     println("Vehicle is moving!");
   }
-}```
+}
+
+```
 
 This will do the same thing as the java code above it. Any class that has this trait must have a make, model, year, and makeVehicleGo() method. The way we implement traits, however, can be a little different.
 
 Trait Implementation:
-```class Car extends Vehicle {
+```
+class Car extends Vehicle {
   var model: String = Ford
   var make: String = Mustang
   var year: Int = 2012
   def makeVehicleGo(){
     println("Vehicle is moving!")
   }
-}```
+}
+
+```
 
 This is basically the same way that Java does it, so we can use a trait as an interface for Objects, but we can also create a one-off object that has a trait without affecting all other objects created from the same class.
 
 Trait Singleton:
-```class Test {
+```
+class Test {
   val newCar = new Car with Vehicle
-}```
+}
+
+```
 
 This now creates a singleton object that has the trait "Vehicle". There will not be another class that uses Vehicle unless we do the same new "Object" with "Trait" call to make another object. This can be pretty valuable if you only want certain instances of the same Object to contain a trait. Like say if we had a Person class and we wanted a person's race to be a trait related to the Person object. We could just choose which Trait to link with each object when we create them.
 
