@@ -381,6 +381,7 @@ herp derp
 
 #### Ruby: `modules`
 yyang
+
 Introduction 
 Ruby was invented in 1993 by Yukihiro Matsumoto. It is open source with subject to a license. Ruby is object-oriented 
 and interpreted language which has a clean and easy syntax. The programming is popular because it is scalable and easy to maintain. 
@@ -494,7 +495,68 @@ They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
 Problem
 Modules are part of what makes Ruby’s design beautiful. However, since they do not have a direct analogy in any mainstream programming language, it is easy to get a bit confused about what they should be used for.
 
-Conclusion
+EXAMPLE FOR PRESENTATION
+
+This is a module 
+``` 
+module Week
+   FIRST_DAY = "Sunday"
+   def Week.weeks_in_month
+      puts "You have four weeks in a month"
+   end
+   def Week.weeks_in_year
+      puts "You have 52 weeks in a year"
+   end
+end
+```
+
+To use the module, use "require "WeekModule"" , and also include the module name as "include Week"
+
+```
+ #!/usr/bin/ruby
+$LOAD_PATH << '.'
+require "WeekModule"
+
+class Decade
+include Week
+   no_of_yrs=10
+   def weeks_in_year
+      puts Week::FIRST_DAY
+      number=54
+      puts number
+   end
+end
+
+
+d1=Decade.new
+puts "use module constant"
+puts Week::FIRST_DAY
+puts "use module method 1"
+Week.weeks_in_month
+puts "use module method 2"
+Week.weeks_in_year
+puts "use class method"
+d1.weeks_in_year
+```
+
+Here is the output running on Onyx.
+```
+[yyang@node06 ruby example]$ ruby Decade.rb
+use module constant
+Sunday
+use module method 1
+You have four weeks in a month
+use module method 2
+You have 52 weeks in a year
+use class method
+Sunday
+54
+```
+
+
+
+
+
 
 ---
 
