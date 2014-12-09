@@ -191,6 +191,38 @@ p.fly
 Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">http://rubylearning.com/satishtalim/ruby_inheritance.html</a>
 
 
+```ruby
+class GF  
+ def initialize  
+  puts 'In GF class'  
+ end  
+ def gfmethod  
+  puts 'GF method call'  
+ end  
+end  
+  
+# class F sub-class of GF  
+class F < GF  
+ def initialize  
+  puts 'In F class'  
+ end  
+end  
+  
+# class S sub-class of F  
+class S < F  
+ def initialize  
+  puts 'In S class'  
+ end  
+end  
+son = S.new  
+son.gfmethod  
+```
+Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">http://rubylearning.com</a>
+
+A class can only inherit from one class at a time (i.e. a class can inherit from a class that inherits from
+ another class which inherits from another class, but a single class can not inherit from many classes at once). 
+ If you needed a Class to inherit attributes and methods from multiple classes you can either use format shown above,
+ or you can use mixins, as you have seen, or will see soon...
 ---
 
 #### Ruby: `numbers` `arithmetic`
