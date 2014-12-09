@@ -1251,19 +1251,102 @@ SQL has many uses this day and age and I don’t think it’s going to be going 
 jkniss
 
 
+#####General Info
+Micro Python is a re-implementation of Python3 and a subset of the standard
+Python3 libraries.
+
+Micro Python was re-implemented to run on embedded systems - which required
+greatly reducing the amount of RAM the language used.
+
+RAM is a primary constriant for embedded systems / microcontrollers.
+
+For example: ```i = 5``` in Python3 will alocate a full 4KB of RAM because the
+compiler anticipates (and tries to optimize for) future small integer use by
+allocating a an array of 262  small integers first then returning the value you
+asked for. But for a microcontroller with only 192KB of RAM, a 4KB
+allocation for a single integer is very expesive.
+
+Micro Python was created by Damien George and he used Kickstarter to fund the
+the language implmentation and the accompanying development board..
+
+#####Code
+
+- object oriented "scripting" language that is written in C and compiled with gcc
+- dynamically & strongly typed
+- space delimited methods (rather than curly braces and semi-colons)
+- includes a lexer, parser, compiler, interpreter
+- can be written as a full module and downloaded to the board ("drag-and-drop")
+- files can be directly opened and written to on the board
+- code can be written "live" using the REPL (read-execute-print-loop) command-line
+
+- garbage collection is "mark and sweep" and takes just 4ms for a full collection
+- open source and released under the MIT license
+
+-- [My Prog-Lang write up](https://github.com/misskniss/language-research/tree/master/jkniss)
+-- [Micro Python official Site](http://micropython.org/)
+
+
+#####The PyBoard
+
+- Based on the STM32F405 ARM microcontroller clocked at 168MHz with 1MB flash
+and 192KB of RAM.
+<sub>Arduino Uno(Atmel): 16Mhz & 2KB RAM</sub>
+<sub>Raspberry Pi(ARM): 700Mhz+ & up to 512MB RAM</sub>
+- Compiles and runs Micro Python
+- Built in USB interface for programming
+- 4 LEDS, 1 Aceleromter, PWM, ADC, DAC, I2C, SPI, 5 UARTS, 4 servo ports, etc...
+- 3.3v - 5.0v and 3.3v output
+
+[info source](https://www.kickstarter.com/projects/214379695/micro-python-python-for-microcontrollers/description)
+
+
 ##### Basic Motor Control
 
  (See Bluetooth Control below)
 
 
 ##### Basic Accelerometer Control
- 
- (next up...)
+
++[Accelerometer Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoRzZnYTRQSjhEOHY1cmg4UElmdWxadlB6X3NB/view?usp=sharing)
+
+```Python
+# main.py -- on pyboard
+
+import pyb
+
+def led_angle(seconds):
+
+    one = pyb.LED(1)
+    two = pyb.LED(2)
+    three = pyb.LED(3)
+    four = pyb.LED(4)
+    acl = pyb.Accel()
+
+    for i in range(20 * seconds):
+       x = acl.x()
+
+       if x >= 10:
+         one.on()
+       elif x >= 5:
+         two.on()
+       elif x <= -5:
+         four.on()
+       else:
+         one.off()
+         two.off()
+         three.off()
+         four.off()
+       pyb.delay(50)
+
+
+led_angle(60)
+
+```
 
 
 ##### Light Sensor
 
-```
+```Python
 from pyb import ADC
 light = ADC(Pin('X7'))
 light.read()
@@ -1273,7 +1356,7 @@ light.read()
 
 ##### IR Sensor
 
-```
+```Python
 from pyb import ADC
 eyes = ADC(Pin('Y11'))
 eyes.read()
@@ -1282,10 +1365,12 @@ eyes.read()
 
 
 ##### Bluetooth Control
-[Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
 
-```
+[Bluetooth Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
+
+```Python
 # main.py -- on pyboard
+
 import pyb
 from pyb import Pin
 from pyb import UART
@@ -1317,8 +1402,30 @@ def go():
     pyb.delay(200)
 ```
 
+##### PROS & CONS
 
-Basic 
+*PROS*
+- Get things working fast. Little time is wasted with the compile-flash
+cycle we normally experience with embedded systems programming.
+- Compact and powerful.
+- More natural language with much less typing time then C (or worse...Java)
+- Much more fun to program
+- convinient to test your code with the python command-line before loading it
+to board as a full module.
+- It is much more powerful than the ATMEGA series by ATMel
+- Cheaper than the Raspberry Pi
+- There is a huge community for Python support.
+
+*CONS*
+- Not all the standard python libraries are implemented yet (but you can contribute!)
+- The language is only about a year old and getting better but the support for
+both the board and language (where it differs from Python3) is still maturing -
+ <sub>This month is the 1-year anneversary of the Kickstarter for Micro Python</sub>
+- Not as powerful as the Raspberry Pi (but then, the RaspPi is a full computer
+not a development board.)
+
+
+
 
 ---
 
