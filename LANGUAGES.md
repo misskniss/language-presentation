@@ -637,9 +637,7 @@ cnelson
 #### Go: `goroutines`
 mclausen
 
-<<<<<<< HEAD
 ---
-<<<<<<< HEAD
 
 #### Scala: `pattern matching` 
 btombari
@@ -883,6 +881,8 @@ class Test {
 
 This is just a simple driver class to test the functionality of the ConstructorExample class by newing up the object and putting it into a "val", then passing the necessary arguments. We could have also typed sum as var and the code would work just as well. The difference between var and val is that a var typed variable can be changed, while a val type variable is constant.
 
+#### Sources
+<a href = http://www.tutorialspoint.com/scala/scala_classes_objects.htm>Tutorial's Point</a>
 
 ##### Traits
 Traits have a lot of the same functionality of a Interface in Java, both of them can pretty much mimic eachother to a point (will go into that later). To easily explain how traits work, I will compare them with Java's Interface code. The first code snippet will be Java followed by a second code snippet that is the Scala implementation of the same functionality.
@@ -953,6 +953,9 @@ class Test {
 
 This now creates a singleton object that has the trait "Vehicle". There will not be another class that uses Vehicle unless we do the same new "Object" with "Trait" call to make another object. This can be pretty valuable if you only want certain instances of the same Object to contain a trait. Like say if we had a Person class and we wanted a person's race to be a trait related to the Person object. We could just choose which Trait to link with each object when we create them.
 
+#### Sources
+<a href = http://www.scala-lang.org/old/node/126>Scala-Lang></a>
+<a href = http://en.wikibooks.org/wiki/Scala/Traits>Wiki</a>
 
 ---
 
