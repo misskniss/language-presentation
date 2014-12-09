@@ -1262,7 +1262,7 @@ RAM is a primary constriant for embedded systems / microcontrollers.
 
 For example: ```i = 5``` in Python3 will alocate a full 4KB of RAM because the
 compiler anticipates (and tries to optimize for) future small integer use by
-allocating a an array of 262  small integers first then returning the value you
+allocating an array of 262  small integers first then returning the value you
 asked for. But for a microcontroller with only 192KB of RAM, a 4KB
 allocation for a single integer is very expesive.
 
@@ -1283,6 +1283,7 @@ the language implmentation and the accompanying development board..
 - open source and released under the MIT license
 
 -- [My Prog-Lang write up](https://github.com/misskniss/language-research/tree/master/jkniss)
+
 -- [Micro Python official Site](http://micropython.org/)
 
 
@@ -1290,8 +1291,11 @@ the language implmentation and the accompanying development board..
 
 - Based on the STM32F405 ARM microcontroller clocked at 168MHz with 1MB flash
 and 192KB of RAM.
+
 <sub>Arduino Uno(Atmel): 16Mhz & 2KB RAM</sub>
+
 <sub>Raspberry Pi(ARM): 700Mhz+ & up to 512MB RAM</sub>
+
 - Compiles and runs Micro Python
 - Built in USB interface for programming
 - 4 LEDS, 1 Aceleromter, PWM, ADC, DAC, I2C, SPI, 5 UARTS, 4 servo ports, etc...
