@@ -17,7 +17,7 @@ However, there are times when you want to group things together that don't natur
 
 The answer is the module mechanism. Modules define a namespace, a sandbox in which your methods and constants can play without having to worry about being stepped on by other methods and constants. The trig functions can go into one module:
 
-```
+```ruby
 module Trig
   PI = 3.141592654
   def Trig.sin(x)
@@ -37,7 +37,7 @@ Modules have another, wonderful use. At a stroke, they pretty much eliminate the
 
 A module can't have instances, because a module isn't a class. However, you can include a module within a class definition. When this happens, all the module's instance methods are suddenly available as methods in the class as well. They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
 
-```
+```ruby
 module Debug
   def whoAmI?
     "#{self.type.name} (\##{self.id}): #{self.to_s}"
@@ -59,7 +59,7 @@ et.whoAmI?	»	"EightTrack (#537765860): Surrealistic Pillow"
 
 Mixins give you a wonderfully controlled way of adding functionality to classes. However, their true power comes out when the code in the mixin starts to interact with code in the class that uses it. Let's take the standard Ruby mixin Comparable as an example. The Comparable mixin can be used to add the comparison operators (<, <=, ==, >=, and >), as well as the method between?, to a class. For this to work, Comparable assumes that any class that uses it defines the operator <=>. So, as a class writer, you define the one method, <=>, include Comparable, and get six comparison functions for free. Let's try this with our Song class, by making the songs comparable based on their duration. All we have to do is include the Comparable module and implement the comparison operator <=>.
 
-```
+```ruby
 class Song
   include Comparable
   def <=>(other)
@@ -68,7 +68,7 @@ class Song
 end
 ```
 
-```
+```ruby
 song1 = Song.new("My Way",  "Sinatra", 225)
 song2 = Song.new("Bicylops", "Fleck",  260)
 song1 <=> song2	»	-1
