@@ -414,12 +414,12 @@ jdelagar
 #Ruby Scope Intro
 
 Ruby has static scoping despite being an interpreted language. Even though ruby is considered an interpreted language it does have a simple compiler that translates 
-the code to intermediate code and allows for it to be statically Scoped. Like in Java ruby has different types of variable scopes which are global variables, instance 
-variables, class variables, local variables, and constants. Ruby also has Method scopes which are public, privatem and protected.
+the code to intermediate code and allows for it to be statically Scoped. Like in Java, ruby has different types of variable scopes which are global variables, instance 
+variables, class variables, local variables, and constants. Ruby also has Method scopes which are public, private and protected.
 
 #Ruby Scope Of Variables
 
-|syntax	|variable type		|short description                                                                                         |
+|Syntax	|Variable type		|Short description                                                                                         |
 |:-----:|:-----------------:|----------------------------------------------------------------------------------------------------------|
 |$		|Global Variable	|Global variables are variables accessible anywhere in the program                                         |
 |@      |Instance Variable  |Instance variables are contained inside an instance object of a certain class                             |
@@ -452,7 +452,7 @@ class MyClass
     end
   end
 ```
-It is a common practice to use them to create accessors methods for instance or class variables.
+It is a common practice to use them to create accessor methods for instance or class variables.
 
 
 Private methods in Ruby are denoted by the keyword "private". Private methods are only available to that instance. Ex, inside an instance method of a class.
