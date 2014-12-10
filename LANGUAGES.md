@@ -495,6 +495,7 @@ However, you can include a module within a class definition. When this happens, 
 They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
 
 Problem
+
 Modules are part of what makes Ruby’s design beautiful. However, since they do not have a direct analogy in any mainstream programming language, it is easy to get a bit confused about what they should be used for.
 
 EXAMPLE FOR PRESENTATION
