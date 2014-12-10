@@ -1928,7 +1928,7 @@ If a property is provided a getter but no setter, it is essentially a read-only 
 #### Auto-impelmented properties
 An auto-implemented property is just a property that has the most basic getter and setter.
 ```
-public boolean CanadianEh{ get; set;}
+public bool CanadianEh{ get; set;}
 ```
 What is the advantage to this over accessing the public variable directly? 
 - If a property is eventually expanded to include more activities in its getter or setter, it's an easier change to make.
