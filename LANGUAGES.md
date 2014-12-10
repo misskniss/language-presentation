@@ -430,7 +430,8 @@ two colons, and the constant name. e.g. Area::PI.
 
 When & How Modules are Used?
 
-1. Namespaces
+Namespaces
+
 When we work on big Ruby program, we usually write more than one class with logically related functions grouped in a file rather than put everything 
 in one class.  And then we import/include the relevant classes into a file if we need to use the classes in the file. However, there is a risk when the 
 classes contain functions with the same name. Say Molly writes a file called area.rb, and defines functions to calculate the area of square, round, 
@@ -482,7 +483,8 @@ fact = Shape.round(Shape::YES)
 ```
 Using modules, the program will know which function to use which will avoid names conflicting problem.
 
-2. Mixin
+Mixin
+
 (Another student did this part, so I won't talk thorougly on mixin.)
 Like Java, Ruby does not support multiple inheritances directly. However, Ruby Modules can solve the problem by adding functionality to classes. 
 In the namespace section, we defined module methods whose names are prefixed by the module name. There is another way to define methods in modules 
