@@ -239,8 +239,8 @@ arthurfc
 Before to introduce Numeric class, let's check out the figure for Ruby data type. All of the class are from Object Class. There are the Numeric class and sub-class.
 
 # Integer (Fixnum and Bignum)
-Two dat type for integer : Fixnum and Bignum。
-The following arithmetic show the , e.g.,
+Two data type for integer : Fixnum and Bignum。
+The following arithmetic show the integers.
 
 ```
 puts 10     #output integer 10
