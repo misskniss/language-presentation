@@ -1925,7 +1925,7 @@ Console.Out.Write(t.Hours);
 ```
 If a property is provided a getter but no setter, it is essentially a read-only public variable.
 
-#### Auto-impelmented properties
+#### Auto-implemented properties
 An auto-implemented property is just a property that has the most basic getter and setter.
 ```
 public bool CanadianEh{ get; set;}
