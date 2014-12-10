@@ -105,8 +105,8 @@ samp.b1
 samp.b2
 samp.s1
 ```
-Module A consists of the methods a1 and a2. Module B consists of the methods b1 and b2. The class Sample includes both modules A and B. The class Sample can access all four methods, namely, a1, a2, b1, and b2. Therefore, you can see that the class Sample inherits from both the modules. Thus, you can say the class Sample shows multiple inheritance or a mixin.
 
+Module A consists of the methods a1 and a2. Module B consists of the methods b1 and b2. The class Sample includes both modules A and B. The class Sample can access all four methods, namely, a1, a2, b1, and b2. Therefore, you can see that the class Sample inherits from both the modules. Thus, you can say the class Sample shows multiple inheritance or a mixin.
 --
 
 #### Ruby: `classes` `inheritance`
@@ -139,6 +139,7 @@ The initialize method is a special type of method, which will be executed when t
 Using the class variable @@numMammals, you can determine the population of mammals that are created.
 
 I learned about classes in Ruby at <a href="http://www.tutorialspoint.com/ruby/ruby_classes.htm"target="_blank">tutorialspoint.com/ruby</a>
+<a href="http://repl.it/"target="_blank">TRY ME!</a>
 
 #Inheritance in Ruby
 In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but Ruby doesn't.
@@ -162,6 +163,7 @@ rani.breathe
 rani.speak
 ```
 Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">rubylearning.com</a>
+<a href="http://repl.it/"target="_blank">TRY ME!</a>
 
 
 Note the line where the class definition for cat is 'class Cat < Mammal'  the < operator is used to show the inheritance. The cat inherited the ability to breathe, which can be fairly useful.
@@ -189,6 +191,7 @@ p.preen
 p.fly
 ```
 Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">http://rubylearning.com/satishtalim/ruby_inheritance.html</a>
+<a href="http://repl.it/"target="_blank">TRY ME!</a>
 
 
 ```ruby
@@ -218,6 +221,7 @@ son = S.new
 son.gfmethod  
 ```
 Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">http://rubylearning.com</a>
+<a href="http://repl.it/"target="_blank">TRY ME!</a>
 
 A class can only inherit from one class at a time (i.e. a class can inherit from a class that inherits from
  another class which inherits from another class, but a single class can not inherit from many classes at once). 
