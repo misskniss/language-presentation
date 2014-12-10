@@ -500,6 +500,7 @@ Modules are part of what makes Ruby’s design beautiful. However, since they do
 
 EXAMPLE:
 
+Here is a module
 ```
  
 module Week
@@ -513,6 +514,7 @@ module Week
 end
 ```
 
+Here is a class that calls module
 ```
  #!/usr/bin/ruby
 $LOAD_PATH << '.'
