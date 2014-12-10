@@ -1,4 +1,4 @@
-﻿
+
 
 #### Ruby: `mixins`
 acole
@@ -17,7 +17,7 @@ However, there are times when you want to group things together that don't natur
 
 The answer is the module mechanism. Modules define a namespace, a sandbox in which your methods and constants can play without having to worry about being stepped on by other methods and constants. The trig functions can go into one module:
 
-```ruby
+```
 module Trig
   PI = 3.141592654
   def Trig.sin(x)
@@ -37,7 +37,7 @@ Modules have another, wonderful use. At a stroke, they pretty much eliminate the
 
 A module can't have instances, because a module isn't a class. However, you can include a module within a class definition. When this happens, all the module's instance methods are suddenly available as methods in the class as well. They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
 
-```ruby
+```
 module Debug
   def whoAmI?
     "#{self.type.name} (\##{self.id}): #{self.to_s}"
@@ -59,7 +59,7 @@ et.whoAmI?	»	"EightTrack (#537765860): Surrealistic Pillow"
 
 Mixins give you a wonderfully controlled way of adding functionality to classes. However, their true power comes out when the code in the mixin starts to interact with code in the class that uses it. Let's take the standard Ruby mixin Comparable as an example. The Comparable mixin can be used to add the comparison operators (<, <=, ==, >=, and >), as well as the method between?, to a class. For this to work, Comparable assumes that any class that uses it defines the operator <=>. So, as a class writer, you define the one method, <=>, include Comparable, and get six comparison functions for free. Let's try this with our Song class, by making the songs comparable based on their duration. All we have to do is include the Comparable module and implement the comparison operator <=>.
 
-```ruby
+```
 class Song
   include Comparable
   def <=>(other)
@@ -68,7 +68,7 @@ class Song
 end
 ```
 
-```ruby
+```
 song1 = Song.new("My Way",  "Sinatra", 225)
 song2 = Song.new("Bicylops", "Fleck",  260)
 song1 <=> song2	»	-1
@@ -76,37 +76,6 @@ song1  <  song2	»	true
 song1 ==  song1	»	true
 song1  >  song2
 ```
-
-```ruby
-module A
-   def a1
-   end
-   def a2
-   end
-end
-module B
-   def b1
-   end
-   def b2
-   end
-end
-
-class Sample
-include A
-include B
-   def s1
-   end
-end
-
-samp=Sample.new
-samp.a1
-samp.a2
-samp.b1
-samp.b2
-samp.s1
-```
-Module A consists of the methods a1 and a2. Module B consists of the methods b1 and b2. The class Sample includes both modules A and B. The class Sample can access all four methods, namely, a1, a2, b1, and b2. Therefore, you can see that the class Sample inherits from both the modules. Thus, you can say the class Sample shows multiple inheritance or a mixin.
-
 --
 
 #### Ruby: `classes` `inheritance`
@@ -139,7 +108,6 @@ The initialize method is a special type of method, which will be executed when t
 Using the class variable @@numMammals, you can determine the population of mammals that are created.
 
 I learned about classes in Ruby at <a href="http://www.tutorialspoint.com/ruby/ruby_classes.htm"target="_blank">tutorialspoint.com/ruby</a>
-<a href="http://repl.it/"target="_blank">TRY ME!</a>
 
 #Inheritance in Ruby
 In Ruby, a class can only inherit from a single other class. Other languages allow for inheritance from multiple classes, but Ruby doesn't.
@@ -163,7 +131,6 @@ rani.breathe
 rani.speak
 ```
 Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">rubylearning.com</a>
-<a href="http://repl.it/6Dw"target="_blank">TRY ME!</a>
 
 
 Note the line where the class definition for cat is 'class Cat < Mammal'  the < operator is used to show the inheritance. The cat inherited the ability to breathe, which can be fairly useful.
@@ -191,183 +158,13 @@ p.preen
 p.fly
 ```
 Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">http://rubylearning.com/satishtalim/ruby_inheritance.html</a>
-<a href="http://repl.it/6Ds"target="_blank">TRY ME!</a>
 
 
-```ruby
-class GF  
- def initialize  
-  puts 'In GF class'  
- end  
- def gfmethod  
-  puts 'GF method call'  
- end  
-end  
-  
-# class F sub-class of GF  
-class F < GF  
- def initialize  
-  puts 'In F class'  
- end  
-end  
-  
-# class S sub-class of F  
-class S < F  
- def initialize  
-  puts 'In S class'  
- end  
-end  
-son = S.new  
-son.gfmethod  
-```
-Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">http://rubylearning.com</a>
-<a href="http://repl.it/6Du"target="_blank">TRY ME!</a>
-
-A class can only inherit from one class at a time (i.e. a class can inherit from a class that inherits from
- another class which inherits from another class, but a single class can not inherit from many classes at once). 
- If you needed a Class to inherit attributes and methods from multiple classes you can either use format shown above,
- or you can use mixins, as you have seen, or will see soon...
 ---
 
 #### Ruby: `numbers` `arithmetic`
 arthurfc
 
-![alt text]( https://gradyli.files.wordpress.com/2007/11/rubydataclasses.jpg
- "Ruby self definition")
-
- 
-Before to introduce Numeric class, let's check out the figure for Ruby data type. All of the class are from Object Class. There are the Numeric class and sub-class.
-
-# Integer (Fixnum and Bignum)
-Two data type for integer : Fixnum and Bignum。
-The following arithmetic show the integers.
-
-```
-puts 10     #output integer 10
-
-puts 10.class     #what class for output integer 10; Fixnum
- 
-puts 10 + 5     #arithmetic result 15
-
-puts 10 - 1     #9
-
-puts 5 * 5     #25
-
-puts 100 / 5     #20
-
-puts 10 ** 2     #** is power; 100
-
-puts 10 % 3     #mod; 1
- 
-puts 10.to_f     #for Float data type; 10.0
-
-puts 10.to_s     #for String data type; 10
- 
-puts 123456789987654321.class     #Bignum
- 
-puts 1 == 2     #false
-
-puts 2 == 2.0     #true
- 
-puts -1234.abs     #abs value; 1234
-```
- 
-check the number to be zero; only for Fixnum
-
-could check the divisor to be not zero
-
-```
-puts 2.zero?     #false
-```
-
-
-# Float
-
-```
-puts 10 / 3     #3，the two numbers are Fixnum
-``` 
-
-make either dividend or divisor to be Float，Ruby can process the result
-
-```
-puts 10.0 / 3     #3.3333333333333
-
-puts 10 / 3.0     #3.3333333333333
-```
- 
-pass the minimum integer which is greater than the value
-
-```
-puts (0.1).ceil     #1
-
-puts (-0.1).ceil     #0
-```
- 
-pass the maximum integer which is less than the value
-
-```
-puts (2.1).floor     #2
-
-puts (-2.1).floor    #-3
-```
- 
-round the number
-
-```
-puts (3.3).round     #3
-
-puts (4.5).round     #5
-
-puts (-5.1).round     #-5
-
-puts (-6.6).round     #-7
-```
-
-
-The Ruby Way mention the output cannot be 10.0  for the result of 10.0 / 3 (3.3333333333333)  to multiply the original divisor (3). But according to the code below, it can be 10.0.
-
-```
-x = 10.0 / 3
-
-puts x       #3.3333333333333
- 
-y = x * 3
-
-puts y       #10.0
-```
-
-
-Besides, we can use BigDecimal class to have accurate floating point numbers.
-
-```
-require 'bigdecimal'
- 
-x = BigDecimal.new("0.3333333333")
- 
-puts x * 3     #0.9999999999E0
-```
-
-# Complex
-
-A complex number can be represented as a paired real number with imaginary unit; a+bi. Where a is real part, b is imaginary part and i is imaginary unit.
-
-```
-Complex(1)           #=> (1+0i)
-Complex(2, 3)        #=> (2+3i)
-```
-
-# BigDecimal
-BigDecimal provides similar support for very large or very accurate floating point numbers. Ruby provides built-in support for arbitrary precision integer arithmetic. For example:
-
-42**13 -> 1265437718438866624512
-
-Decimal arithmetic is also useful for general calculation, because it provides the correct answers people expect–whereas normal binary floating point arithmetic often introduces subtle errors because of the conversion between base 10 and base 2. For example,
-
-```
-(BigDecimal.new(“1.2”) - BigDecimal(“1.0”)) == BigDecimal(“0.2”) -> true
-
-(1.2 - 1.0) == 0.2 -> false
-```
 ---
 
 #### Ruby: `blocks` &amp; `collections`
@@ -377,7 +174,7 @@ part 0.
 ---
 
 #### Ruby: `data types` &amp; `symbols`
-
+zlambert
 
 herp derp
 
@@ -498,182 +295,12 @@ They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
 Problem
 Modules are part of what makes Ruby’s design beautiful. However, since they do not have a direct analogy in any mainstream programming language, it is easy to get a bit confused about what they should be used for.
 
-EXAMPLE:
-
-Here is a module
-```
- 
-module Week
-   FIRST_DAY = "Sunday"
-   def Week.weeks_in_month
-      puts "You have four weeks in a month"
-   end
-   def Week.weeks_in_year
-      puts "You have 52 weeks in a year"
-   end
-end
-```
-
-Here is a class that calls module
-```
- #!/usr/bin/ruby
-$LOAD_PATH << '.'
-require "WeekModule"
-
-class Decade
-include Week
-   no_of_yrs=10
-   def weeks_in_year
-      puts Week::FIRST_DAY
-      number=54
-      puts number
-   end
-end
-
-
-d1=Decade.new
-puts "use module constant"
-puts Week::FIRST_DAY
-puts "use module method 1"
-Week.weeks_in_month
-puts "use module method 2"
-Week.weeks_in_year
-puts "use class method"
-d1.weeks_in_year
-```
-
-OUTPUT:
-```
-[yyang@node02 ruby example]$ ruby Decade.rb
-use module constant
-Sunday
-use module method 1
-You have four weeks in a month
-use module method 2
-You have 52 weeks in a year
-use class method
-Sunday
-54
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
+Conclusion
 
 ---
 
 #### Ruby: `scope`
 jdelagar
-
-#Ruby Scope Intro
-
-Ruby has static scoping despite being an interpreted language. Even though ruby is considered an interpreted language it does have a simple compiler that translates 
-the code to intermediate code and allows for it to be statically Scoped. Like in Java, ruby has different types of variable scopes which are global variables, instance 
-variables, class variables, local variables, and constants. Ruby also has Method scopes which are public, private and protected.
-
-#Ruby Scope Of Variables
-
-|Syntax	|Variable type		|Short description                                                                                         |
-|:-----:|:-----------------:|----------------------------------------------------------------------------------------------------------|
-|$		|Global Variable	|Global variables are variables accessible anywhere in the program                                         |
-|@      |Instance Variable  |Instance variables are contained inside an instance object of a certain class                             |
-|@@     |Class Variable     |Class variables are shared with all instanced objects of the same class                                   |
-|[a-z] _|Local Variables    |Local variables are local to the code construct in wich they are declared                                 |
-|[A-Z}  |Constants          |Available in the class or construct they are defined. Ruby will allow to change constant but gives warning|
-
-
-#Who am I? Finding self in Ruby scope
-
-![alt text](https://thenewcircle.com/static/bookshelf/ruby_tutorial/self2.png "Ruby self definition")
-
-
-#Ruby Method Scope
-
-Public Methods in Ruby are the default setting of scoping in methods.
-
-```ruby
-class MyClass
-    def initialize
-      @foo = 28
-    end
- 
-    def foo
-      return @foo
-    end
- 
-    def foo=(value)
-      @foo = value
-    end
-  end
-```
-It is a common practice to use them to create accessor methods for instance or class variables. Notice the getter and setters have the same name. This may cause issues 
-when attempting to use the setter to set a value. You can't use the setter of a variable inside the instance because it looks just like a local variable assignment 
-to the interpreter.
-```ruby
-def somedef
-	foo = 4
-end
-```
-instead use
-```ruby
-def somedef
-	self.foo = 4
-end
-```
-
-
-
-Private methods in Ruby are denoted by the keyword "private". Private methods are only available to that instance. Ex, inside an instance method of a class.
-
-```ruby
-@@@ ruby
-class Midas
-  def initialize(initial_gold)
-    @gold = initial_gold
-  end
-
-  def gold
-    @gold
-  end
-
-  def take_gold_from(other)
-    @gold += other.gold
-  end
-
-  private :gold
-end
-
->> m1 = Midas.new(10)
->> m2 = Midas.new(20)
->> m1.take_gold_from(m2)
-NoMethodError: private method `gold' called
-```
-The code showed a message error because m1 was trying to touch m2's privates. Siblings can't touch each others privates!!!
-
-
-Protected methods in Ruby are denoted by the keyword private. Protected methods are available when self is an instance of that class or one of its descendants.
-
-```ruby
-@@@ruby
-  class Midas
-    protected :gold
-  end
-
-  m1.take_gold_from(m2)
-  => 30
-```
-But siblings can touch each others protected items!!
-
-image and example code hosted at (https://thenewcircle.com/static/bookshelf/ruby_tutorial/scope.html)
 
 ---
 
@@ -690,6 +317,71 @@ Ruby is a dynamic, reflective, object-oriented, general-purpose programming lang
 Meat:
 
 Ruby’s dynamic nature facilitates a style of type system known as duck typing. In particular, duck typing breaks the strong association between an object’s class and its type by defining types based on what an object can do rather than what class it was born from.
+
+My favorite example:
+
+```
+class Duck  
+  def quack  
+    'Quack!'  
+  end  
+  
+  def swim  
+    'Paddle paddle paddle...'  
+  end  
+end  
+  
+class Goose  
+  def honk  
+    'Honk!'  
+  end  
+  def swim  
+    'Splash splash splash...'  
+  end  
+end  
+  
+class DuckRecording  
+  def quack  
+    play  
+end  
+  
+  def play  
+    'Quack!'  
+  end  
+end  
+  
+def make_it_quack(duck)  
+  duck.quack  
+end  
+puts make_it_quack(Duck.new)  
+puts make_it_quack(DuckRecording.new)  
+  
+def make_it_swim(duck)  
+  duck.swim  
+end  
+puts make_it_swim(Duck.new)  
+puts make_it_swim(Goose.new)  
+```
+
+If you refer to the code shown below:
+
+```
+def make_it_quack(duck)  
+  duck.quack  
+end  
+puts make_it_quack(Duck.new)  
+puts make_it_quack(DuckRecording.new)  
+```
+
+A method that told a Duck to quack works when given a DuckRecoding, due to Duck Typing. Similarly in the following code:
+```
+def make_it_swim(duck)  
+  duck.swim  
+end  
+puts make_it_swim(Duck.new)  
+puts make_it_swim(Goose.new)  
+```
+A method that tells a Duck to swim when given a Goose, works.
 
 Duck typing to avoid scope creep
 
@@ -800,7 +492,9 @@ cnelson
 #### Go: `goroutines`
 mclausen
 
+<<<<<<< HEAD
 ---
+<<<<<<< HEAD
 
 #### Scala: `pattern matching` 
 btombari
@@ -869,8 +563,7 @@ var myVar = myNumbers["one"] //myVar now equals 1
 
 <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Subscripts.html">Apple Developer Website - Subscripts</a>
 
----
-
+>>>>>>> 008e5a7aa827e36f6bf483ae199789dac5a459b2
 #### Swift: `Control Flow Structures` and `Exception\Error Handling`
 mtaylor
 
@@ -991,136 +684,12 @@ For programmer errors (like out of bounds access of array element, invalid argum
 NSException(name: "SomeName", reason: "SomeReason", userInfo: nil).raise()
 ```
 You cannot catch them in pure Swift, so you have to opt for catching exceptions in ObjC code.
+>>>>>>> f8e8a3c867648d01d3985a52b9fda6688fa4fc28
 
 ---
 
 #### Scala: `classes` &amp; `traits`
 sodham
-
-
-### Classes
-Classes in Scala are very similar to Java. Classes are defined using the the "class" type then the class name. An object can be created from a class using the "new" keyword, just like java.
-
-#### Example:
-```
-class ScalaExample() {
-  var x: Int = 7
-  var y: Int = 9
-  def addXY(){
-  var z: Int = x + y
-  println ("X + Y = " + z);
-  }
-}
-
-```
-
-In this basic class the type class is given before the name of the class. We then initiate two variables, X and Y, to the numbers 7 and 9 respectively. The syntax to instantiating a variable is a little different than what we are used to seeing in java. var x: Int = 7 is literally translated to variable x of type Integer is set to 7. This is a bit verbose, however, because this could be shortened to just var x = 7. This is completely valid but if we did not know the value that will be assigned to x, we would have to explicitly choose the type for x via the following: var x: Int , now x can hold any Int value. Method calls have a little bit of a different syntax as well, they are preceded by the def type. def addXY() is the equivalent of void addXY() in java. Within the addXY() method we just instantiate a new variable, z, then set it to the sum of x and y, after which we print the sum.
-
-One other interesting feature about Scala's classes is that the class name works as a class constructor and arguments can be specified that must be provided when this class is newed up as an object.
-
-#### ConstructorExample:
-```
-class ConstructorExample(val x1: Int, val x2: Int) {
-  var x: Int = x1
-  var y: Int = x2
-  def addXY(){
-  var z: Int = x + y
-  println ("X + Y = " + z);
-  }
-}
-
-```
-
-This example is very similar to the above example, the only real difference is that now the values of x and y are not hard-coded. Two integer values can be passed to this class on creation, to create this object we would use the following methodology:
-#### CreatingObject:
-```
-class Test {
-  def main(args: Array[String]){
-  val sum = new ConstructorExample(15, 20);
-  }
-}
-
-```
-
-This is just a simple driver class to test the functionality of the ConstructorExample class by newing up the object and putting it into a "val", then passing the necessary arguments. We could have also typed sum as var and the code would work just as well. The difference between var and val is that a var typed variable can be changed, while a val type variable is constant.
-
-#### Sources
-<a href = http://www.tutorialspoint.com/scala/scala_classes_objects.htm>Tutorial's Point</a>
-
-### Traits
-Traits have a lot of the same functionality of a Interface in Java, both of them can pretty much mimic eachother to a point (will go into that later). To easily explain how traits work, I will compare them with Java's Interface code. The first code snippet will be Java followed by a second code snippet that is the Scala implementation of the same functionality.
-
-#### Java Interface:
-```
-interface Car {
-  String model;
-  String make;
-  int year;
-  void makeCarGo();
-}
-
-```
-
-This is just a simple inteface for a car in Java, now I will mimic this using Scala's trait type.
-
-#### Scala Trait:
-```
-trait Vehicle {
-  var model: String
-  var make: String
-  var year: Int
-  def makeVehicleGo()
-}
-
-```
-
-We can also implement the makeVehicleGo() method
-
-#### Scala Trait Explicit:
-
-```
-trait Vehicle {
-  var model: String
-  var make: String
-  var year: Int
-  def makeVehicleGo() {
-    println("Vehicle is moving!");
-  }
-}
-
-```
-
-This will do the same thing as the java code above it. Any class that has this trait must have a make, model, year, and makeVehicleGo() method. The way we implement traits, however, can be a little different.
-
-#### Trait Implementation:
-```
-class Car extends Vehicle {
-  var model: String = Ford
-  var make: String = Mustang
-  var year: Int = 2012
-  def makeVehicleGo(){
-    println("Vehicle is moving!")
-  }
-}
-
-```
-
-This is basically the same way that Java does it, so we can use a trait as an interface for Objects, but we can also create a one-off object that has a trait without affecting all other objects created from the same class.
-
-#### Trait Singleton:
-```
-class Test {
-  val newCar = new Car with Vehicle
-}
-
-```
-
-This now creates a singleton object that has the trait "Vehicle". There will not be another class that uses Vehicle unless we do the same new "Object" with "Trait" call to make another object. This can be pretty valuable if you only want certain instances of the same Object to contain a trait. Like say if we had a Person class and we wanted a person's race to be a trait related to the Person object. We could just choose which Trait to link with each object when we create them.
-
-#### Sources
-<a href = http://www.scala-lang.org/old/node/126>Scala-Lang</a>
-
-<a href = http://en.wikibooks.org/wiki/Scala/Traits>Wiki</a>
 
 ---
 
@@ -1499,191 +1068,10 @@ SQL is a simple but powerful language for working with relational database syste
 #### SQL: `operators` &amp; `views`
 adebaca
 
-A “OPERATOR” in SQL is a reserved word or a character that is used primarily in an SQL statement’s WHERE clause to perform some type of operation, such as comparisons and arithmetic operations.
-
-Operators are used in special conditions in SQL statements and to serve as conjunctions for multiple conditions in a statement.
-
-Arithmetic operators
-
-Comparison operators
-
-Logical operators
-
-Operators used to negate conditions
-
-#### SQL Arithmetic Operators:
-
-```
-       +  Addition-Adds values on either side of the operator
-	
-- Subtraction-Subtracts right hand operand from left hand operand
-
-• Multiplication-Multiplies values on either side of the operator
-
-/  Division-Divides left hand operand by right hand operand
-
-%  Modulus-Divides left hand operand by right hand operand and returns remainder
-```
-
-#### SQL Comparison Operators:
-SQL Comparison Operators are the heart and soul of SQL.
-
-```
-	=  Checks if two operands are equal or not. If they are equal then 	
-		the conditions becomes true. 
-
-	!= Checks if two operands are not equal then the condition becomes 	
-		True.
-
-      <> Checks if two values are equal or not, if they are not equal then 
-		it comes true.
-
-      >  Checks if the left operand is greater than the right operand, 
-		then the condition becomes true.
-
-	<   Checks if the left operand is less than the right operand.
-
-	>=  Checks if the left operand is greater than or equal to the right 
-		Operand.
-
-	<= Checks if the right operand is greater than or equal to the right 
-		Operand.
-
-	!<  Checks if the left operand is not less than the right operand
-
-	!>  Checks if the left operand is not greater than the right operand
-```
-
-#### SQL Logical Operators:
- 
-Following is a list of logical operators
-
-```
-	ALL	Selects all values in a set
-	AND	Adding multiple conditions in a SQL WHERE clause
-	ANY	Compare any applicable value in the list condition
-	BETWEEN	Gets values between minimum and maximum value.
-	EXISTS Searches for a row that meets a criteria.
-	IN	Used to compare a value that meets a criteria.
-	LIKE	Compares value that have similar values.
-	NOT	This is a negate operator.
-	OR	This operator is used is a WHERE clause.
-	IS NULL	Used to compare a value with a NULL value
-	UNIQUE	Searches every row of a table for uniqueness. 
-```
-	
-
-
-
-The basic syntax for a operators work something like this: 
-```
-SELECT [realestate].[address]
-FROM realestate 
-WHERE address LIKE CONCAT('%', 1234, '%')
- 
-```
-
-##### VIEWS
-A view is a SQL statement that is stored in the database with an associated name. Basically it is a predefined SQL query.
-
-A view can contain the rows of a table and are a kind of virtual table. 
-
-Following is an example of how views are created.
-
-```
-CREATE VIEW view_name AS
-SELECT column1, column2.....
-FROM table_name
-WHERE [condition];
-```
-
-
-##### Updating a View
-
-A view can be updated under certain conditions:
-
-```
-• The SELECT clause may not contain the keyword DISTINCT.
-• The SELECT clause may not contain summary functions.
-• The SELECT clause may not contain set functions.
-• The SELECT clause may not contain set operators.
-• The SELECT clause may not contain an ORDER BY clause.
-• The FROM clause may not contain multiple tables.
-• The WHERE clause may not contain subqueries.
-• The query may not contain GROUP BY or HAVING.
-• Calculated columns may not be updated.
-• All NOT NULL columns from the base table must be included in the view in order for the INSERT query to function.
-```
-
-####Inserting Rows into a View:
-Rows of data can be inserted into a view. 
-
-####Deleting Rows into a View:
-Rows of data can be deleted from a view.
-
-####Dropping Views:
-You can also drop views that are no longer need.
-```
-DROP VIEW view_name;
-```
-
-##### Conclusion
-SQL has many uses this day and age and I don’t think it’s going to be going away anytime soon. Most of the old database systems are built off SQL, and I feel that NOSQL is not going to take over anytime soon. Knowing basic SQL queries is a key to any programming language and every programmer should have a basic understanding of it. 
-
-
-
 ---
 
 #### MicroPython: `controlling hardware`
 jkniss
-
-
-#####General Info
-Micro Python is a re-implementation of Python3 and a subset of the standard
-Python3 libraries.
-
-Micro Python was re-implemented to run on embedded systems - which required
-greatly reducing the amount of RAM the language used.
-
-RAM is a primary constriant for embedded systems / microcontrollers.
-
-For example: ```i = 5``` in Python3 will alocate a full 4KB of RAM because the
-compiler anticipates (and tries to optimize for) future small integer use by
-allocating an array of 262  small integers first then returning the value you
-asked for. But for a microcontroller with only 192KB of RAM, a 4KB
-allocation for a single integer is very expesive.
-
-Micro Python was created by Damien George and he used Kickstarter to fund the
-the language implmentation and the accompanying development board..
-
-#####Code
-
-- object oriented "scripting" language that is written in C and compiled with gcc
-- dynamically & strongly typed
-- space delimited methods (rather than curly braces and semi-colons)
-- includes a lexer, parser, compiler, interpreter
-- can be written as a full module and downloaded to the board ("drag-and-drop")
-- files can be directly opened and written to on the board
-- code can be written "live" using the REPL (read-execute-print-loop) command-line
-- garbage collection is "mark and sweep" and takes just 4ms for a full collection
-- open source and released under the MIT license
-- [My Prog-Lang write up](https://github.com/misskniss/language-research/tree/master/jkniss)
-- [Micro Python official Site](http://micropython.org/)
-
-
-#####The PyBoard
-
-- Based on the STM32F405 ARM microcontroller clocked at 168MHz with 1MB flash
-and 192KB of RAM.
-
-<sub>NOTE: Arduino Uno(Atmel): 16Mhz/2KB RAM & Raspberry Pi(ARM): 700Mhz+/512MB RAM</sub>
-
-- Compiles and runs Micro Python
-- Built in USB interface for programming
-- 4 LEDS, 1 Acelerometer, PWM, ADC, DAC, I2C, SPI, 5 UARTS, 4 servo ports, etc...
-- 3.3v - 5.0v and 3.3v output
-
-[info source](https://www.kickstarter.com/projects/214379695/micro-python-python-for-microcontrollers/description)
 
 
 ##### Basic Motor Control
@@ -1692,47 +1080,13 @@ and 192KB of RAM.
 
 
 ##### Basic Accelerometer Control
-
-+[Accelerometer Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoRzZnYTRQSjhEOHY1cmg4UElmdWxadlB6X3NB/view?usp=sharing)
-
-```Python
-# main.py -- on pyboard
-
-import pyb
-
-def led_angle(seconds):
-
-    one = pyb.LED(1)
-    two = pyb.LED(2)
-    three = pyb.LED(3)
-    four = pyb.LED(4)
-    acl = pyb.Accel()
-
-    for i in range(20 * seconds):
-       x = acl.x()
-
-       if x >= 10:
-         one.on()
-       elif x >= 5:
-         two.on()
-       elif x <= -5:
-         four.on()
-       else:
-         one.off()
-         two.off()
-         three.off()
-         four.off()
-       pyb.delay(50)
-
-
-led_angle(60)
-
-```
+ 
+ (next up...)
 
 
 ##### Light Sensor
 
-```Python
+```
 from pyb import ADC
 light = ADC(Pin('X7'))
 light.read()
@@ -1742,7 +1096,7 @@ light.read()
 
 ##### IR Sensor
 
-```Python
+```
 from pyb import ADC
 eyes = ADC(Pin('Y11'))
 eyes.read()
@@ -1751,12 +1105,10 @@ eyes.read()
 
 
 ##### Bluetooth Control
+[Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
 
-[Bluetooth Demo Video](https://drive.google.com/file/d/0B9k3eDZYhuLoazZOaFN1bTJkZjQ/view?usp=sharing)
-
-```Python
+```
 # main.py -- on pyboard
-
 import pyb
 from pyb import Pin
 from pyb import UART
@@ -1788,30 +1140,8 @@ def go():
     pyb.delay(200)
 ```
 
-##### PROS & CONS
 
-*PROS*
-- Get things working fast. Little time is wasted with the compile-flash
-cycle we normally experience with embedded systems programming.
-- Compact and powerful.
-- More natural language with much less typing time then C (or worse...Java)
-- Much more fun to program
-- convinient to test your code with the python command-line before loading it
-to board as a full module.
-- It is much more powerful than the ATMEGA series by ATMel
-- Cheaper than the Raspberry Pi
-- There is a huge community for Python support.
-
-*CONS*
-- Not all the standard python libraries are implemented yet (but you can contribute!)
-- The language is only about a year old and getting better but the support for
-both the board and language (where it differs from Python3) is still maturing -
- <sub>This month is the 1-year anneversary of the Kickstarter for Micro Python</sub>
-- Not as powerful as the Raspberry Pi (but then, the RaspPi is a full computer
-not a development board.)
-
-
-
+Basic 
 
 ---
 
@@ -1936,73 +1266,6 @@ rlamichh
 
 #### C#: `anonymous types` &amp; `properties`
 astout
-
-# Anonymous Types
-Anonymous types are essentially wrappers that allow you to store multiple values inside of one variable. 
-####How to use them?
-They are invoked using the keyword 'var' and its members are added in curly braces, separated by commas. This is done like so-
-```
-var totallyVar = new { Name = "William Wallace", Place = "Roswell, New Mexico", Year = 1492};
-```
-These properties can now be accessed as if they were regular member variables (i.e., by using the dot operator). The following code writes "William Wallace" to the console.
-```
-Console.Out.Write(totallyVar.Name);
-```
-
-####Limitations
-Despite seeming really cool, they can't be used as flexibly as it might initially appear.
-- Anonymous types can't be returned from a function
-- The values in anonymous types are read-only (and can't be null)
-- The values can't be pointers
-- An anonymous type can't have functions or events 
-
-####What are they good for?
-Not a lot.
-Anonymous types are used almost exclusively for LINQ (Language-Integrated Query) queries of databases.
-```
-var productQuery = 
-    from prod in products
-    select new { prod.Color, prod.Price };
-
-foreach (var v in productQuery)
-{
-    Console.WriteLine("Color={0}, Price={1}", v.Color, v.Price);
-}
-```
-# Properties
-Properties in C# are like shorthand notation for a private variable that uses a getter and a setter to do a specific job.
-
-####How to use them
-In the following code, a class is used to keep track of a number of hours, but uses seconds in the background to accomplish this. The user doesn't care about the seconds.
-```
-class TimePeriod
-{
-    private double seconds;
-    public double Hours
-    {
-        get { return seconds / 3600; }
-        set { seconds = value * 3600; }
-    }
-}
-```
-When making a setter, using the keyword "value" will refer to the value being assigned to the variable. At this point, the property can be treated like a typical public variable
-```
-TimePeriod t = new TimePeriod();
-
-t.Hours = 10;
-Console.Out.Write(t.Hours);
-```
-If a property is provided a getter but no setter, it is essentially a read-only public variable.
-
-#### Auto-implemented properties
-An auto-implemented property is just a property that has the most basic getter and setter.
-```
-public bool CanadianEh{ get; set;}
-```
-What is the advantage to this over accessing the public variable directly? 
-- If a property is eventually expanded to include more activities in its getter or setter, it's an easier change to make.
-- C# will occasionally treat variables and properties differently and result in compile errors.
-
 
 ---
 
@@ -2271,38 +1534,26 @@ Example Private variable:
 ```python
 class Cutlery(object):
 	
-	__utensils = 0
+	__cutlery = 0
 
-	def __init__(self):
-		self.__utensils += 1
-		print self.__utensils
-	
-	def addUTensil(self):
-		self.__utensils += 1
-		print "adding from public"
-		self.__addUtensil()
-	def __addUtensil(self):
-		Cutlery._Cutlery__utensils += 5
-		print "adding from private"	
+	def __init__(self, utensil, type):
+		self.utensil = utensil
+		self.type = type
+		self.__cutlery += 1
+		
+	def getCutleryCount():
+		print self.__cutlery	
 
-c = Cutlery()
-c.addUtensil()
-print "instance counter", c.__utensils
-print "class counter", Cutlery.__utensils
-
+cutlery = ("Fork", "Salad")
+cutlery.getCutleryCount()
+print cutlery.__cutlery
 ```
-Python does not have private data. We can emulate it in a way though. What python does is recognizes the double underscores, and mangles the name a bit by adding the class name to the variable of function name.
 
-So in order to access the __utensils__ class and instance variables, we call them by the mangled names as per below:
+This code would run a error at the print statement because python sees the two underscores and internally changes th variable name to include the class name. _object.className__variable is what would be used for the print statement to work correctly.
 
 ```python
-print "instance counter", c._Cutlery__utensils
-print "class counter", Cutlery._Cutlery__utensils
+print cutlery._Cutlery__cutlery
 ```
-This new code will print the correct values without errors:
-1
-5
-
 
 ### Python: `modules`
 cbarton
@@ -2310,74 +1561,6 @@ cbarton
 ---
 
 #### Haskell: `monads`
-#Monads
+jpack
 
-Haskell is a purely functional language. This means that Haskell programs behave exactly like mathematical functions; mapping input to output with no other side effects. This presents a problem when we want to do useful things with Haskell, like taking user input. Monads help us address that problem. At a high level, Monads allow us to chain functions together in steps, in effect allowing Haskell to behave like an imperative language. However, Monads also offer us the ability to provide rules between each of these steps, informing how these functions should interact with each other. Monads can be thought of as assembly lines, where functions act on data being moved down the line.
-
-###Maybe
-
-The maybe Monad lets us deal with the possibility of failure. Here's how it's defined in Haskell:
-
-```haskell
-instance Monad Maybe where  
-    return x = Just x  
-    Nothing >>= f = Nothing
-    Just x >>= f  = f x  
-```
-
-So what does this mean?
-
-```haskell
-instance Monad Maybe where  
-```
-
-Here we're defining the type Maybe, which is an instance of the Monad typeclass.
-
-```haskell
-return x = Just x
-```
-
-In Haskell, `return` specifies how to "wrap" a value in a Monad. In other words, it allows a given value to behave like a Maybe monad. 'Just' is a type that simply means the value exists.
-
-```haskell
-    Nothing >>= f = Nothing
-```
-The '>>=' (pronounced bind) operator tells us how the Monad handles Nothing input. Nothing is a type that means, well, nothing's there. It's analogous to null in Java.
-
-```haskell
-    Just x >>= f  = f x 
-```
-
-Now we're defining how a value of Just x will behave given an input function. Here we just return the value of the just passed to the function f.
-
-Now we can look at how maybe works:
-
-```haskell
-ghci> return "WHAT" :: Maybe String  
-Just "WHAT"  
-ghci> Just 9 >>= \x -> return (x*10)  
-Just 90  
-ghci> Nothing >>= \x -> return (x*10)  
-Nothing  
-```
-###'do'
-Haskell also provides some syntactic sugar for when we'd like to use monads to emulate an imperative style. The monad
-
-```haskell
-foo :: Maybe String  
-foo = Just 3   >>= (\x -> 
-      Just "!" >>= (\y -> 
-      Just (show x ++ y)))  
-```
-
-can be written as 
-
-```haskell
-foo :: Maybe String  
-foo = do  
-    x <- Just 3  
-    y <- Just "!"  
-    Just (show x ++ y) 
-```
-
-Monads are generally considered one of the more confusing concepts when learning Haskell, but their expressive power makes them well worth the effort. 
+---
