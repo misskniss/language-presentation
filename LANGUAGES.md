@@ -163,7 +163,7 @@ rani.breathe
 rani.speak
 ```
 Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">rubylearning.com</a>
-<a href="http://repl.it/"target="_blank">TRY ME!</a>
+<a href="http://repl.it/6Dw"target="_blank">TRY ME!</a>
 
 
 Note the line where the class definition for cat is 'class Cat < Mammal'  the < operator is used to show the inheritance. The cat inherited the ability to breathe, which can be fairly useful.
@@ -191,7 +191,7 @@ p.preen
 p.fly
 ```
 Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">http://rubylearning.com/satishtalim/ruby_inheritance.html</a>
-<a href="http://repl.it/"target="_blank">TRY ME!</a>
+<a href="http://repl.it/6Ds"target="_blank">TRY ME!</a>
 
 
 ```ruby
@@ -221,7 +221,7 @@ son = S.new
 son.gfmethod  
 ```
 Source: <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html"target="_blank">http://rubylearning.com</a>
-<a href="http://repl.it/"target="_blank">TRY ME!</a>
+<a href="http://repl.it/6Du"target="_blank">TRY ME!</a>
 
 A class can only inherit from one class at a time (i.e. a class can inherit from a class that inherits from
  another class which inherits from another class, but a single class can not inherit from many classes at once). 
@@ -385,7 +385,6 @@ herp derp
 
 #### Ruby: `modules`
 yyang
-
 Introduction 
 Ruby was invented in 1993 by Yukihiro Matsumoto. It is open source with subject to a license. Ruby is object-oriented 
 and interpreted language which has a clean and easy syntax. The programming is popular because it is scalable and easy to maintain. 
@@ -434,8 +433,7 @@ two colons, and the constant name. e.g. Area::PI.
 
 When & How Modules are Used?
 
-Namespaces
-
+1. Namespaces
 When we work on big Ruby program, we usually write more than one class with logically related functions grouped in a file rather than put everything 
 in one class.  And then we import/include the relevant classes into a file if we need to use the classes in the file. However, there is a risk when the 
 classes contain functions with the same name. Say Molly writes a file called area.rb, and defines functions to calculate the area of square, round, 
@@ -487,8 +485,7 @@ fact = Shape.round(Shape::YES)
 ```
 Using modules, the program will know which function to use which will avoid names conflicting problem.
 
-Mixin
-
+2. Mixin
 (Another student did this part, so I won't talk thorougly on mixin.)
 Like Java, Ruby does not support multiple inheritances directly. However, Ruby Modules can solve the problem by adding functionality to classes. 
 In the namespace section, we defined module methods whose names are prefixed by the module name. There is another way to define methods in modules 
@@ -499,71 +496,9 @@ However, you can include a module within a class definition. When this happens, 
 They get mixed in. In fact, mixed-in modules effectively behave as superclasses.
 
 Problem
-
 Modules are part of what makes Ruby’s design beautiful. However, since they do not have a direct analogy in any mainstream programming language, it is easy to get a bit confused about what they should be used for.
 
-EXAMPLE FOR PRESENTATION
-
-This is a module 
-``` 
-module Week
-   FIRST_DAY = "Sunday"
-   def Week.weeks_in_month
-      puts "You have four weeks in a month"
-   end
-   def Week.weeks_in_year
-      puts "You have 52 weeks in a year"
-   end
-end
-```
-
-To use the module, use "require "WeekModule"" , and also include the module name as "include Week"
-
-```
- #!/usr/bin/ruby
-$LOAD_PATH << '.'
-require "WeekModule"
-
-class Decade
-include Week
-   no_of_yrs=10
-   def weeks_in_year
-      puts Week::FIRST_DAY
-      number=54
-      puts number
-   end
-end
-
-
-d1=Decade.new
-puts "use module constant"
-puts Week::FIRST_DAY
-puts "use module method 1"
-Week.weeks_in_month
-puts "use module method 2"
-Week.weeks_in_year
-puts "use class method"
-d1.weeks_in_year
-```
-
-Here is the output running on Onyx.
-```
-[yyang@node06 ruby example]$ ruby Decade.rb
-use module constant
-Sunday
-use module method 1
-You have four weeks in a month
-use module method 2
-You have 52 weeks in a year
-use class method
-Sunday
-54
-```
-
-
-
-
-
+Conclusion
 
 ---
 
