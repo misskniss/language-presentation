@@ -214,7 +214,7 @@ could check the divisor to be not zero
 ```
 puts 2.zero?     #false
 ```
-![alt text]( https://www.facebook.com/photo.php?fbid=10205281913426941&set=a.1650111092225.93526.1220414953&type=3&theater)
+
 
 # Float
 
@@ -303,6 +303,23 @@ Decimal arithmetic is also useful for general calculation, because it provides t
 
 (1.2 - 1.0) == 0.2 -> false
 ```
+
+Because BigDecimal is more accurate than normal binary floating point arithmetic, it requires some special values.
+BigDecimal sometimes needs to return infinity, for example if you divide a value by zero.
+
+
+::new("1.0") / ::new("0.0") -> infinity
+
+::new("-1.0") / ::new("0.0") -> -infinity
+
+When a computation results in an undefined value, the special value NaN (for ‘not a number’) is returned.
+
+Example:
+
+::new("0.0") / ::new("0.0") -> NaN
+
+
+
 
 ---
 
