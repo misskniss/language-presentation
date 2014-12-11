@@ -214,7 +214,7 @@ could check the divisor to be not zero
 ```
 puts 2.zero?     #false
 ```
-
+![alt text]( https://www.facebook.com/photo.php?fbid=10205281913426941&set=a.1650111092225.93526.1220414953&type=3&theater)
 
 # Float
 
