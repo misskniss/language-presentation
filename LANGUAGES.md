@@ -487,6 +487,68 @@ part 0 lol ermagerhd!
 #### Ruby: `IO` `files`
 cnelson
 
+IO or Input/Output refers to the ways that the computer interacts with the
+world.  It can be reading in from files and keyboards or writing out to files
+or the console/screen.  The default for standard input is reading from the keyboard
+and the default for standard output is writing to the terminal.
+
+# Output
+
+There are several ways to output on the console. The following example is from 
+the Kernel module which are available to all objects in Ruby.
+
+```
+#!/usr/bin/ruby
+
+print "Apple "
+print "Apple\n"
+
+puts "Orange"
+puts "Orange"
+
+```
+
+Both print and put methods will produce the text to the console.
+The puts method will automatically include a new line. There are other 
+ways to print out in the following example:
+
+```
+#!/usr/bin/ruby
+
+$stdout.print "Ruby language\n"
+$stdout.puts "Python language"
+
+p "Lemon"
+p "Lemon"
+
+printf "There are %d apples\n", 3
+
+putc 'K'
+
+```
+
+# Creating a file and writing to it
+
+```
+somefile = File.open("sample.txt", "w")
+somefile.puts "Hello file!"
+somefile.close   
+
+```
+Ruby has a file class that has methods to manipulate files. The above will
+create a file called sample.txt and write "Hello file!" to the newly created file.
+
+## Reading from a file
+
+Reading from a file will use the same method as above with one small change, using "r"
+instead of "w".
+
+```
+file = File.open("sample.txt", "r")
+contents = file.read
+puts contents   #=> Lorem ipsum etc.
+```
+
 ---
 
 #### Go: `goroutines`
