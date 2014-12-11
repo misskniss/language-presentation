@@ -498,6 +498,53 @@ mclausen
 
 #### Scala: `pattern matching` 
 btombari
+
+Scala is a programming language which uses the JVM
+Scala is very similar to Java, but is a fully functional language and also contains additional features
+Pattern matching in Scala is structured like a switch-case statement in Java.
+	-
+```
+object Example1 {
+	def main(args: Array[String]) {
+		println(patternMatch(3))
+	}
+	def patternMatch(x: Int) : String = x match {
+		case 1 => "One"
+		case 2 => "Two"
+		case 3 => "Three"
+		case 4 => "Four"
+		case 5 => "Five"
+		case 6 => "Six"
+		case 7 => "Seven"
+		case 8 => "Eight"
+		case 9 => "Nine"
+		case _ => "Not A Number"
+	}
+}
+```
+
+The => operator separates the pattern from the expression.
+The matched case will return the expression.
+Underscore serves as the default for any pattern which does not fit the cases above it(primitive data types).
+Scala calls toString and equals methods automatically.
+Scala allows or using arbitrary data types in pattern matching
+
+```
+object Example2 {
+	def main(args: Array[String]) {
+		val johnS = new Person("John", "Smith")
+		val JohnD = new Person("John", "Davis")
+		
+		for(person <- list(johnS, johnD)) {
+			person match {
+				case Person("John", "Smith") => println("True")
+				case Person(First, Last) => println("Unknown person " + First + " " + Last)
+			}
+		}
+	}
+	case class Person(First: String, Last: String)
+}
+```
 =======
 =======
 #### 'Enumerations' and 'Subscripts'
