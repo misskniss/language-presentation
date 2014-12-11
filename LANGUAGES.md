@@ -1316,13 +1316,13 @@ C# language's exception handling is similar to Java.
 * Exceptions are object that inherits from System.Exception class
 	- Constructors:
 
-	Exception()
+		Exception()
 
-	Exception(String)
+		Exception(String)
 
-	Exception(SerializationInfo, Streaming context)
+		Exception(SerializationInfo, Streaming context)
 
-	Exception(String, Exception)
+		Exception(String, Exception)
 
 	- Properties:
 	Stack trace, Source, Message, InnerException, HelpLink, etc
@@ -1415,7 +1415,6 @@ Etc..
 ### Demo in Visual Studio 2013
 
 ```C#
-<font size="8">
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1518,7 +1517,6 @@ namespace DebuggingDemo
         }
     }
 }
-</p>
 ```
 ---
 
