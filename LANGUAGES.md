@@ -1510,10 +1510,8 @@ namespace DebuggingDemo
 
     partial class UserException: Exception
     {
-        String message;
-        public UserException(String message)
+        public UserException(String message): base(message)
         {
-            this.message = message;
         }
     }
 }
